@@ -47,20 +47,6 @@ function aplazar(tarea, esperaMs = 1200) {
   }
 }
 
-// Google Analytics 4. El ID de medicion va aqui y en ningun otro sitio, y solo
-// se manda algo si tiene el formato G-XXXXXXXXXX: con cualquier otro valor el
-// codigo descarta el envio y no se pide nada a Google. El ID real esta en
-// Analytics > Administracion > Flujos de datos > ID de medicion.
-const analyticsId = "G-3TRY9F4G0Z";
-// Hosts que necesita el CSP de vercel.json. El primero es el script de gtag y
-// los otros dos los endpoints de recogida (el pixel y el beacon). Se declaran
-// aqui para que el validador del CSP los vea y avise si alguno se queda fuera.
-const analyticsEndpoints = {
-  tag: "https://www.googletagmanager.com/gtag/js",
-  collect: "https://www.google-analytics.com/g/collect",
-  collectRegional: "https://region1.google-analytics.com/g/collect",
-};
-const consentStorageKey = "component-field-analytics-consent";
 const translations = {
   en: {
     categories: {
@@ -215,47 +201,32 @@ const translations = {
     catalogLoadError: "Could not load the component catalog. Run the site from a local web server and regenerate it if needed. {message}",
     themeNotSaved: "Theme preference will not be saved in this browser",
     languageNotSaved: "Language preference will not be saved in this browser",
-    consentLabel: "Cookie notice",
-    consentText: "We use Google Analytics to know how many people visit and which pages they open. It only loads if you accept. You can change your mind from the footer.",
-    consentAccept: "Accept",
-    consentReject: "Only necessary",
-    consentAccepted: "Thank you. Analytics enabled",
-    consentRejected: "Analytics disabled. You can change this from the footer",
-    cookies: "Cookies",
     // Paginas de texto largo (Web/privacidad.html y Web/legal.html). Van en el
     // mismo diccionario que el resto para que el conmutador de idioma las
     // traduzca igual que a la portada, sin logica extra.
     privacyLink: "Privacy",
     legalLink: "Legal",
     privacyTitle: "Privacy",
-    privacyUpdated: "Last updated: 2026-10-02",
-    privacyIntro: "What this site collects and what it does not. It is a static library of HTML and CSS demos: no accounts, no submission forms, no payments, no advertising and no analytics loaded by default.",
+    privacyUpdated: "Last updated: 2026-10-14",
+    privacyIntro: "What this site collects and what it does not. It is a static library of HTML and CSS demos: no accounts, no submission forms, no payments, no advertising, and no third-party advertising scripts. The only analytics that loads is Vercel Web Analytics, which measures visits and page views without collecting personal data.",
     privacyTocLabel: "Index",
     privacyTocTitle: "On this page",
     privacyTocLocal: "What is stored in your browser",
-    privacyTocAnalytics: "Google Analytics",
-    privacyTocCookies: "Cookies",
+    privacyTocAnalytics: "Vercel Web Analytics",
     privacyTocThird: "Requests to other domains",
     privacyTocNone: "Data that is not collected",
     privacyTocHost: "Who hosts the site",
     privacyTocContact: "Contact",
     privacyLocalTitle: "What is stored in your browser",
-    privacyLocalIntro: "The application uses localStorage for three things, all of them local to your browser and never sent to any server:",
+    privacyLocalIntro: "The application uses localStorage for two things, both local to your browser and never sent to any server:",
     privacyColKey: "Key",
     privacyColWhat: "What it stores",
     privacyColWhy: "Why",
     privacyRowTheme: "remember the theme you picked",
     privacyRowLanguage: "remember the language you picked",
-    privacyRowConsentValue: "your decision about statistics",
-    privacyRowConsentWhy: "whether you accepted or rejected Google Analytics",
-    privacyLocalOutro: "You can delete them at any time from your browser settings, and the statistics decision also from the Cookies button in the footer of any page.",
-    privacyAnalyticsTitle: "Google Analytics",
-    privacyAnalyticsIntro: "It is used to measure visits and pages opened, with the measurement ID G-3TRY9F4G0Z.",
-    privacyAnalyticsWhen: "When: the script only loads if you accept in the notice. Without your acceptance there is no request to Google and no cookie is created.",
-    privacyAnalyticsWhere: "Where it goes: www.googletagmanager.com (script load) and www.google-analytics.com / region1.google-analytics.com (collection).",
-    privacyAnalyticsChange: "How to change your mind: the Cookies button in the footer, which rejects and deletes the key, or clearing localStorage from your browser.",
-    privacyCookiesTitle: "Cookies",
-    privacyCookiesText: "This site does not create its own cookies. Google Analytics cookies only appear if you accept the statistics.",
+    privacyLocalOutro: "You can delete them at any time from your browser settings.",
+    privacyAnalyticsTitle: "Vercel Web Analytics",
+    privacyAnalyticsIntro: "It is used to measure visits and pages opened. The script is served from the site itself (/_vercel/insights/script.js) and does not request personal data, set advertising cookies, share with third parties or join other profiles.",
     privacyThirdTitle: "Requests to other domains",
     privacyThirdIntro: "The typefaces are in the repository, not on a CDN. The only external destinations are:",
     privacyNoneTitle: "Data that is not collected",
@@ -449,44 +420,29 @@ const translations = {
     catalogLoadError: "No se pudo cargar el catálogo. Abre el sitio desde un servidor local y, si hace falta, vuelve a generarlo. {message}",
     themeNotSaved: "No se pudo guardar el tema en este navegador",
     languageNotSaved: "No se pudo guardar el idioma en este navegador",
-    consentLabel: "Aviso de cookies",
-    consentText: "Usamos Google Analytics para saber cuánta gente entra y qué páginas abre. Solo se carga si lo aceptas. Puedes cambiar de opinión desde el pie.",
-    consentAccept: "Aceptar",
-    consentReject: "Solo lo necesario",
-    consentAccepted: "Gracias. Estadísticas activadas",
-    consentRejected: "Estadísticas desactivadas. Puedes cambiarlo desde el pie",
-    cookies: "Cookies",
     privacyLink: "Privacidad",
     legalLink: "Legal",
     privacyTitle: "Privacidad",
-    privacyUpdated: "Última actualización: 2026-10-02",
-    privacyIntro: "Qué recoge esta web y qué no. Es una biblioteca estática de demos de HTML y CSS: no hay cuentas, ni formularios de envío, ni pagos, ni publicidad, ni analítica cargada por defecto.",
+    privacyUpdated: "Última actualización: 2026-10-14",
+    privacyIntro: "Qué recoge esta web y qué no. Es una biblioteca estática de demos de HTML y CSS: no hay cuentas, ni formularios de envío, ni pagos, ni publicidad, ni scripts publicitarios de terceros. La única analítica que se carga es Vercel Web Analytics, que mide visitas y páginas vistas sin recoger datos personales.",
     privacyTocLabel: "Índice",
     privacyTocTitle: "En esta página",
     privacyTocLocal: "Lo que se guarda en tu navegador",
-    privacyTocAnalytics: "Google Analytics",
-    privacyTocCookies: "Cookies",
+    privacyTocAnalytics: "Vercel Web Analytics",
     privacyTocThird: "Peticiones a otros dominios",
     privacyTocNone: "Datos que no se recogen",
     privacyTocHost: "Quién aloja la web",
     privacyTocContact: "Contacto",
     privacyLocalTitle: "Lo que se guarda en tu navegador",
-    privacyLocalIntro: "La aplicación usa localStorage para tres cosas, todas locales a tu navegador y que no se envían a ningún servidor:",
+    privacyLocalIntro: "La aplicación usa localStorage para dos cosas, todas locales a tu navegador y que no se envían a ningún servidor:",
     privacyColKey: "Clave",
     privacyColWhat: "Qué guarda",
     privacyColWhy: "Para qué",
     privacyRowTheme: "recordar el tema elegido",
     privacyRowLanguage: "recordar el idioma elegido",
-    privacyRowConsentValue: "tu decisión sobre estadísticas",
-    privacyRowConsentWhy: "si aceptaste o rechazaste Google Analytics",
-    privacyLocalOutro: "Puedes borrarlas en cualquier momento desde la configuración de tu navegador, y la decisión sobre estadísticas también desde el botón Cookies del pie de cualquier página.",
-    privacyAnalyticsTitle: "Google Analytics",
-    privacyAnalyticsIntro: "Se usa para medir visitas y páginas abiertas, con el ID de medición G-3TRY9F4G0Z.",
-    privacyAnalyticsWhen: "Cuándo: el script solo se carga si aceptas en el aviso. Sin aceptación no se hace ninguna petición a Google ni se crea ninguna cookie.",
-    privacyAnalyticsWhere: "A dónde va: www.googletagmanager.com (carga del script) y www.google-analytics.com / region1.google-analytics.com (recogida).",
-    privacyAnalyticsChange: "Cómo cambiar de opinión: el botón Cookies del pie, que rechaza y borra la clave, o borrar localStorage desde tu navegador.",
-    privacyCookiesTitle: "Cookies",
-    privacyCookiesText: "Este sitio no crea cookies propias. Las cookies de Google Analytics solo aparecen si aceptas las estadísticas.",
+    privacyLocalOutro: "Puedes borrarlas en cualquier momento desde la configuración de tu navegador.",
+    privacyAnalyticsTitle: "Vercel Web Analytics",
+    privacyAnalyticsIntro: "Se usa para medir visitas y páginas vistas. El script se sirve desde el propio sitio (/_vercel/insights/script.js) y no solicita datos personales, no usa cookies publicitarias, no comparte con terceros ni se combina con otros perfiles.",
     privacyThirdTitle: "Peticiones a otros dominios",
     privacyThirdIntro: "Las fuentes tipográficas están en el repositorio, no en un CDN. Los únicos destinos externos son:",
     privacyNoneTitle: "Datos que no se recogen",
@@ -1931,134 +1887,14 @@ function initializeLanguage() {
   }
 }
 
-// --- Google Analytics ------------------------------------------------------
-// Nada de esto se ejecuta hasta que hay un ID de medicion real y alguien ha
-// aceptado: el banner pregunta primero y el script de gtag se pide despues, de
-// modo que sin aceptacion no sale ni una peticion a Google ni una cookie.
+// --- Eventos de analitica ----------------------------------------------------
+// Antes este modulo cargaba Google Analytics 4 con banner de consentimiento;
+// ahora mismo solo Vercel Web Analytics (cargado por el script inline de cada
+// HTML, no necesita JS aqui). Esta funcion queda como no-op para no romper las
+// 5 llamadas que ya tenia repartidas por la app y por si en el futuro se
+// enchufa otra analitica con una implementacion real.
 
-function readAnalyticsConsent() {
-  try {
-    return localStorage.getItem(consentStorageKey);
-  } catch {
-    return null;
-  }
-}
-
-function writeAnalyticsConsent(decision) {
-  try {
-    localStorage.setItem(consentStorageKey, decision);
-  } catch {
-    // Sin localStorage la eleccion no se recuerda, pero la pagina actual ya
-    // abide por ella: es mejor que bloquear la decision.
-  }
-}
-
-function hasAnalyticsId() {
-  // Un ID de medicion de GA4 son las letras G, un guion y de cuatro a diez
-  // caracteres en mayusculas y digitos. El valor de ejemplo ("PENDIENTE", sin
-  // la G) no lo cumple, asi que con el no se pide el script ni se pone ninguna
-  // cookie. Se exige mayusculas porque los IDs que emite Google las traen.
-  return /^G-[A-Z0-9]{4,10}$/.test(analyticsId);
-}
-
-// En local no se manda nada a Google: cada recarga desde localhost contaria
-// como una visita real y ensuciaria las estadisticas. En produccion el
-// hostname es el dominio de Vercel, asi que la pregunta solo corta cuando la
-// web se abre en el servidor del propio repositorio.
-function isLocalPreview() {
-  const host = window.location.hostname;
-  return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
-}
-
-function loadAnalytics() {
-  // El ID de ejemplo y las pruebas en local se quedan fuera a proposito: sin
-  // esto, revisar la web en localhost seria contar visitas falsas.
-  if (!hasAnalyticsId() || isLocalPreview() || typeof window.gtag === "function") return;
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `${analyticsEndpoints.tag}?id=${encodeURIComponent(analyticsId)}`;
-  document.head.append(script);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments);
-  };
-  window.gtag("js", new Date());
-  // anonymize_ip trunca la IP antes de guardarla. La web no publica datos
-  // publicitarios: eso se declara aqui en vez de en la configuracion de GA.
-  window.gtag("config", analyticsId, { anonymize_ip: true });
-}
-
-function trackAnalyticsEvent(name, parameters) {
-  if (typeof window.gtag !== "function") return;
-  window.gtag("event", name, parameters ?? {});
-}
-
-function openConsentBanner() {
-  const banner = createElement("div", "consent-banner");
-  banner.dataset.consentBanner = "";
-  banner.dataset.i18nAriaLabel = "consentLabel";
-  banner.setAttribute("role", "region");
-
-  const text = createElement("p", "consent-text");
-  text.dataset.i18n = "consentText";
-  const actions = createElement("div", "consent-actions");
-  const reject = createElement("button", "button button-secondary");
-  reject.type = "button";
-  reject.dataset.consent = "deny";
-  reject.dataset.i18n = "consentReject";
-  // Acepta lleva button-primary y no .button a secas: .button no fija
-  // background, asi que el navegador pone el gris por defecto de los controles
-  // (rgb(107, 107, 107)) sobre el --surface-raised del aviso, y eso da
-  // 2,21:1 con el texto heredado. El primario usa --accent sobre --accent-ink,
-  // que pasa AA en los dos temas.
-  const accept = createElement("button", "button button-primary");
-  accept.type = "button";
-  accept.dataset.consent = "grant";
-  accept.dataset.i18n = "consentAccept";
-  actions.append(reject, accept);
-  banner.append(text, actions);
-  document.body.append(banner);
-
-  for (const button of banner.querySelectorAll("[data-consent]")) {
-    button.addEventListener("click", () => {
-      const decision = button.dataset.consent === "grant" ? "grant" : "deny";
-      writeAnalyticsConsent(decision);
-      banner.remove();
-      if (decision === "grant") {
-        loadAnalytics();
-        showToast(t("consentAccepted"));
-      } else {
-        showToast(t("consentRejected"));
-      }
-    });
-  }
-  // El banner se pinta ya traducido: los textos se rellenan con el idioma
-  // activo en vez de esperar al siguiente applyLanguage.
-  applyStaticTranslations();
-  return banner;
-}
-
-function initializeAnalytics() {
-  const decision = readAnalyticsConsent();
-  if (decision === "grant") {
-    loadAnalytics();
-  } else if (decision !== "deny") {
-    // Sin respuesta todavia: se pregunta. Un "deny" no vuelve a preguntar.
-    openConsentBanner();
-  }
-  // El boton del pie reabre el aviso para poder cambiar de idea, que es lo que
-  // pide el consentimiento: se puede retirar cuando se quiera.
-  for (const button of document.querySelectorAll("[data-cookie-preferences]")) {
-    button.addEventListener("click", () => {
-      try {
-        localStorage.removeItem(consentStorageKey);
-      } catch {
-        // da igual: el banner se abre igualmente.
-      }
-      openConsentBanner();
-    });
-  }
-}
+function trackAnalyticsEvent(_name, _parameters) {}
 
 function showToast(message) {
   elements.toast.textContent = message;
@@ -2190,7 +2026,6 @@ function initializeSearch() {
 
 async function initializeApp() {
   initializeLanguage();
-  initializeAnalytics();
   initializeTheme();
   initializeNavigation();
   initializeSearch();
