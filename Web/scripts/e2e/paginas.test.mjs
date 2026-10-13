@@ -113,16 +113,13 @@ test("portada: carga, tiene h1 y el catalogo alimenta los destacados", async () 
   await pagina.close();
 });
 
-test("portada: el aviso de cookies aparece y el rechazo se guarda", async () => {
+test("portada: Vercel Web Analytics no inserta nada visible y no usa localStorage propio", async () => {
+  // El script de Vercel Web Analytics se sirve como <script src="...">, no
+  // inyecta DOM ni escribe en localStorage: si lo hiciera, esta pagina lo
+  // mostraria y el buscador del catalogo no se pintaria a tiempo.
   const pagina = await abrir("/Web/index.html");
-  const aviso = pagina.locator("[data-consent-banner]");
-  await aviso.waitFor({ timeout: 10000 });
-  // Rechazar debe decidir, no preguntar otra vez, y guardar "deny".
-  await pagina.locator('[data-consent="deny"]').click();
-  const decision = await pagina.evaluate(() =>
-    window.localStorage.getItem("component-field-analytics-consent"),
-  );
-  assert.equal(decision, "deny");
+  const claves = await pagina.evaluate(() => Object.keys(window.localStorage));
+  assert.equal(claves.includes("component-field-analytics-consent"), false);
   await pagina.close();
 });
 

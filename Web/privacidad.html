@@ -71,19 +71,19 @@
     <main id="main-content" aria-label="Politica de privacidad" data-i18n-aria-label="privacyMain">
       <article class="legal-doc">
         <h1 data-i18n="privacyTitle">Privacidad</h1>
-        <p class="legal-updated" data-i18n="privacyUpdated">Última actualización: 2026-10-02</p>
+        <p class="legal-updated" data-i18n="privacyUpdated">Última actualización: 2026-10-14</p>
 
         <p data-i18n="privacyIntro">Qué recoge esta web y qué no. Es una
           biblioteca estática de demos de HTML y CSS: no hay cuentas, ni
-          formularios de envío, ni pagos, ni publicidad, ni analítica cargada
-          por defecto.</p>
+          formularios de envío, ni pagos, ni publicidad, ni scripts publicitarios
+          de terceros. La única analítica que se carga es Vercel Web Analytics,
+          que mide visitas y páginas vistas sin recoger datos personales.</p>
 
         <nav class="legal-toc" aria-label="Índice" data-i18n-aria-label="privacyTocLabel">
           <p data-i18n="privacyTocTitle">En esta página</p>
           <ul>
             <li><a href="#local" data-i18n="privacyTocLocal">Lo que se guarda en tu navegador</a></li>
-            <li><a href="#analytics" data-i18n="privacyTocAnalytics">Google Analytics</a></li>
-            <li><a href="#cookies" data-i18n="privacyTocCookies">Cookies</a></li>
+            <li><a href="#analytics" data-i18n="privacyTocAnalytics">Vercel Web Analytics</a></li>
             <li><a href="#terceros" data-i18n="privacyTocThird">Peticiones a otros dominios</a></li>
             <li><a href="#nada" data-i18n="privacyTocNone">Datos que no se recogen</a></li>
             <li><a href="#aloja" data-i18n="privacyTocHost">Quién aloja la web</a></li>
@@ -93,7 +93,7 @@
 
         <h2 id="local" data-i18n="privacyLocalTitle">Lo que se guarda en tu navegador</h2>
         <p data-i18n="privacyLocalIntro">La aplicación usa <code>localStorage</code>
-          para tres cosas, todas locales a tu navegador y que no se envían a
+          para dos cosas, todas locales a tu navegador y que no se envían a
           ningún servidor:</p>
         <table class="legal-table">
           <thead>
@@ -114,39 +114,18 @@
               <td><code>es</code> / <code>en</code></td>
               <td data-i18n="privacyRowLanguage">recordar el idioma elegido</td>
             </tr>
-            <tr>
-              <td><code>component-field-analytics-consent</code></td>
-              <td data-i18n="privacyRowConsentValue">tu decisión sobre estadísticas</td>
-              <td data-i18n="privacyRowConsentWhy">si aceptaste o rechazaste Google Analytics</td>
-            </tr>
           </tbody>
         </table>
         <p data-i18n="privacyLocalOutro">Puedes borrarlas en cualquier momento
-          desde la configuración de tu navegador, y la decisión sobre
-          estadísticas también desde el botón <strong>Cookies</strong> del pie de
-          cualquier página.</p>
+          desde la configuración de tu navegador.</p>
 
-        <h2 id="analytics" data-i18n="privacyAnalyticsTitle">Google Analytics</h2>
+        <h2 id="analytics" data-i18n="privacyAnalyticsTitle">Vercel Web Analytics</h2>
         <p data-i18n="privacyAnalyticsIntro">Se usa para medir visitas y páginas
-          abiertas, con el ID de medición <code>G-3TRY9F4G0Z</code>.</p>
-        <ul>
-          <li data-i18n="privacyAnalyticsWhen"><strong>Cuándo:</strong> el
-            script solo se carga si aceptas en el aviso. Sin aceptación no se
-            hace ninguna petición a Google ni se crea ninguna cookie.</li>
-          <li data-i18n="privacyAnalyticsWhere"><strong>A dónde va:</strong>
-            <code>www.googletagmanager.com</code> (carga del script) y
-            <code>www.google-analytics.com</code> /
-            <code>region1.google-analytics.com</code> (recogida).</li>
-          <li data-i18n="privacyAnalyticsChange"><strong>Cómo cambiar de
-            opinión:</strong> el botón <strong>Cookies</strong> del pie, que
-            rechaza y borra la clave, o borrar <code>localStorage</code> desde tu
-            navegador.</li>
-        </ul>
-
-        <h2 id="cookies" data-i18n="privacyCookiesTitle">Cookies</h2>
-        <p data-i18n="privacyCookiesText">Este sitio <strong>no crea cookies
-          propias</strong>. Las cookies de Google Analytics solo aparecen si
-          aceptas las estadísticas.</p>
+          vistas. El script (<code>/_vercel/insights/script.js</code>) se sirve
+          desde el propio sitio, no pide datos personales, no usa cookies
+          publicitarias, no comparte con terceros ni se combina con otros
+          perfiles. La política completa está en
+          <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noreferrer">vercel.com/docs/analytics/privacy-policy</a>.</p>
 
         <h2 id="terceros" data-i18n="privacyThirdTitle">Peticiones a otros dominios</h2>
         <p data-i18n="privacyThirdIntro">Las fuentes tipográficas están en el
@@ -159,10 +138,6 @@
           <li><code>github.com</code> y
             <code>avatars.githubusercontent.com</code> — imágenes de algunos
             demos.</li>
-          <li><code>www.googletagmanager.com</code>,
-            <code>www.google-analytics.com</code> y
-            <code>region1.google-analytics.com</code> — solo con tu
-            aceptación.</li>
         </ul>
 
         <h2 id="nada" data-i18n="privacyNoneTitle">Datos que no se recogen</h2>
@@ -198,7 +173,7 @@
           <a href="./team-core.html" data-i18n="footerDonateLink">Team Core</a>.</p>
       </div>
       <p class="footer-about" data-i18n="footerBuilt">Code library</p>
-      <div class="footer-meta"><span id="footer-year"></span><span class="footer-meta-divider" aria-hidden="true">-</span><a href="https://github.com/kindred-98/Libreria_HTML_CSS" target="_blank" rel="noreferrer">GitHub</a><span class="footer-meta-divider footer-divider-legal" aria-hidden="true">-</span><a class="footer-link" href="./como-usar.html" data-i18n="howToLink">How to</a><span class="footer-meta-divider footer-divider-legal" aria-hidden="true">-</span><a class="footer-link" href="./privacidad.html" data-i18n="privacyLink">Privacy</a><span class="footer-meta-divider footer-divider-legal" aria-hidden="true">-</span><button class="footer-link" type="button" data-cookie-preferences data-i18n="cookies">Cookies</button></div>
+      <div class="footer-meta"><span id="footer-year"></span><span class="footer-meta-divider" aria-hidden="true">-</span><a href="https://github.com/kindred-98/Libreria_HTML_CSS" target="_blank" rel="noreferrer">GitHub</a><span class="footer-meta-divider footer-divider-legal" aria-hidden="true">-</span><a class="footer-link" href="./como-usar.html" data-i18n="howToLink">How to</a><span class="footer-meta-divider footer-divider-legal" aria-hidden="true">-</span><a class="footer-link" href="./privacidad.html" data-i18n="privacyLink">Privacy</a></div>
     </footer>
     <output class="toast" id="toast" aria-live="polite"></output>
   </body>

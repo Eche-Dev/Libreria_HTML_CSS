@@ -1861,49 +1861,6 @@ input:focus-visible {
   color: var(--accent);
 }
 
-/* Aviso de consentimiento. Va sobre el pie, en una sola barra, y solo existe
-   hasta que se contesta: despues se borra del DOM. Los `env(safe-area-inset-*)`
-   son los huecos que reserva el notch y la barra de inicio: sin ellos, en iPhone
-   el borde de abajo cae debajo del indicador de gesto y en horizontal los lados
-   quedan bajo el notch. Donde no exista `env()`, el valor vale 0 y el margen
-   original se respeta igual. */
-.consent-banner {
-  position: fixed;
-  z-index: 40;
-  right: 16px;
-  right: calc(16px + env(safe-area-inset-right));
-  bottom: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  left: 16px;
-  left: calc(16px + env(safe-area-inset-left));
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 20px;
-  max-width: 620px;
-  margin-inline: auto;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  background: var(--surface-raised);
-  box-shadow: 0 14px 34px rgb(0 0 0 / 35%);
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.consent-text {
-  margin: 0;
-  flex: 1 1 260px;
-}
-
-.consent-actions {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 8px;
-}
-
 .toast {
   position: fixed;
   z-index: 30;
