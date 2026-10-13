@@ -51,5 +51,8 @@
     "playwright": "^1.63.0",
     "prettier": "^3.9.9",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
