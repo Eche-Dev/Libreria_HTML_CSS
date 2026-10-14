@@ -93,6 +93,15 @@ for (const pagina of PAGINAS) {
       continue;
     }
 
+    // Rutas que sirve la plataforma en runtime y no viven en el repo: el script
+    // de Vercel Web Analytics (/_vercel/insights/*) lo añade Vercel en la edge
+    // al habilitar Analytics, y aun asi los `<script src="...">` del sitio
+    // tienen que apuntarlo para trackear pageviews.
+    if (destino.startsWith("/_vercel/")) {
+      externos += 1;
+      continue;
+    }
+
     const [rutaParte, ancla] = destino.split("#");
     const sinConsulta = rutaParte.split("?")[0];
 
