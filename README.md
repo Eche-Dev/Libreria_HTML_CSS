@@ -5,15 +5,15 @@
 **1 018 demos independientes** de interfaz, en HTML y CSS sin dependencias.
 Copia, pega y adapta.
 
-[![CI](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml)
-[![CodeQL](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml)
+[![CI](https://github.com/Eche-Dev/Libreria_HTML_CSS/actions/workflows/validate.yml/badge.svg)](https://github.com/Eche-Dev/Libreria_HTML_CSS/actions/workflows/validate.yml)
+[![CodeQL](https://github.com/Eche-Dev/Libreria_HTML_CSS/actions/workflows/codeql.yml/badge.svg)](https://github.com/Eche-Dev/Libreria_HTML_CSS/actions/workflows/codeql.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kindred-98_Libreria_HTML_CSS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kindred-98_Libreria_HTML_CSS)
 [![Licencia](https://img.shields.io/badge/licencia-MIT-d4f779?style=flat-square&labelColor=1b231c)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-5FA04E?style=flat-square&labelColor=1b231c)](./package.json)
 
 [**Ver la biblioteca**](https://libreria-html-css.vercel.app/) · [Cómo usar un componente](./Web/como-usar.html) · [Privacidad](./Web/privacidad.html) · [Aviso legal](./Web/legal.html)
 
-> 🎉 **Versión estable 1.0.0 publicada.** [Ver notas de la release](https://github.com/kindred-98/Libreria_HTML_CSS/releases/tag/v1.0.0).
+> 🎉 **Versión estable 1.0.0 publicada.** [Ver notas de la release](https://github.com/Eche-Dev/Libreria_HTML_CSS/releases/tag/v1.0.0).
 
 </div>
 

@@ -126,7 +126,7 @@ resultados completos sobre los 1018 demos solo existen en `main`.
 directo:
 
 ```text
-https://github.com/kindred-98/Libreria_HTML_CSS/security/advisories/new
+https://github.com/Eche-Dev/Libreria_HTML_CSS/security/advisories/new
 ```
 
 El **STOP** de la fase exigía tener activo el reporte privado de

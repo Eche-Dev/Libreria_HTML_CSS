@@ -63,7 +63,7 @@ const libraryRoots = [
     // autoras de la carpeta) se anade a cada ZIP, igual que en las demas raices.
     license: "MIT",
     licenseFile: "LICENSE",
-    source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+    source: "https://github.com/Eche-Dev/Libreria_HTML_CSS",
     redistributable: true,
     // La carpeta superior ya declara la categoría, en castellano.
     categories: {
@@ -93,19 +93,19 @@ const libraryRoots = [
       "indicadores-de-carga": {
         license: "MIT",
         licenseFile: "LICENSE",
-        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        source: "https://github.com/Eche-Dev/Libreria_HTML_CSS",
         redistributable: true,
       },
       navegacion: {
         license: "MIT",
         licenseFile: "LICENSE",
-        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        source: "https://github.com/Eche-Dev/Libreria_HTML_CSS",
         redistributable: true,
       },
       tarjetas: {
         license: "MIT",
         licenseFile: "LICENSE",
-        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        source: "https://github.com/Eche-Dev/Libreria_HTML_CSS",
         redistributable: true,
       },
     },

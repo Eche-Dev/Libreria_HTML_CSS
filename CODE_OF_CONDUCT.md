@@ -45,7 +45,7 @@ Ejemplos de comportamiento inaceptable:
 Si experimenta, presencia o sospecha cualquier infracción de este código de
 conducta, puedes contactar con quien mantiene el repositorio por el **canal
 privado de avisos de GitHub** del proyecto
-(<https://github.com/kindred-98/Libreria_HTML_CSS/security/advisories/new>).
+(<https://github.com/Eche-Dev/Libreria_HTML_CSS/security/advisories/new>).
 Todas las quejas se revisarán e investigarán de manera rápida y justa, y se
 tomarán todas las medidas que correspondan. Quien mantenga el proyecto está
 obligado a respetar la privacidad y la seguridad de quien reporte cualquier

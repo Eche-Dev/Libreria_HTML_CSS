@@ -100,7 +100,7 @@ El identificador es la ruta de la carpeta en minúsculas, con guiones como separ
     "description": "A rotary dial that rotates smoothly to a chosen value.",
     "descriptionEs": "Un dial rotativo que gira con suavidad hasta el valor elegido.",
     "tags": ["button", "dial", "control"],
-    "source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+    "source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
     "license": "MIT",
     "licenseFile": "LICENSE",
     "redistributable": true

@@ -33,7 +33,7 @@ const repositoryDirectory = path.resolve(scriptDirectory, "..", "..");
 
 const RAICES = ["creaciones-primium", "CreacionesNuevas", "DavokerDiseñador"];
 const EXTENSIONES = new Set([".html", ".css", ".js"]);
-const USER_AGENT = "Libreria_HTML_CSS-asset-fetcher/1.0 (https://github.com/kindred-98/Libreria_HTML_CSS)";
+const USER_AGENT = "Libreria_HTML_CSS-asset-fetcher/1.0 (https://github.com/Eche-Dev/Libreria_HTML_CSS)";
 const ESPERA_ENTRE_PETICIONES = 500; // 2 por segundo, como pide la politica
 const REINTENTOS_MAX = 4;
 
