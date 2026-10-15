@@ -62,19 +62,26 @@ licencia declarada. Ver [Material retirado](#material-retirado).
 
 ## Contenido
 
-- [Qué es](#qué-es)
-- [Características](#características)
-- [Dependencias](#dependencias)
-- [Empezar](#empezar)
-- [Estructura](#estructura)
-  - [El catálogo se genera en el despliegue](#el-catálogo-se-genera-en-el-despliegue)
-- [Añadir un demo](#añadir-un-demo)
-- [Validación continua](#validación-continua)
-- [Despliegue](#despliegue)
-- [Licencias y procedencia](#licencias-y-procedencia)
-  - [Material retirado](#material-retirado)
-- [Documentación](#documentación)
-- [Contribuir](#contribuir)
+- [Biblioteca HTML y CSS](#biblioteca-html-y-css)
+  - [Qué es](#qué-es)
+  - [Características](#características)
+  - [Contenido](#contenido)
+  - [Dependencias](#dependencias)
+    - [En producción: ninguna](#en-producción-ninguna)
+    - [De desarrollo (10 paquetes, todos `devDependencies`)](#de-desarrollo-10-paquetes-todos-devdependencies)
+  - [Empezar](#empezar)
+    - [Ver la biblioteca](#ver-la-biblioteca)
+    - [Usar un componente](#usar-un-componente)
+    - [Los comandos disponibles](#los-comandos-disponibles)
+  - [Estructura](#estructura)
+    - [El catálogo se genera en el despliegue](#el-catálogo-se-genera-en-el-despliegue)
+  - [Añadir un demo](#añadir-un-demo)
+  - [Validación continua](#validación-continua)
+  - [Despliegue](#despliegue)
+  - [Licencias y procedencia](#licencias-y-procedencia)
+    - [Material retirado](#material-retirado)
+  - [Documentación](#documentación)
+  - [Contribuir](#contribuir)
 
 ---
 
@@ -373,6 +380,6 @@ fusionar un PR sin pasar el CI.
 
 **1018 demos** · MIT · sin dependencias en producción
 
-Hecho con HTML, CSS y JavaScript a pelo.
+Creado con HTML, CSS y JavaScript asistido por IA, bajo supervisión humana y aportando nuestro toque de autenticidad.
 
 </div>
