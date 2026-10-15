@@ -1,5 +1,20 @@
 # Biblioteca HTML y CSS
 
+[![Validar sitio](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml)
+[![CodeQL](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml)
+[![Enlaces externos](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/enlaces-externos.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/enlaces-externos.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kindred-98_Libreria_HTML_CSS&metric=alert_status)](https://sonarcloud.io/dashboard?id=kindred-98_Libreria_HTML_CSS)
+[![Web en vivo](https://img.shields.io/badge/web-libreria--html--css.vercel.app-0070F2)](https://libreria-html-css.vercel.app)
+[![Licencia](https://img.shields.io/badge/licencia-MIT%20(parcial)-blue.svg)](./LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-5FA04E.svg)](./package.json)
+
+> [!WARNING]
+> **El `LICENSE` de la raíz no cubre todo el repositorio.** Solo cubre el código
+> original de la aplicación y la documentación. Los demos de terceros tienen sus
+> propias licencias y `Docs/THIRD_PARTY_NOTICES.md` es la fuente de verdad sobre
+> qué se puede redistribuir. Lee [Procedencia y licencias](#procedencia-y-licencias)
+> antes de usar o publicar algo de aquí.
+
 Biblioteca estática y con búsqueda de demos independientes de interfaces hechos con HTML, CSS y JavaScript. El repositorio contiene actualmente **1018 páginas de demos** repartidas en tres colecciones:
 
 - `DavokerDiseñador/` — **119 efectos de texto** de **davoker** (7 temas: miscelánea, harry potter, stalker, monster hunter, star wars, matrix y the division), cada uno con su showcase, su `.zip` y sus instrucciones. Su repositorio es **MIT**, así que **ZIP habilitado**. La carpeta guarda también su **portada** (`davoker.html`, el showcase unificado de los 119), que se abre dentro de la rejilla al elegir a davoker en el filtro de autores, y fuera del catálogo.
@@ -24,6 +39,42 @@ Los **1018 son descargables**. La aplicación web está separada en `Web/` y se 
 - Diseño adaptable, controles accesibles con teclado y compatibilidad con movimiento reducido.
 - Sin frameworks, backend, instalación de paquetes ni dependencias de compilación.
 
+## Tabla de contenidos
+
+- [Características](#características)
+- [Stack técnico](#stack-técnico)
+- [Ejecutar en local](#ejecutar-en-local)
+- [Estructura](#estructura)
+- [Añadir un demo](#añadir-un-demo)
+- [Vistas previas y código](#vistas-previas-y-código)
+- [Procedencia y licencias](#procedencia-y-licencias)
+  - [Material retirado](#material-retirado)
+- [Despliegue](#despliegue)
+  - [Vercel](#vercel)
+  - [El catálogo se genera en el despliegue](#el-catálogo-se-genera-en-el-despliegue)
+  - [GitHub Pages](#github-pages)
+  - [Netlify](#netlify)
+- [Validación continua](#validación-continua)
+- [Contribuir](#contribuir)
+- [Documentación](#documentación)
+
+## Stack técnico
+
+| Capa | Tecnología | Notas |
+| --- | --- | --- |
+| Markup | HTML5 semántico | Tres páginas: `index.html`, `components.html`, `team-core.html` |
+| Estilos | CSS3 moderno | Custom properties, `grid`, `flexbox`, `@layer`, `color-mix()`, container queries |
+| Lógica | JavaScript (ES modules) | Vanilla, sin framework ni transpilación |
+| Build | Node.js 20+ | Solo scripts de catálogo, sellado y ZIP. Sin bundler |
+| Despliegue | Vercel | Estático, sin backend ni base de datos |
+| CI | GitHub Actions | Node 20, 22 y 24 en `ubuntu-24.04` |
+| Calidad | SonarCloud, CodeQL | Analysis y quality gates |
+| Dependencias de runtime | **Ninguna** | El sitio no carga nada externo salvo fuentes y analítica |
+
+No hay frameworks, no hay paso de compilación y no hay paso de instalación de
+paquetes para ver el sitio en marcha. Los `devDependencies` del `package.json`
+existen solo para las comprobaciones de CI.
+
 ## Ejecutar en local
 
 Regenera el catálogo después de añadir o modificar demos:
@@ -34,13 +85,21 @@ node Web/scripts/generate-catalog.mjs
 
 Para abrir la biblioteca directamente, abre `Web/index.html` en el navegador. Antes, regenera el catálogo con el comando anterior si cambiaste o añadiste demos. El archivo `Web/data/catalog.js` permite cargar el catálogo al usar `file://`.
 
-Para probarla mediante HTTP, inicia un servidor estático desde la raíz del repositorio. En Windows puedes usar Python:
+Para probarla mediante HTTP, inicia un servidor estático desde la raíz del repositorio:
+
+```powershell
+node Web/scripts/serve.mjs
+```
+
+Abre <http://localhost:8000/>. La página raíz redirige a `/Web/`.
+
+En Windows también puedes usar Python:
 
 ```powershell
 py -m http.server 8000
 ```
 
-Abre <http://localhost:8000/>. La página raíz redirige a `/Web/`. También puedes iniciar Live Server en VS Code desde la raíz del repositorio. El servidor HTTP es recomendable para probar el portapapeles y las descargas ZIP; al abrir con `file://`, la compatibilidad de esas API depende del navegador.
+O iniciar Live Server en VS Code desde la raíz del repositorio. El servidor HTTP es recomendable para probar el portapapeles y las descargas ZIP; al abrir con `file://`, la compatibilidad de esas API depende del navegador.
 
 Node.js 20 o posterior (lo que declara `engines` en `package.json`) solo hace falta para regenerar el catálogo, para las comprobaciones de CI y para `validar:layout`, que además necesita Chromium (`npx playwright install chromium`). El sitio utiliza HTML, CSS y módulos JavaScript.
 
@@ -66,9 +125,17 @@ Node.js 20 o posterior (lo que declara `engines` en `package.json`) solo hace fa
 |   |   |-- serve.mjs           # Servidor estático local, sin dependencias
 |   |   |-- stamp-assets.mjs    # Sella el `?v=` de los assets en el despliegue
 |   |   |-- validate.mjs        # Comprueba que el catálogo cuadra con el disco
-|   |   |-- validar-csp.mjs     # La CSP cubre todos los hosts externos de los demos
-|   |   |-- validar-layout.mjs  # Que ninguna página se sale de lado (usa Chromium)
-|   |   `-- zip.js              # Crea archivos ZIP comprimidos en el navegador
+|   |   |-- zip.js              # Crea archivos ZIP comprimidos en el navegador
+|   |   |-- generar-sitemap.mjs  # Regenera sitemap.xml
+|   |   `-- validaciones (solo CI, no se despliegan)
+|   |       |-- validar-csp.mjs         # La CSP cubre todos los hosts externos de los demos
+|   |       |-- validar-layout.mjs      # Que ninguna página se sale de lado (usa Chromium)
+|   |       |-- validar-a11y.mjs        # Accesibilidad con axe-core sobre Chromium real
+|   |       |-- validar-encabezados.mjs # Los encabezados de seguridad son los correctos
+|   |       |-- validar-enlaces.mjs     # Enlaces internos que no llevan a ninguna parte
+|   |       |-- smoke-demos.mjs         # Que cada demo carga sin errores de consola
+|   |       |-- detectar-duplicados.mjs # Demos duplicados o casi idénticos
+|   |       `-- validar-lighthouse.mjs  # Rendimiento, accesibilidad y SEO (Node 24)
 |   |-- styles/site.css
 |   |-- styles/team-core.css    # Hoja propia de Team Core (solo esa pagina)
 |   |-- components.html          # Listado de componentes y detalle
@@ -87,6 +154,7 @@ Node.js 20 o posterior (lo que declara `engines` en `package.json`) solo hace fa
 |-- index.html                  # Entrada a la aplicación web
 |-- LICENSE
 |-- PRIVACY.md                  # Qué datos recoge la web y cuáles no
+|-- SECURITY.md                 # Cómo avisar de un fallo de seguridad
 `-- README.md
 ```
 
@@ -192,6 +260,35 @@ El workflow [`validate.yml`](.github/workflows/validate.yml) se ejecuta en cada 
 
 Se ejecuta sobre la matriz de Node `[20, 22, 24]` (lo que `package.json` promete con `>=20`) en `ubuntu-24.04`, con `fail-fast: false` para ver todas las versiones aunque una falle. Las acciones van **fijadas por SHA** —`actions/checkout` y `actions/setup-node`, con la versión legible en comentario—, porque un tag se puede mover por quien tenga escritura en la acción.
 
+### Comandos disponibles
+
+Todos se lanzan desde la raíz del repositorio. Los marcados como *(CI)* no se
+ejecutan en el despliegue, solo en las comprobaciones automáticas.
+
+| Comando | Qué hace |
+| --- | --- |
+| `npm run catalogo` | Regenera `catalog.json`, `catalog.js` y `sources/`. **Obligatorio** tras añadir o modificar un demo |
+| `npm run servidor` | Sirve el repositorio en <http://localhost:8000/> |
+| `npm run sellar` | Sella el `?v=` de los assets. En local solo con `--force`, para ver qué URLs quedarían |
+| `npm run zips` | Genera los 119 ZIP de Davoker |
+| `npm run sitemap` | Regenera `sitemap.xml` |
+| `npm run validar` | `validate.mjs` + `validar-csp.mjs`: lo mínimo antes de abrir un PR |
+| `npm run validar:html` | `html-validate` sobre los HTML *(CI)* |
+| `npm run validar:enlaces` | Enlaces internos rotos *(CI)* |
+| `npm run validar:encabezados` | Cabeceras de seguridad *(CI)* |
+| `npm run validar:layout` | Ninguna página se sale de lado; usa Chromium |
+| `npm run validar:a11y` | Accesibilidad con axe-core *(CI)* |
+| `npm run validar:demos` | Que cada demo carga sin errores *(CI)* |
+| `npm run validar:lighthouse` | Rendimiento, accesibilidad y SEO; requiere Node ≥ 22.19 |
+| `npm run duplicados` | Detecta demos duplicados o casi idénticos |
+| `npm run enlaces:externos` | Comprueba que los enlaces externos siguen vivos |
+
+Las que usan Chromium necesitan el navegador instalado una vez:
+
+```powershell
+npx playwright install chromium
+```
+
 ## Contribuir
 
 Mantén cada demo independiente, conserva su comportamiento original y evita añadir dependencias a la aplicación del catálogo. Prueba las vistas previas y los controles de copia mediante un servidor HTTP local:
@@ -204,3 +301,48 @@ node Web/scripts/serve.mjs
 Abre <http://localhost:8000/>.
 
 Si quieres añadir un componente o un pull request, lee antes [`CONTRIBUTING.md`](./CONTRIBUTING.md). Participar implica aceptar el [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md). Si has encontrado un fallo de seguridad, no lo reportes por issue: lee [`SECURITY.md`](./SECURITY.md). Qué datos recoge la web (y cuáles no), en [`PRIVACY.md`](./PRIVACY.md).
+
+## Documentación
+
+| Documento | Para qué sirve |
+| --- | --- |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Convenciones para añadir componentes, licenses, commits y pull requests |
+| [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md) | Convivencia y canal de denuncias |
+| [`SECURITY.md`](./SECURITY.md) | Cómo avisar de un fallo de seguridad (canal privado) |
+| [`PRIVACY.md`](./PRIVACY.md) | Qué datos recoge la web y cuáles no |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Registro de cambios, en formato Keep a Changelog |
+| [`Web/README.md`](./Web/README.md) | Cómo funciona la aplicación por dentro |
+| [`Docs/THIRD_PARTY_NOTICES.md`](./Docs/THIRD_PARTY_NOTICES.md) | Procedencia y licencias de cada colección de componentes |
+| [`LICENSE`](./LICENSE) | MIT de la raíz, con su alcance limitado |
+| [`Docs/`](./Docs/) | Auditorías, planes de fase, notas de sesión y lo aplicado de cada fase |
+
+### Resumen de licencias por colección
+
+| Carpeta | Componentes | Autoría | Licencia | ZIP |
+| --- | ---: | --- | --- | :---: |
+| `CreacionesNuevas/` | 248 | `kindred-98` | MIT propia por carpeta | Sí |
+| `creaciones-primium/` | 651 | `kindred-98` y `fatmaerm` | MIT de la raíz de la colección | Sí |
+| `DavokerDiseñador/` | 119 | `davoker` | MIT de su repositorio | Sí |
+| **Total** | **1018** | | | **1018/1018** |
+
+## Cómo contribuir en tres pasos
+
+Si vienes a aportar algo y no has leído todo lo anterior, esta es la ruta corta:
+
+1. **Lee [`CONTRIBUTING.md`](./CONTRIBUTING.md)** — te dice dónde va tu componente
+   (`creaciones-primium/`, en la categoría que le toque), cómo se nombra la carpeta
+   y qué metadatos necesita.
+2. **Trabaja en tu rama y abre un pull request.** El CI valida solo; tú no necesitas
+   desplegar nada.
+3. **Antes de abrir el PR**, ejecuta en local lo mismo que correrá el CI:
+
+   ```powershell
+   npm ci
+   node Web/scripts/generate-catalog.mjs
+   node Web/scripts/validate.mjs
+   ```
+
+   No subas `Web/data/catalog.json`, `Web/data/catalog.js` ni `Web/data/sources/`:
+   son artefactos generados y están en `.gitignore`.
+
+La decisión de integrar o no es siempre de quien mantiene el repositorio.
