@@ -16,6 +16,10 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { leerDireccion } from "./lib/donacion.mjs";
+import { lineasInnerHtmlConConcatenacion } from "./lib/inyeccion.mjs";
+import { comprobarExtensiones } from "./validar-extensiones.mjs";
+
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryDirectory = path.resolve(scriptDirectory, "../..");
 const catalogFile = path.join(repositoryDirectory, "Web", "data", "catalog.json");
@@ -65,7 +69,14 @@ for (const relative of javascriptFiles) {
   try {
     execFileSync(process.execPath, ["--check", absolute], { stdio: "pipe" });
   } catch (error) {
-    fail("sintaxis", `${relative}: ${String(error.stderr ?? error.message).trim().split("\n")[0]}`);
+    fail(
+      "sintaxis",
+      `${relative}: ${
+        String(error.stderr ?? error.message)
+          .trim()
+          .split("\n")[0]
+      }`,
+    );
   }
 }
 
@@ -73,10 +84,10 @@ for (const relative of javascriptFiles) {
 // primero que se comprueba para no soltar un error de Node ilegible.
 if (!(await exists(catalogFile))) {
   console.error(
-    "x Web/data/catalog.json no existe.\n"
-    + "  El catalogo es un artefacto generado y no se versiona.\n"
-    + "  Genera el primero:  node Web/scripts/generate-catalog.mjs\n"
-    + "  (Vercel lo hace solo en el build; en local hay que lanzarlo a mano.)",
+    "x Web/data/catalog.json no existe.\n" +
+      "  El catalogo es un artefacto generado y no se versiona.\n" +
+      "  Genera el primero:  node Web/scripts/generate-catalog.mjs\n" +
+      "  (Vercel lo hace solo en el build; en local hay que lanzarlo a mano.)",
   );
   process.exit(1);
 }
@@ -117,7 +128,10 @@ for (const component of catalog) {
   if (component.missingReferences?.length) brokenReferences.set(component.id, component.missingReferences);
 }
 for (const [id, references] of brokenReferences) {
-  fail("referencias", `${id} apunta a ${references.length} fichero(s) inexistente(s): ${references.join(", ")}`);
+  fail(
+    "referencias",
+    `${id} apunta a ${references.length} fichero(s) inexistente(s): ${references.join(", ")}`,
+  );
 }
 
 // 5. Todo demo del disco tiene que estar en el catalogo. Este es el aviso que
@@ -128,7 +142,13 @@ for (const root of libraryRoots) {
   const rootDirectory = path.join(repositoryDirectory, root);
   const onDisk = new Set(
     (await findHtmlPages(rootDirectory)).map((page) =>
-      path.relative(rootDirectory, path.dirname(page)).split(path.sep).join("/").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      path
+        .relative(rootDirectory, path.dirname(page))
+        .split(path.sep)
+        .join("/")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, ""),
     ),
   );
   const indexed = new Set(
@@ -136,7 +156,10 @@ for (const root of libraryRoots) {
   );
   for (const id of onDisk) {
     if (!indexed.has(id)) {
-      fail("catalogo desactualizado", `${root}/${id}/ tiene index.html pero no esta en catalog.json; ejecuta node Web/scripts/generate-catalog.mjs`);
+      fail(
+        "catalogo desactualizado",
+        `${root}/${id}/ tiene index.html pero no esta en catalog.json; ejecuta node Web/scripts/generate-catalog.mjs`,
+      );
     }
   }
   for (const id of indexed) {
@@ -148,7 +171,9 @@ for (const root of libraryRoots) {
 
 // 6. Aviso, no fallo: los demos de terceros no se pueden redistribuir.
 const unverifiable = catalog.filter((component) => !component.downloadable).length;
-notes.push(`${catalog.length} componentes · ${catalog.length - unverifiable} descargables · ${unverifiable} sin redistribucion`);
+notes.push(
+  `${catalog.length} componentes · ${catalog.length - unverifiable} descargables · ${unverifiable} sin redistribucion`,
+);
 
 // 7. Todo <iframe> de las paginas del sitio lleva sandbox. Si no, el demo
 //    corre en el mismo origen y ve el `localStorage` (incluido el consentimiento
@@ -178,8 +203,19 @@ for (const htmlFile of htmlFiles) {
 //    cartera y los donativos se pierden; y si se cuela una direccion de tercero,
 //    acaban en un desconocido. Se comprueba en CI porque lo comun es el cambio
 //    accidental, no el malicioso, y un error asi no se nota al mirar la pagina.
-//    La constante se copio de Web/index.html, no se tecleo de memoria.
-const donationAddress = "0xa8f0230135b4f6a959358be3e8e8531f3551fa81";
+//    La direccion no se teclea aqui: sale de Web/data/donacion.json, la fuente
+//    unica, para que no haya dos constantes que puedan divergir. El barrido
+//    completo del repositorio vive en Web/scripts/validar-donacion.mjs, que
+//    corre en el mismo paso de CI; aqui se comprueba la presencia en las
+//    cuatro copias que el sitio carga de verdad.
+let donationAddress = "";
+try {
+  donationAddress = leerDireccion(
+    await readFile(path.join(repositoryDirectory, "Web", "data", "donacion.json"), "utf8"),
+  );
+} catch (error) {
+  fail("donacion", `Web/data/donacion.json: ${error instanceof Error ? error.message : String(error)}`);
+}
 const donationFiles = [
   path.join(repositoryDirectory, "Web", "index.html"),
   path.join(repositoryDirectory, "Web", "components.html"),
@@ -194,6 +230,9 @@ for (const donationFile of donationFiles) {
   }
   const texto = await readFile(donationFile, "utf8");
   const found = [...texto.matchAll(/0x[a-fA-F0-9]{40}/g)].map((match) => match[0]);
+  // Con la fuente ilegible el fallo ya esta anotado: comparar contra "" marcaria
+  // la buena como ajena en todos los ficheros y taparia el problema de raiz.
+  if (!donationAddress) continue;
   // Las tres paginas tienen que llevarla; app.js solo se lee, no se exige.
   if (donationFile.toLowerCase().endsWith(".html") && !found.includes(donationAddress)) {
     fail("donacion", `${relative} no contiene la direccion de donacion ${donationAddress}`);
@@ -214,8 +253,9 @@ for (const donationFile of donationFiles) {
 const warnings = [];
 const catalogFolder = new Map();
 for (const component of catalog) {
-  const folder = component.folder
-    ?? (typeof component.preview === "string"
+  const folder =
+    component.folder ??
+    (typeof component.preview === "string"
       ? component.preview.replace(/^\.\.\//, "").replace(/\/index\.html$/, "")
       : null);
   if (folder) catalogFolder.set(component.id, folder);
@@ -245,18 +285,85 @@ for (const component of catalog) {
     css = [...page.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)].map((m) => m[1]).join("\n");
   }
   const limpio = css.replace(/\/\*[\s\S]*?\*\//g, "");
-  const animaConCSS = /@keyframes\b/.test(limpio)
-    || /\banimation(?:-\w+)?\s*:/.test(limpio)
-    || /\btransition(?:-\w+)?\s*:/.test(limpio);
+  const animaConCSS =
+    /@keyframes\b/.test(limpio) ||
+    /\banimation(?:-\w+)?\s*:/.test(limpio) ||
+    /\btransition(?:-\w+)?\s*:/.test(limpio);
   if (animaConCSS && !/prefers-reduced-motion/.test(css)) warnings.push(component.id);
 }
 if (warnings.length) {
   const lista = warnings.slice(0, 20).join(", ") + (warnings.length > 20 ? ", ..." : "");
   console.log(
-    `AVISO: ${warnings.length} demo(s) animan con CSS sin escuchar prefers-reduced-motion: ${lista}\n`
-    + "       Anade el bloque de Web/scripts/add-reduced-motion.mjs (ver CONTRIBUTING, regla 7).",
+    `AVISO: ${warnings.length} demo(s) animan con CSS sin escuchar prefers-reduced-motion: ${lista}\n` +
+      "       Anade el bloque de Web/scripts/add-reduced-motion.mjs (ver CONTRIBUTING, regla 7).",
   );
 }
+
+// 10. Ningun demo monta HTML concatenando datos en `innerHTML` (P0-2). La gente
+//     copia estos demos a aplicaciones reales, y el patron
+//     `innerHTML = '...' + dato` es un XSS en cuanto el dato venga del usuario:
+//     hoy los datos son fijos, pero el patron se copia tal cual.
+//
+//     Excepciones permitidas: asignar la cadena vacia para vaciar y literales
+//     estaticos sin variables (aunque lleven signos entre comillas). Concatenar
+//     sobre `textContent` o montar con createElement/append es seguro siempre y
+//     la regla no lo toca. El detalle del analisis vive en lib/inyeccion.mjs.
+//
+//     Alcance: cualquier `.js` del repositorio salvo vendor/ (codigo de un
+//     tercero que se copia tal cual), Web/data/ (artefactos generados: el
+//     catalogo incrusta las fuentes de los demos) y GevendraAutorExterno/
+//     (copia local no versionada de un tercero, fuera del repo hasta que su
+//     autor autorice la redistribucion, ver THIRD_PARTY_NOTICES). Tambien se
+//     saltan las carpetas de dependencias y temporales por el mismo motivo
+//     que en el resto del script.
+const carpetasNoEscanear = new Set([
+  "node_modules",
+  "tmp",
+  "temp",
+  "dist",
+  "build",
+  "coverage",
+  "GevendraAutorExterno",
+  "vendor",
+]);
+async function findJavascriptFiles(directory, acc) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.name.startsWith(".")) continue;
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      const relative = path.relative(repositoryDirectory, entryPath).split(path.sep).join("/");
+      if (carpetasNoEscanear.has(entry.name) || relative === "Web/data") continue;
+      await findJavascriptFiles(entryPath, acc); // NOSONAR (S9382): el orden de `acc` debe seguir el paseo en profundidad de readdir; paralelizar cambiariamos ese orden y los `failures` se anadiriamos en otro orden.
+    } else if (entry.isFile() && entry.name.toLowerCase().endsWith(".js")) {
+      acc.push(entryPath);
+    }
+  }
+}
+const javascriptDemoFiles = [];
+await findJavascriptFiles(repositoryDirectory, javascriptDemoFiles);
+for (const javascriptFile of javascriptDemoFiles) {
+  const relative = path.relative(repositoryDirectory, javascriptFile);
+  const texto = await readFile(javascriptFile, "utf8"); // NOSONAR (S9382): cada fallo se anade a `failures` en el orden en que se recorre `javascriptDemoFiles`; paralelizar cambiariamos el orden de los mensajes de salida.
+  for (const linea of lineasInnerHtmlConConcatenacion(texto)) {
+    fail(
+      "inyeccion",
+      `${relative}:${linea.numero}: innerHTML con concatenacion o interpolacion (linea: ${linea.texto})`,
+    );
+  }
+}
+
+// 11. Lista blanca de extensiones en las carpetas de los demos (P0-3). El
+//     catalogo y los ZIP se construyen con lo que haya en esas carpetas, y
+//     nada impide hoy que se cuele un `.exe`, un `.php` o un `.svg` con
+//     script: aqui se rechaza antes de que llegue a publicarse. Las raices
+//     salen del catalogo (mismas libraryRoots que generate-catalog) y la
+//     regla concreta vive en lib/extensiones.mjs, compartida con el generador
+//     y con build-zips.
+const raicesDemo = [...new Set(catalog.map((componente) => componente.root))]
+  .filter(Boolean)
+  .map((nombre) => path.join(repositoryDirectory, nombre));
+const controlExtensiones = await comprobarExtensiones(repositoryDirectory, raicesDemo);
+for (const fallo of controlExtensiones.fallos) fail("extensiones", fallo);
 
 for (const note of notes) console.log(`info  ${note}`);
 

@@ -6,11 +6,14 @@
   "type": "module",
   "scripts": {
     "catalogo": "node Web/scripts/generate-catalog.mjs",
+    "iconos": "node Web/scripts/generar-iconos.mjs",
     "sitemap": "node Web/scripts/generar-sitemap.mjs",
     "catalogo:watch": "node --watch-path=./DavokerDiseñador --watch-path=./CreacionesNuevas --watch-path=./creaciones-primium Web/scripts/generate-catalog.mjs",
     "servidor": "node Web/scripts/serve.mjs",
-    "validar": "node Web/scripts/validate.mjs && node Web/scripts/validar-csp.mjs",
+    "validar": "node Web/scripts/validate.mjs && node Web/scripts/validar-csp.mjs && node Web/scripts/validar-donacion.mjs",
     "validar:csp": "node Web/scripts/validar-csp.mjs",
+    "validar:donacion": "node Web/scripts/validar-donacion.mjs",
+    "validar:licencias": "node Web/scripts/validar-licencias.mjs",
     "validar:layout": "node Web/scripts/validar-layout.mjs",
     "validar:a11y": "node Web/scripts/validar-a11y.mjs",
     "validar:encabezados": "node Web/scripts/validar-encabezados.mjs",
@@ -19,8 +22,18 @@
     "enlaces:externos": "node Web/scripts/comprobar-enlaces-externos.mjs",
     "validar:demos": "node Web/scripts/smoke-demos.mjs",
     "validar:lighthouse": "node Web/scripts/validar-lighthouse.mjs",
+    "validar:lighthouse:movil": "node Web/scripts/validar-lighthouse-movil.mjs",
     "duplicados": "node Web/scripts/detectar-duplicados.mjs",
+    "validar:peso": "node Web/scripts/validar-peso-catalogo.mjs",
     "sonar:exportar": "node Web/scripts/exportar-incidencias-sonar.mjs",
+    "test": "node Web/scripts/test.mjs",
+    "test:e2e": "node Web/scripts/test.mjs e2e",
+    "lint": "eslint Web/scripts/",
+    "lint:fix": "eslint Web/scripts/ --fix",
+    "typecheck": "node Web/scripts/validar-tipos.mjs",
+    "format:check": "prettier --check \"Web/scripts/**/*.mjs\"",
+    "format": "prettier --write \"Web/scripts/**/*.mjs\"",
+    "minificar": "node Web/scripts/minificar.mjs --force",
     "sellar": "node Web/scripts/stamp-assets.mjs --force",
     "zips": "node Web/scripts/build-zips.mjs --force"
   },
@@ -29,9 +42,14 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
+    "@types/node": "^26.6.4",
     "chrome-launcher": "1.2.2",
+    "esbuild": "0.28.2",
+    "eslint": "^9.39.5",
     "html-validate": "10.17.0",
     "lighthouse": "13.5.0",
-    "playwright": "^1.63.0"
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.3"
   }
 }

@@ -48,7 +48,7 @@
     );
   }
   var CHIPS_HTML = CHIPS.join("");
-  tapeRow.innerHTML = CHIPS_HTML + CHIPS_HTML;
+  tapeRow.innerHTML = CHIPS_HTML.repeat(2);
 
   function smooth(src) {
     var out = [];
@@ -184,7 +184,7 @@
   var lastPx = "";
 
   function step() {
-    var now = (new Date()).getTime();
+    var now = Date.now();
     if (!t0) t0 = now;
     var ms = now - t0;
     var live = runT >= 0;

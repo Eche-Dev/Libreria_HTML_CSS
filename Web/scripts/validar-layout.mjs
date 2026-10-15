@@ -23,21 +23,19 @@
  *
  * En el CI hace falta el navegador: `npx playwright install --with-deps chromium`.
  */
-import { spawn } from "node:child_process";
-import net from "node:net";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { arrancarServidor, puertoLibre } from "./lib/servidor.mjs";
 
-const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
-
-// Las paginas del sitio, que son las que tienen cabecera y pie. Las cinco son
+// Las paginas del sitio, que son las que tienen cabecera y pie. Las seis son
 // las que `validate.mjs` ya revisa para lo del `sandbox`, y estan a proposito
 // en la misma lista: si se anade una pagina al sitio, esta la mira sola.
 const PAGINAS = [
   { ruta: "/Web/index.html", nombre: "portada" },
   { ruta: "/Web/components.html", nombre: "componentes" },
   { ruta: "/Web/team-core.html", nombre: "team core" },
+  { ruta: "/Web/como-usar.html", nombre: "como usar" },
+  { ruta: "/Web/privacidad.html", nombre: "privacidad" },
+  { ruta: "/Web/legal.html", nombre: "legal" },
   { ruta: "/404.html", nombre: "404" },
   { ruta: "/index.html", nombre: "redireccion de la raiz" },
 ];
@@ -46,8 +44,8 @@ const PAGINAS = [
 // pasa ahi. Los de en medio son donde ha habido fallos reales, y 320 es el
 // movil mas estrecho que se sigue viendo.
 const ANCHOS = [
-  320, 360, 375, 390, 414, 480, 540, 600, 620, 621, 640, 660, 680, 700, 720, 768,
-  820, 900, 1024, 1200, 1280, 1440, 1920,
+  320, 360, 375, 390, 414, 480, 540, 600, 620, 621, 640, 660, 680, 700, 720, 768, 820, 900, 1024, 1200, 1280,
+  1440, 1920,
 ];
 
 // Desbordamientos que se aceptan a proposito, con el motivo. Si algo se
@@ -62,54 +60,6 @@ const EXCEPCIONES = {};
 // Margen de tolerancia. Con 1 px no se falla: hay redondeos de subpixel que no
 // son un fallo que el visitante llegue a ver. A partir de 2 px ya se nota.
 const TOLERANCIA = 1;
-
-// Puerto libre, en vez de uno fijo: en local casi siempre hay ya un servidor de
-// desarrollo levantado, y si este tropezara con el suyo la comprobacion
-// fallaria por un motivo que no tiene que ver con el layout. Se le pide uno
-// libre al sistema, se cierra, y se le pasa a `serve.mjs`. Con PORT en el
-// entorno se usa ese, por si hay quien lo quiera fijo.
-async function puertoLibre() {
-  const fijado = Number(process.env.PORT ?? 0);
-  if (fijado) return fijado;
-  return new Promise((resolve, reject) => {
-    const sonda = net.createServer();
-    sonda.on("error", reject);
-    sonda.listen(0, "127.0.0.1", () => {
-      const { port } = sonda.address();
-      sonda.close(() => resolve(port));
-    });
-  });
-}
-
-function arrancarServidor(puerto) {
-  return new Promise((resolve, reject) => {
-    const proceso = spawn(process.execPath, [path.join(scriptDirectory, "serve.mjs")], {
-      env: { ...process.env, PORT: String(puerto) },
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-    let salida = "";
-    let arrancado = false;
-    const listo = () => {
-      if (arrancado) return;
-      arrancado = true;
-      resolve(proceso);
-    };
-    proceso.stdout.on("data", (trozo) => {
-      salida += trozo;
-      if (salida.includes("Sirviendo el repositorio")) listo();
-    });
-    proceso.stderr.on("data", (trozo) => { salida += trozo; });
-    proceso.on("error", reject);
-    proceso.on("exit", (codigo) => {
-      if (!arrancado) {
-        reject(new Error(`serve.mjs no arranco en el puerto ${puerto} (codigo ${codigo}):\n${salida.trim()}`));
-      }
-    });
-    setTimeout(() => {
-      if (!arrancado) reject(new Error(`serve.mjs no arranco en 15 s en el puerto ${puerto}:\n${salida.trim()}`));
-    }, 15000).unref();
-  });
-}
 
 function esperar(milisegundos) {
   return new Promise((resolve) => setTimeout(resolve, milisegundos));
@@ -151,7 +101,11 @@ try {
           // el documento (el marquee, por ejemplo, mide 4935 px y no se ve nada
           // de eso). Solo se listan los que no tienen quien los recorte.
           const recortado = (elemento) => {
-            for (let padre = elemento.parentElement; padre && padre !== document.body; padre = padre.parentElement) {
+            for (
+              let padre = elemento.parentElement;
+              padre && padre !== document.body;
+              padre = padre.parentElement
+            ) {
               const comoSeMuestra = getComputedStyle(padre);
               if (comoSeMuestra.overflowX !== "visible" || comoSeMuestra.overflowY !== "visible") return true;
             }
@@ -165,7 +119,7 @@ try {
             if (recortado(elemento)) continue;
             fuera.push(
               `${elemento.tagName.toLowerCase()}${elemento.className ? "." + String(elemento.className).trim().split(/\s+/).join(".") : ""}` +
-              ` (se sale ${Math.round(caja.right - limite)}px)`,
+                ` (se sale ${Math.round(caja.right - limite)}px)`,
             );
           }
           return fuera.slice(0, 3).join(", ");
@@ -177,7 +131,9 @@ try {
       // llego a pintarse, el script diria que todo esta bien.
       const vacia = await pestana.evaluate(() => document.body.getBoundingClientRect().height < 50);
       if (vacia) {
-        fallos.push(`${pagina.nombre} (${pagina.ruta}) a ${ancho}px: la pagina no ha pintado, la medicion no vale`);
+        fallos.push(
+          `${pagina.nombre} (${pagina.ruta}) a ${ancho}px: la pagina no ha pintado, la medicion no vale`,
+        );
         continue;
       }
 
@@ -191,8 +147,8 @@ try {
         }
         fallos.push(
           `${pagina.nombre} (${pagina.ruta}) a ${ancho}px: se sale ${medida.exceso}px ` +
-          `(ventana ${medida.clientWidth}px, contenido ${medida.scrollWidth}px). ` +
-          (medida.culpable ? `Culpables: ${medida.culpable}.` : ""),
+            `(ventana ${medida.clientWidth}px, contenido ${medida.scrollWidth}px). ` +
+            (medida.culpable ? `Culpables: ${medida.culpable}.` : ""),
         );
       }
     }
@@ -207,7 +163,9 @@ try {
   servidor.kill();
 }
 
-console.log(`info  ${PAGINAS.length} paginas x ${ANCHOS.length} anchos = ${PAGINAS.length * ANCHOS.length} medidas, tolerancia ${TOLERANCIA}px`);
+console.log(
+  `info  ${PAGINAS.length} paginas x ${ANCHOS.length} anchos = ${PAGINAS.length * ANCHOS.length} medidas, tolerancia ${TOLERANCIA}px`,
+);
 
 for (const nota of notas) console.log(`info  ${nota}`);
 

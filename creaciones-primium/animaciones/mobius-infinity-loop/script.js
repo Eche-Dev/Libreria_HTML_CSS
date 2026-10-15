@@ -222,7 +222,6 @@
     elSpine.setAttribute('d', spineD);
     elSpineHalo.setAttribute('d', spineD);
 
-    const mid = Math.round(SEG / 2);
     buildRibs(RIB_MINOR, ribBuf);
     elRibsMinor.setAttribute('d', ribBuf[0] + ribBuf[1]);
     buildRibs(RIB_MAJOR, ribBuf);
@@ -264,7 +263,9 @@
     whole += 'Z';
     if (whole !== lastLobe) {
       lastLobe = whole;
-      lobeBack.innerHTML = '<path d="' + whole + '"/>';
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', whole);
+      lobeBack.replaceChildren(path);
       lobeFront.innerHTML = '';
     }
 

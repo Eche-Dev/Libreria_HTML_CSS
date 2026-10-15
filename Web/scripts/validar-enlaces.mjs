@@ -31,7 +31,16 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryDirectory = path.resolve(scriptDirectory, "../..");
 
 // Las mismas paginas que mira `html-validate` y que el CI construye.
-const PAGINAS = ["Web/index.html", "Web/components.html", "Web/team-core.html", "404.html", "index.html"];
+const PAGINAS = [
+  "Web/index.html",
+  "Web/components.html",
+  "Web/team-core.html",
+  "Web/como-usar.html",
+  "Web/privacidad.html",
+  "Web/legal.html",
+  "404.html",
+  "index.html",
+];
 
 const fallos = [];
 const avisos = [];
@@ -84,6 +93,15 @@ for (const pagina of PAGINAS) {
       continue;
     }
 
+    // Rutas que sirve la plataforma en runtime y no viven en el repo: el script
+    // de Vercel Web Analytics (/_vercel/insights/*) lo añade Vercel en la edge
+    // al habilitar Analytics, y aun asi los `<script src="...">` del sitio
+    // tienen que apuntarlo para trackear pageviews.
+    if (destino.startsWith("/_vercel/")) {
+      externos += 1;
+      continue;
+    }
+
     const [rutaParte, ancla] = destino.split("#");
     const sinConsulta = rutaParte.split("?")[0];
 
@@ -123,9 +141,7 @@ for (const pagina of PAGINAS) {
     }
 
     if (ancla) {
-      const destinoAbsoluto = rutaLimpia.endsWith("/")
-        ? path.join(objetivo, "index.html")
-        : objetivo;
+      const destinoAbsoluto = rutaLimpia.endsWith("/") ? path.join(objetivo, "index.html") : objetivo;
       const idsDestino = await idsDe(destinoAbsoluto);
       if (!idsDestino) {
         avisos.push(`${pagina}: ${atributo}="${destino}" no se puede leer para comprobar la ancla`);
@@ -136,7 +152,9 @@ for (const pagina of PAGINAS) {
   }
 }
 
-console.log(`info  ${PAGINAS.length} paginas del sitio, ${comprobados} destinos locales comprobados, ${externos} externos`);
+console.log(
+  `info  ${PAGINAS.length} paginas del sitio, ${comprobados} destinos locales comprobados, ${externos} externos`,
+);
 
 if (avisos.length) {
   for (const aviso of avisos) console.log(`AVISO: ${aviso}`);

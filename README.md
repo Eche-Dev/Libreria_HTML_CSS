@@ -1,3 +1,5 @@
+<div align="center">
+
 # Biblioteca HTML y CSS
 
 [![Validar sitio](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml)
@@ -17,27 +19,33 @@
 
 Biblioteca estática y con búsqueda de demos independientes de interfaces hechos con HTML, CSS y JavaScript. El repositorio contiene actualmente **1018 páginas de demos** repartidas en tres colecciones:
 
-- `DavokerDiseñador/` — **119 efectos de texto** de **davoker** (7 temas: miscelánea, harry potter, stalker, monster hunter, star wars, matrix y the division), cada uno con su showcase, su `.zip` y sus instrucciones. Su repositorio es **MIT**, así que **ZIP habilitado**. La carpeta guarda también su **portada** (`davoker.html`, el showcase unificado de los 119), que se abre dentro de la rejilla al elegir a davoker en el filtro de autores, y fuera del catálogo.
-- `CreacionesNuevas/` — **248 demos** originales creados para este repositorio, cada uno con su propio archivo `LICENSE` MIT y **descarga ZIP habilitada**.
-- `creaciones-primium/` — **651 demos** organizados por categoría: **272** de animaciones, botones, controles, efectos y formularios de **kindred-98**, más **86 galerías** de fotografía y los **293** de **fatmaerm** repartidos entre `indicadores-de-carga/`, `navegacion/` y `tarjetas/`. Toda la colección comparte el `LICENSE` MIT de la carpeta, que nombra a las dos autoras, así que el **ZIP está habilitado en todos**. Las 86 galerías (676 fotografías) muestran sus fotos desde Wikimedia Commons, con el autor y la licencia de cada imagen impresos en la propia página; el inventario completo está en [`THIRD_PARTY_NOTICES.md`](./Docs/THIRD_PARTY_NOTICES.md).
+[![CI](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/validate.yml)
+[![CodeQL](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml/badge.svg)](https://github.com/kindred-98/Libreria_HTML_CSS/actions/workflows/codeql.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kindred-98_Libreria_HTML_CSS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kindred-98_Libreria_HTML_CSS)
+[![Licencia](https://img.shields.io/badge/licencia-MIT-d4f779?style=flat-square&labelColor=1b231c)](./LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-5FA04E?style=flat-square&labelColor=1b231c)](./package.json)
 
-Los **1018 son descargables**. La aplicación web está separada en `Web/` y se divide en tres páginas —`index.html` (portada), `components.html` (listado y detalle) y `team-core.html` (equipo y donación)—; los demos originales se cargan directamente para mostrar vistas previas reales.
+[**Ver la biblioteca**](https://libreria-html-css.vercel.app/) · [Cómo usar un componente](./Web/como-usar.html) · [Privacidad](./Web/privacidad.html) · [Aviso legal](./Web/legal.html)
 
-> `GevendraAutorExterno/` **no forma parte del repositorio ni del árbol de trabajo**: está en `.gitignore` y no está en el disco de un clon nuevo. Los 116 demos que provee un tercero **no se catalogan, no se publican y no se sirven**, y su material no tiene licencia declarada. Ver *Material retirado*.
+> 🎉 **Versión estable 1.0.0 publicada.** [Ver notas de la release](https://github.com/kindred-98/Libreria_HTML_CSS/releases/tag/v1.0.0).
 
-## Características
+</div>
 
-- Búsqueda por nombre, categoría, descripción y etiquetas.
-- Filtros por categorías inferidas de los nombres de los demos.
-- Filtro por autor (Todos, davoker, kindred-98 y fatmaerm). Cada botón lleva su animación: davoker *Liquid Fill Button*, kindred-98 *Datamosh Decode Button* y fatmaerm *Neutron Star Pulse Button*.
-- Sección de destacados con demos existentes.
-- Vistas previas interactivas que cargan el HTML original.
-- Inspección y copia del HTML, CSS y JavaScript local de cada demo.
-- Descargas ZIP solo después de verificar la fuente, los permisos de redistribución y la licencia individual.
-- Tema oscuro y claro con preferencia guardada en el navegador.
-- Interfaz en inglés y español, con idioma recordado de forma independiente al tema.
-- Diseño adaptable, controles accesibles con teclado y compatibilidad con movimiento reducido.
-- Sin frameworks, backend, instalación de paquetes ni dependencias de compilación.
+---
+
+## Qué es
+
+Una colección de **1 018 demos** de interfaz web, repartidos en tres
+colecciones, con buscador, filtros, vistas previas reales y **descarga del
+código fuente en ZIP**. Cada demo es un componente autónomo pensado para
+copiarse tal cual: no hay framework, ni paso de compilación, ni
+dependencias que instalar para usarlo.
+
+| Colección                                      | Qué contiene                                                                  | ZIP |
+| ---------------------------------------------- | ----------------------------------------------------------------------------- | --- |
+| [`CreacionesNuevas/`](./CreacionesNuevas/)     | **248** creaciones originales del autor, cada una con su `LICENSE` MIT propio | Sí  |
+| [`creaciones-primium/`](./creaciones-primium/) | **651** creaciones en curso por categorías (de **kindred-98** y **fatmaerm**) | Sí  |
+| [`DavokerDiseñador/`](./DavokerDiseñador/)     | **119** efectos de texto de **davoker**, cada uno con su showcase y su `.zip` | Sí  |
 
 ## Tabla de contenidos
 
@@ -77,13 +85,73 @@ existen solo para las comprobaciones de CI.
 
 ## Ejecutar en local
 
-Regenera el catálogo después de añadir o modificar demos:
+> `GevendraAutorExterno/` **no forma parte del repositorio**. Está en
+> `.gitignore`, no está en el disco y sus 116 demos no se catalogan ni se
+> sirven: su material no declara licencia. Ver [Material retirado](#material-retirado).
 
-```powershell
-node Web/scripts/generate-catalog.mjs
+---
+
+## Características
+
+- **Búsqueda** por nombre, categoría, descripción y etiquetas, sin distinguir
+  mayúsculas.
+- **Filtros** por categoría (inferidas del nombre del demo) y por autor. Cada
+  botón lleva su propia animación: davoker _Liquid Fill_, kindred-98
+  _Datamosh_, fatmaerm _Neutron Star_.
+- **Vistas previas reales**: cada tarjeta carga el `index.html` original en un
+  `iframe`. No son capturas.
+- **Código fuente a la vista**: el detalle trae el HTML, el CSS y el JavaScript
+  de cada demo, con botones de copia.
+- **Descarga en ZIP** solo tras verificar la fuente, los permisos de
+  redistribución y la licencia individual de cada pieza.
+- **Tema oscuro y claro**, con la preferencia recordada en el navegador.
+- **Interfaz en español e inglés**, con el idiomaindependiente independiente del tema.
+- **Accesible**: navegación por teclado, foco visible, `prefers-reduced-motion`
+  respetado y **0 violaciones serious ni critical** en axe-core.
+- **Instalable**: se puede añadir a la pantalla de inicio como aplicación.
+- **Sin frameworks, sin backend, sin paso de compilación.**
+
+---
+
+## Dependencias
+
+### En producción: ninguna
+
+El sitio es HTML, CSS y JavaScript a pelo. **No hay `node_modules` en
+producción, ni framework, ni bundler.** Todo lo que se descarga el visitante
+son los ficheros del repositorio.
+
+Esto es deliberado: el sitio carga sin build, funciona sin JavaScript en las
+páginas de texto, y su `Lighthouse` de escritorio está en **99-100**.
+
+### De desarrollo (9 paquetes, todos `devDependencies`)
+
+Se usan **solo** para generar el catálogo, validar y medir. No se despliegan.
+
+| Paquete                                                                                                          | Para qué                                                                               |
+| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`playwright`](https://playwright.dev)                                                                           | Abrir Chromium en los validadores de layout, accesibilidad, Lighthouse y los tests e2e |
+| [`@axe-core/playwright`](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/%40axe-core/playwright) | Motor de accesibilidad                                                                 |
+| [`lighthouse`](https://developer.chrome.com/docs/lighthouse/overview)                                            | Medición de rendimiento y SEO                                                          |
+| [`html-validate`](https://html-validate.org)                                                                     | Validar el HTML de las páginas del sitio                                               |
+| [`chrome-launcher`](https://github.com/GoogleChrome/chrome-launcher)                                             | Arrancar el Chromium que usa Lighthouse                                                |
+| [`eslint`](https://eslint.org)                                                                                   | Lint del código de Node                                                                |
+| [`prettier`](https://prettier.io)                                                                                | Formato del código de Node                                                             |
+| [`typescript`](https://www.typescriptlang.org)                                                                   | Solo para `tsc --checkJs`: tipos sobre JavaScript                                      |
+| `@types/node`                                                                                                    | Tipos de Node para el anterior                                                         |
+
+**Instalar:**
+
+```bash
+npm install
+npx playwright install chromium   # solo si vas a medir o a correr los e2e
 ```
 
-Para abrir la biblioteca directamente, abre `Web/index.html` en el navegador. Antes, regenera el catálogo con el comando anterior si cambiaste o añadiste demos. El archivo `Web/data/catalog.js` permite cargar el catálogo al usar `file://`.
+**Requisitos:** Node.js **20 o superior** (lo declara `engines`).
+
+---
+
+## Empezar
 
 Para probarla mediante HTTP, inicia un servidor estático desde la raíz del repositorio:
 
@@ -95,28 +163,32 @@ Abre <http://localhost:8000/>. La página raíz redirige a `/Web/`.
 
 En Windows también puedes usar Python:
 
-```powershell
-py -m http.server 8000
+```bash
+npm install
+npm run catalogo     # genera Web/data/catalog.json y sources/
+npm run servidor     # sirve el repositorio en http://localhost:8000
 ```
 
 O iniciar Live Server en VS Code desde la raíz del repositorio. El servidor HTTP es recomendable para probar el portapapeles y las descargas ZIP; al abrir con `file://`, la compatibilidad de esas API depende del navegador.
 
-Node.js 20 o posterior (lo que declara `engines` en `package.json`) solo hace falta para regenerar el catálogo, para las comprobaciones de CI y para `validar:layout`, que además necesita Chromium (`npx playwright install chromium`). El sitio utiliza HTML, CSS y módulos JavaScript.
+---
 
 ## Estructura
 
 ```text
 .
-|-- DavokerDiseñador/           # 119 efectos de texto de davoker (MIT, ZIP habilitado) + su portada davoker.html
-|-- CreacionesNuevas/           # 248 creaciones propias del autor (MIT, ZIP habilitado)
-|-- creaciones-primium/         # 651 creaciones en curso, por categorías (MIT, ZIP habilitado)
+|-- CreacionesNuevas/           # 248 creaciones propias del autor (MIT, ZIP)
+|-- creaciones-primium/         # 651 creaciones en curso, por categorías (MIT, ZIP)
+|-- DavokerDiseñador/           # 119 efectos de texto de davoker + su portada
 |-- Web/
-|   |-- data/
-|   |   |-- catalog.json        # Índice ligero generado (sin código fuente)
-|   |   |-- catalog.js          # Catálogo completo, solo para abrir con file:// (no se despliega)
-|   |   |-- sources/            # Código de cada componente, se paga al abrir el detalle
-|   |   |-- component-overrides.json
-|   |   `-- names-es.json        # Nombre en español por nombre inglés, escrito a mano
+|   |-- index.html              # Portada
+|   |-- components.html         # Listado y detalle de componentes
+|   |-- team-core.html          # Equipo y donación
+|   |-- como-usar.html          # Cómo usar un componente (guía para visitantes)
+|   |-- privacidad.html         # Política de privacidad
+|   |-- legal.html              # Aviso legal y declaración de accesibilidad
+|   |-- manifest.webmanifest    # Para instalarla como aplicación
+|   |-- styles/site.css         # Estilos del sitio
 |   |-- scripts/
 |   |   |-- app.js              # Búsqueda, filtros, detalle, copia, tema y metadatos
 |   |   |-- build-zips.mjs      # Los 119 ZIP de Davoker (build de Vercel y `npm run zips`)
@@ -158,14 +230,29 @@ Node.js 20 o posterior (lo que declara `engines` en `package.json`) solo hace fa
 `-- README.md
 ```
 
+### El catálogo se genera en el despliegue
+
+`Web/data/catalog.json`, `Web/data/catalog.js` y `Web/data/sources/` son
+**artefactos generados** y **no están versionados**. Se producen en el build,
+antes de servir nada.
+
+La razón práctica: añadir un demo no exige ningún paso manual y dos personas
+(o dos agentes) pueden trabajar a la vez sin que sus cambios choquen sobre los
+mismos 1 018 ficheros de `sources/`. Lo único que hay que recordar en local
+antes de abrir el sitio es `npm run catalogo`.
+
+`Web/data/component-overrides.json` **sí** está versionado: se edita a mano.
+
+---
+
 ## Añadir un demo
 
-1. Crea una carpeta dentro de `creaciones-primium/` con un `index.html` y sus recursos locales. Usa `kebab-case` en minúsculas y un nombre que describa el componente, por ejemplo `image-gallery/`. Si es de fatmaerm, dentro de `indicadores-de-carga/`, `navegacion/` o `tarjetas/`. `CreacionesNuevas/` está cerrada; es el archivo histórico de lo ya publicado.
-2. Enlaza el CSS y JavaScript locales desde ese HTML con `<link rel="stylesheet">` y `<script src="...">`.
-3. Ejecuta `node Web/scripts/generate-catalog.mjs`. El generador busca también en carpetas anidadas, lee títulos y referencias locales a CSS/JS, y actualiza `Web/data/catalog.json`.
-4. Si hace falta, añade metadatos revisados a `Web/data/component-overrides.json`. El ID del demo se forma con la ruta de su carpeta en minúsculas y guiones como separadores.
-
-Por ejemplo, la carpeta `My-Hover-Card/` produce el ID `my-hover-card`:
+1. Crea una carpeta dentro de `creaciones-primium/` con un `index.html` y sus
+   recursos. Nombre en `kebab-case` y descriptivo, por ejemplo `image-gallery/`.
+2. Enlaza el CSS y el JavaScript locales desde ese HTML.
+3. Ejecuta `npm run catalogo`.
+4. Si hace falta, añade metadatos revisados a
+   `Web/data/component-overrides.json`:
 
 ```json
 {
@@ -182,83 +269,127 @@ Por ejemplo, la carpeta `My-Hover-Card/` produce el ID `my-hover-card`:
 }
 ```
 
-Establece `redistributable` en `true` solo después de confirmar los permisos del código y de todos los recursos incluidos. Guarda la licencia completa o el aviso requerido en la ruta indicada por `licenseFile` dentro de la carpeta del demo. Sin esos campos revisados y un archivo de licencia válido, el botón ZIP permanece deshabilitado y el demo queda fuera del artefacto de despliegue.
+Pon `redistributable: true` **solo** después de confirmar los permisos del
+código y de todos los recursos incluidos. Sin eso y sin un archivo de licencia
+válido en la carpeta, el botón ZIP permanece deshabilitado.
 
-Las categorías se infieren de los nombres de carpetas y páginas, y se añaden automáticamente cuando aparecen. Usa un override si hay que corregir una categoría o descripción. `description` es el texto en inglés y `descriptionEs` el español: si no hay traducción, la interfaz en español muestra el texto original. La búsqueda no distingue mayúsculas y minúsculas.
+Las categorías se infieren de los nombres y se añaden solas. El ID del demo
+sale de su ruta en minúsculas con guiones.
 
-## Vistas previas y código
-
-Cada tarjeta y página de detalle carga el `index.html` original en un `iframe`, no una captura. El detalle muestra ese HTML y obtiene los archivos CSS y JavaScript locales para los controles de copia. Algunos demos dependen de imágenes, fuentes, iconos o bibliotecas remotas y pueden necesitar conexión a Internet. Los recursos de terceros no se copian automáticamente al repositorio.
-
-Se repararon las cinco referencias locales que estaban rotas: se eliminaron o reemplazaron scripts ausentes, el demo del cursor utiliza su hoja de estilos existente y la tarjeta de película apunta a su `pngwing.png` local con un fondo CSS. La auditoría ya no encuentra referencias locales rotas en HTML. Los derechos de esa imagen y de otros recursos de terceros aún deben verificarse.
-
-## Procedencia y licencias
-
-La MIT de la raíz se limita al código original de la aplicación y a la documentación de `kindred-98`; no cubre los demos ni recursos de terceros.
-
-Hay una situación distinta en la colección:
-
-- **`CreacionesNuevas/` (248 demos del autor).** Son creaciones originales de este repositorio, cada una con un `LICENSE` MIT propio. El catálogo los marca con `license: "MIT"`, `redistributable: true` y `source` apuntando a este repositorio, así que **el botón ZIP está activo** y el ZIP incluye el `LICENSE` y un `ATTRIBUTION.txt` con la fuente y la licencia.
-
-El inventario completo está en [Docs/THIRD_PARTY_NOTICES.md](Docs/THIRD_PARTY_NOTICES.md).
-
-### Material retirado
-
-`GevendraAutorExterno/` **no forma parte del repositorio**: los 116 demos de un tercero **quedaron fuera del catálogo, del sitio y de las descargas** el 2026-09-30, y además se sacaron del índice de git, así que la carpeta ya no existe ni en el historial ni en el disco de un clon nuevo: está en `.gitignore` y no se despliega. Los 116 proceden del repositorio público [`gevendra2004/gevstack`](https://github.com/gevendra2004/gevstack), que **no declara licencia** —`LICENSE` devuelve 404, la API de GitHub responde `"license": null` y el `README.md` no incluye términos— y el autor **no respondió** a los contactos hechos para pedirle permiso. Sin licencia no hay permiso de redistribución, ni siquiera sin botón de descarga, así que la opción correcta era no publicar su código: se retiraron también el `LICENSE` MIT que esta carpeta llegó a llevar y el CSS de sus demos que se había copiado a `Web/styles/site.css`. Volver a publicarlos exige su **autorización escrita** o que añada una licencia a su repositorio; cuando la haya, se quita la línea de `.gitignore`, se vuelve a añadir la raíz a `generate-catalog.mjs` y el catálogo recupera los 116 solo.
-
-Antes de publicar o distribuir un demo, verifica su procedencia y las condiciones de su código, imágenes, fuentes, iconos y dependencias. Conserva los avisos necesarios, solicita permiso cuando corresponda o excluye el material cuyos derechos no estén claros.
-
-## Despliegue
-
-La aplicación es estática y no necesita backend ni base de datos.
-
-### Vercel
-
-El repositorio incluye [`vercel.json`](./vercel.json) y [`.vercelignore`](./.vercelignore). Configura el proyecto con **Framework Preset: Other** y **Output Directory: `.`** (la raíz del repositorio). El **Build Command no va vacío**: `vercel.json` ya lo fija como `node Web/scripts/generate-catalog.mjs && node Web/scripts/stamp-assets.mjs && node Web/scripts/build-zips.mjs`. Si en el panel lo dejas en blanco, sobrescribes el valor del fichero y no se generará ni el catálogo, ni los sellos `?v=`, ni los ZIP.
-
-Se despliega **la raíz del repositorio**, no un subdirectorio: las vistas previas cargan `../CreacionesNuevas/...` y `../creaciones-primium/...`, así que esas carpetas tienen que publicarse también. `vercel.json` redirige `/` → `/Web/` y `/Web` → `/Web/` (sin barra final rompería las rutas relativas), y añade las cabeceras de seguridad: `Content-Security-Policy`, `Strict-Transport-Security`, `Permissions-Policy`, `X-Content-Type-Options`, `X-Frame-Options` y `Referrer-Policy`. El `404.html` de la raíz lo sirve Vercel automáticamente en cualquier dirección que no exista.
-
-La CSP usa `frame-src 'self'`, así que las vistas previas siguen cargando porque viven en el mismo origen. Los demos de terceros van dentro de un `iframe` y **sí** quedan sujetos a esta CSP: cada documento hereda las cabeceras del sitio, así que si la CSP no permite el host del que un demo saca sus imágenes o sus scripts, ese demo se ve roto en producción aunque en local vaya bien.
-
-Por eso la CSP es deliberadamente corta. Los recursos que usaban los demos se bajaron a la carpeta `vendor/` de cada componente, y hoy los demos y la aplicación usan **ocho hosts externos**: `upload.wikimedia.org` y `commons.wikimedia.org` para las fotos de las galerías (1 210 usos), `github.com` y `avatars.githubusercontent.com` para enlaces y avatares, `www.googletagmanager.com`, `www.google-analytics.com` y `region1.google-analytics.com` para la analítica, y `libreria-html-css.vercel.app` (el propio dominio en algún enlace). `validar-csp.mjs` los enumera en cada pasada, comprueba que la directiva que le toca los cubre en cada despliegue y también si la CSP permite un host que ya no usa nadie.
-
-### El catálogo se genera en el despliegue
-
-`Web/data/catalog.json`, `Web/data/catalog.js` y `Web/data/sources/` son **artefactos generados** y **no están versionados**. Se producen en el build de Vercel, antes de servir nada.
-
-La razón práctica: añadir un demo ya no exige ningún paso manual. Da igual si lo añade una persona o un agente, el catálogo siempre refleja lo que hay en el disco. Y como esos ficheros no se versionan, dos agentes pueden añadir demos a la vez sin que sus cambios choquen sobre los mismos 1 018 ficheros de `sources/`.
-
-Lo único que hay que recordar en local, antes de abrir el sitio:
-
-```powershell
-node Web/scripts/generate-catalog.mjs
-```
-
-`Web/data/component-overrides.json` **sí** está versionado, porque se edita a mano.
-
-### GitHub Pages
-
-**No se usa.** El sitio se despliega en Vercel y GitHub Pages solo podría publicar una versión recortada por licencias, nunca la colección completa. Se eliminó el workflow que lo publicaba.
-
-### Netlify
-
-También innecesario. Si algún día se usa: raíz del repositorio, y **Build Command** `node Web/scripts/generate-catalog.mjs`.
+---
 
 ## Validación continua
 
-El workflow [`validate.yml`](.github/workflows/validate.yml) se ejecuta en cada `push` a `main` y en cada pull request. **No despliega nada**. Reproduce lo que hace Vercel y lo comprueba, de modo que si el catálogo, el sellado o los ZIP fallan, se ve en GitHub antes de llegar a producción:
+El workflow [`validate.yml`](./.github/workflows/validate.yml) corre en cada
+`push` a `main` y en cada pull request. **No despliega nada**: reproduce lo
+que hace Vercel y lo comprueba, para que si el catálogo, el sellado o los ZIP
+fallan, se vea en GitHub antes de llegar a producción.
 
-1. `npm ci` — instala lo que dice el lockfile (solo `playwright`, para la comprobación de layout).
-2. `node Web/scripts/generate-catalog.mjs` — el mismo primer comando que ejecuta Vercel.
-3. `node Web/scripts/validate.mjs` — sintaxis e integridad del catálogo ya generado.
-4. `node Web/scripts/validar-csp.mjs` — la CSP cubre todos los hosts externos de los demos.
-5. `node Web/scripts/stamp-assets.mjs --force` — el sellado `?v=` encuentra todos los assets que los HTML referencian.
-6. `node Web/scripts/build-zips.mjs --force` — los 119 ZIP de Davoker se generan sin errores.
-7. `npm run validar:layout` — cinco páginas en 23 anchos con navegador real; solo en una de las versiones de Node, porque es la que instala Chromium.
+Roda sobre la matriz de Node `[20, 22, 24]` en `ubuntu-24.04`, con
+`fail-fast: false`, y las acciones **fijadas por SHA** (un tag se puede mover
+por quien tenga escritura).
 
-`validate.mjs` comprueba la sintaxis de todos los `.js`, que cada entrada del catálogo tenga su fichero en `sources/` y viceversa, que cada `preview` apunte a un `index.html` real, que no queden referencias locales rotas, y que **ningún demo del disco falte en el catálogo**. Ese último punto es el que más avisa: un demo nuevo sin indexar no aparece en la web sin ningún otro síntoma.
+| Comprobación                                | Qué mide                                              |
+| ------------------------------------------- | ----------------------------------------------------- |
+| `npm audit --audit-level=high`              | Vulnerabilidades de dependencias                      |
+| `format:check`, `lint`, `typecheck`, `test` | Estilo, errores, tipos y 55 tests                     |
+| `validar`                                   | Que el catálogo cuadre con el disco, y la CSP         |
+| `validar:layout`                            | 8 páginas × 23 anchos, con navegador real             |
+| `validar:a11y`                              | axe-core: 6 páginas × 2 idiomas × 2 temas             |
+| `validar:lighthouse`                        | Rendimiento y SEO de las 6 páginas                    |
+| `validar:demos`                             | Abre los **1 018 demos** con el sandbox de producción |
 
-Se ejecuta sobre la matriz de Node `[20, 22, 24]` (lo que `package.json` promete con `>=20`) en `ubuntu-24.04`, con `fail-fast: false` para ver todas las versiones aunque una falle. Las acciones van **fijadas por SHA** —`actions/checkout` y `actions/setup-node`, con la versión legible en comentario—, porque un tag se puede mover por quien tenga escritura en la acción.
+`validate.mjs` comprueba, entre otras cosas, que **ningún demo del disco falte
+en el catálogo**: un demo nuevo sin indexar no aparecería en la web sin ningún
+otro síntoma.
+
+---
+
+## Despliegue
+
+Es estático y no necesita backend. El repositorio incluye
+[`vercel.json`](./vercel.json) y [`.vercelignore`](./.vercelignore).
+
+- **Framework Preset:** `Other`
+- **Output Directory:** `.` (la raíz del repositorio, no un subdirectorio: las
+  vistas previas cargan `../CreacionesNuevas/...`).
+- **Build Command:** el de `vercel.json`. **No lo dejes en blanco** en el
+  panel, o sobrescribes el valor del fichero.
+
+Se despliega la **raíz** porque las vistas previas necesitan las carpetas de
+demos. `vercel.json` redirige `/` → `/Web/`, sirve `/robots.txt` y
+`/sitemap.xml` desde la raíz (es donde los busca Google) y añade las cabeceras
+de seguridad: `Content-Security-Policy`, `Strict-Transport-Security`,
+`Permissions-Policy`, `X-Content-Type-Options`, `X-Frame-Options` y
+`Referrer-Policy`.
+
+**GitHub Pages no se usa** (solo podría publicar una versión recortada por
+licencias) y **Netlify** tampoco hace falta.
+
+---
+
+## Licencias y procedencia
+
+La MIT de la raíz cubre el **código de la aplicación y la documentación**, no
+los demos ni los recursos de terceros. Cada colección lleva sus propios
+términos, y cada ZIP incluye su `LICENSE` y un `ATTRIBUTION.txt`.
+
+- **`CreacionesNuevas/`**: creaciones originales, `LICENSE` MIT propio cada una.
+- **`creaciones-primium/`**: comparten el `LICENSE` MIT de la carpeta, que nombra
+  a las dos autoras.
+- **`DavokerDiseñador/`**: MIT del autor de origen.
+
+Las **86 galerías** (676 fotografías) enlazan imágenes de Wikimedia Commons con
+el autor y la licencia impresos en la propia página. El inventario completo
+está en [`Docs/THIRD_PARTY_NOTICES.md`](./Docs/THIRD_PARTY_NOTICES.md).
+
+Antes de publicar un demo, verifica la procedencia y las condiciones de su
+código, imágenes, fuentes, iconos y dependencias.
+
+### Material retirado
+
+`GevendraAutorExterno/` **no forma parte del repositorio**: está en
+`.gitignore` y no está en el disco de un clon nuevo. Sus 116 demos proceden de
+[`gevendra2004/gevstack`](https://github.com/gevendra2004/gevstack), que **no
+declara licencia** y cuyo autor no respondió a los contactos hechos para pedir
+permiso. Sin licencia no hay permiso de redistribución, así que se retiraron
+también de `git`, del catálogo y del despliegue. Volver a publicarlos exige su
+**autorización escrita** o que añada una licencia a su repositorio.
+
+---
+
+## Documentación
+
+| Documento                                                              | Qué contiene                                                  |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------- |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md)                                 | Cómo añadir un componente y abrir un PR                       |
+| [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md)                           | Convivencia y canal de denuncias                              |
+| [`SECURITY.md`](./SECURITY.md)                                         | Cómo reportar un fallo de seguridad (**no por issue**)        |
+| [`Web/como-usar.html`](./Web/como-usar.html)                           | Guía para visitantes: elegir, copiar el código y bajar el ZIP |
+| [`PRIVACY.md`](./PRIVACY.md)                                           | Fuente de la política de privacidad del sitio                 |
+| [`CHANGELOG.md`](./CHANGELOG.md)                                       | Qué cambió en cada commit                                     |
+| [`Docs/01-planes/Plan_de_nivel_siguiente.md`](./Docs/01-planes/Plan_de_nivel_siguiente.md) | Plan por fases para llevar el proyecto al 97                  |
+| [`Docs/04-sesiones/Sesion_2026-10-05_06.md`](./Docs/04-sesiones/Sesion_2026-10-05_06.md)       | Cierre de las fases 0, 1, 2, 4a y 4b, con lo que queda        |
+| [`Docs/04-sesiones/Sesion_2026-10-08.md`](./Docs/04-sesiones/Sesion_2026-10-08.md)             | Estado de SonarCloud, guía pública y validaciones actuales    |
+| [`Docs/03-sonar/Sonar_decisiones.md`](./Docs/03-sonar/Sonar_decisiones.md)               | Qué se **no** corrigió de SonarQube, y por qué                |
+| [`Docs/03-sonar/Sonar_para_marcar.md`](./Docs/03-sonar/Sonar_para_marcar.md)             | Decisiones SonarCloud aplicadas y issues pendientes           |
+| [`Docs/06-seo/Search_Console.md`](./Docs/06-seo/Search_Console.md)                   | Estado del descubrimiento en buscadores                       |
+| [`Docs/03-sonar/AnalisisSonarQube.md`](./Docs/03-sonar/AnalisisSonarQube.md)             | Análisis del quality gate y limpieza de SonarQube             |
+| [`Docs/THIRD_PARTY_NOTICES.md`](./Docs/THIRD_PARTY_NOTICES.md)         | Procedencia y licencias de cada componente                    |
+
+En el sitio: [Privacidad](https://libreria-html-css.vercel.app/Web/privacidad.html)
+· [Aviso legal y accesibilidad](https://libreria-html-css.vercel.app/Web/legal.html)
+
+---
+
+## Contribuir
+
+Lee antes [`CONTRIBUTING.md`](./CONTRIBUTING.md): explica las tres
+colecciones, cuándo usar cuál y la convención de los demos. Participar implica
+aceptar el [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md).
+
+Si has encontrado un **fallo de seguridad**, no lo reportes por issue: lee
+[`SECURITY.md`](./SECURITY.md).
 
 ### Comandos disponibles
 
@@ -291,14 +422,11 @@ npx playwright install chromium
 
 ## Contribuir
 
-Mantén cada demo independiente, conserva su comportamiento original y evita añadir dependencias a la aplicación del catálogo. Prueba las vistas previas y los controles de copia mediante un servidor HTTP local:
+<div align="center">
 
-```powershell
-node Web/scripts/generate-catalog.mjs
-node Web/scripts/serve.mjs
-```
+**1018 demos** · MIT · sin dependencias en producción
 
-Abre <http://localhost:8000/>.
+Hecho con HTML, CSS y JavaScript a pelo.
 
 Si quieres añadir un componente o un pull request, lee antes [`CONTRIBUTING.md`](./CONTRIBUTING.md). Participar implica aceptar el [`CODE_OF_CONDUCT.md`](./CODE_OF_CONDUCT.md). Si has encontrado un fallo de seguridad, no lo reportes por issue: lee [`SECURITY.md`](./SECURITY.md). Qué datos recoge la web (y cuáles no), en [`PRIVACY.md`](./PRIVACY.md).
 

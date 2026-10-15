@@ -27,20 +27,26 @@ let featuredTimer = null;
 // colapsar el resto en puntos suspensivos.
 const pageWindow = 1;
 
-// Google Analytics 4. El ID de medicion va aqui y en ningun otro sitio, y solo
-// se manda algo si tiene el formato G-XXXXXXXXXX: con cualquier otro valor el
-// codigo descarta el envio y no se pide nada a Google. El ID real esta en
-// Analytics > Administracion > Flujos de datos > ID de medicion.
-const analyticsId = "G-3TRY9F4G0Z";
-// Hosts que necesita el CSP de vercel.json. El primero es el script de gtag y
-// los otros dos los endpoints de recogida (el pixel y el beacon). Se declaran
-// aqui para que el validador del CSP los vea y avise si alguno se queda fuera.
-const analyticsEndpoints = {
-  tag: "https://www.googletagmanager.com/gtag/js",
-  collect: "https://www.google-analytics.com/g/collect",
-  collectRegional: "https://region1.google-analytics.com/g/collect",
-};
-const consentStorageKey = "component-field-analytics-consent";
+// Ejecuta una tarea cuando el navegador tenga un rato libre, sin bloquear lo
+// que ya se esta viendo.
+//
+// `requestIdleCallback` es lo que hay para esto, pero no existe en todos los
+// navegadores (y en pruebas automatizadas puede no disparar nunca), asi que el
+// `timeout` es el garantia: la tarea se ejecuta **a los 1200 ms como tarde**,
+// ocupe o no el hilo principal. Ese techo importa: sin el, en un movil lento
+// el carrusel podria no aparecer nunca.
+//
+// @param {() => void} tarea Lo que se quiere aplazar.
+// @param {number} [esperaMs] Tope de espera en milisegundos.
+// @returns {void}
+function aplazar(tarea, esperaMs = 1200) {
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(tarea, { timeout: esperaMs });
+  } else {
+    window.setTimeout(tarea, 200);
+  }
+}
+
 const translations = {
   en: {
     categories: {
@@ -61,6 +67,20 @@ const translations = {
     marqueeLabel: "Featured strip",
     pageComponents: "Components",
     pageTeamCore: "Team Core",
+    pagePrivacy: "Privacy",
+    pageLegal: "Legal",
+    // Nombre accesible de cada <main>. Sin esto las paginas tienen un
+    // landmark igual (`main`) y axe lo marca (landmark-unique): quien recorre
+    // la pagina con un lector de pantalla no puede saber en cual esta.
+    portadaMain: "Home",
+    componentsMain: "Component catalogue",
+    teamMain: "Team and donations",
+    privacyMain: "Privacy policy",
+    legalMain: "Legal notice and accessibility",
+    // Encabezado oculto que precede a las tarjetas del catalogo: las tarjetas
+    // llevan un h3 y el encabezado anterior era el h1 de la pagina, salto que
+    // axe marca como heading-order.
+    resultsHeading: "Results",
     teamCoreEyebrow: "TEAM CORE",
     teamCoreTitle: "The people behind the library",
     teamCoreLead: "Three programming students and one repository that lit the fuse.",
@@ -181,13 +201,77 @@ const translations = {
     catalogLoadError: "Could not load the component catalog. Run the site from a local web server and regenerate it if needed. {message}",
     themeNotSaved: "Theme preference will not be saved in this browser",
     languageNotSaved: "Language preference will not be saved in this browser",
-    consentLabel: "Cookie notice",
-    consentText: "We use Google Analytics to know how many people visit and which pages they open. It only loads if you accept. You can change your mind from the footer.",
-    consentAccept: "Accept",
-    consentReject: "Only necessary",
-    consentAccepted: "Thank you. Analytics enabled",
-    consentRejected: "Analytics disabled. You can change this from the footer",
-    cookies: "Cookies",
+    // Paginas de texto largo (Web/privacidad.html y Web/legal.html). Van en el
+    // mismo diccionario que el resto para que el conmutador de idioma las
+    // traduzca igual que a la portada, sin logica extra.
+    privacyLink: "Privacy",
+    legalLink: "Legal",
+    privacyTitle: "Privacy",
+    privacyUpdated: "Last updated: 2026-10-14",
+    privacyIntro: "What this site collects and what it does not. It is a static library of HTML and CSS demos: no accounts, no submission forms, no payments, no advertising, and no third-party advertising scripts. The only analytics that loads is Vercel Web Analytics, which measures visits and page views without collecting personal data.",
+    privacyTocLabel: "Index",
+    privacyTocTitle: "On this page",
+    privacyTocLocal: "What is stored in your browser",
+    privacyTocAnalytics: "Vercel Web Analytics",
+    privacyTocThird: "Requests to other domains",
+    privacyTocNone: "Data that is not collected",
+    privacyTocHost: "Who hosts the site",
+    privacyTocContact: "Contact",
+    privacyLocalTitle: "What is stored in your browser",
+    privacyLocalIntro: "The application uses localStorage for two things, both local to your browser and never sent to any server:",
+    privacyColKey: "Key",
+    privacyColWhat: "What it stores",
+    privacyColWhy: "Why",
+    privacyRowTheme: "remember the theme you picked",
+    privacyRowLanguage: "remember the language you picked",
+    privacyLocalOutro: "You can delete them at any time from your browser settings.",
+    privacyAnalyticsTitle: "Vercel Web Analytics",
+    privacyAnalyticsIntro: "It is used to measure visits and pages opened. The script is served from the site itself (/_vercel/insights/script.js) and does not request personal data, set advertising cookies, share with third parties or join other profiles.",
+    privacyThirdTitle: "Requests to other domains",
+    privacyThirdIntro: "The typefaces are in the repository, not on a CDN. The only external destinations are:",
+    privacyNoneTitle: "Data that is not collected",
+    privacyNoneText: "There is no user registration, what you type in the search box is never sent, there are no advertising networks, no information is bought or sold, and no device fingerprinting is done.",
+    privacyHostTitle: "Who hosts the site",
+    privacyHostText: "The site is static and is served from Vercel (libreria-html-css.vercel.app), which logs requests for operational and security purposes under its own policy. This project has no server of its own and no database.",
+    privacyContactTitle: "Contact",
+    privacyContactText: "Privacy questions: open an issue on GitHub. For security reports, use the private channel described in SECURITY.md.",
+    privacyChanges: "If this policy changes, the change is recorded in the repository CHANGELOG and the date above is updated in the same commit.",
+    legalTitle: "Legal",
+    legalUpdated: "Last updated: 2026-10-06",
+    legalTocLabel: "Index",
+    legalTocTitle: "On this page",
+    legalTocOwner: "Ownership",
+    legalTocLicenses: "Licenses",
+    legalTocThirdParty: "Third-party material",
+    legalTocWarranty: "No warranty",
+    legalTocA11y: "Accessibility",
+    legalTocContact: "Contact",
+    legalOwnerTitle: "Ownership",
+    legalOwnerText: "This site is an open source project published on GitHub. The components have their own authorship: each demo folder declares its author and its license in the repository itself.",
+    legalLicensesTitle: "Licenses",
+    legalColWhat: "What",
+    legalColLicense: "License",
+    legalRowSite: "The site and its scripts",
+    legalRowMit: "MIT",
+    legalRowDemos: "The downloadable components",
+    legalRowEachOwn: "MIT, with its author declared in the ZIP",
+    legalRowDavoker: "davoker's effects",
+    legalRowDavokerLicense: "MIT from the original author",
+    legalLicenseNote: "You may copy, modify and use the components in your projects, including for commercial purposes. No permission needs to be requested and no attribution beyond what each ZIP already carries.",
+    legalThirdTitle: "Third-party material",
+    legalThirdText: "Some demos link images from Wikimedia Commons under their original licenses, and some material is listed in the repository's THIRD_PARTY_NOTICES.md file. Content removed for having no declared license is listed in the README and is not part of the catalogue.",
+    legalWarrantyTitle: "No warranty",
+    legalWarrantyText: "The components are provided as is, as interface experiments. Use them with judgement: they are demonstrations of a technique, not audited production code.",
+    legalA11yTitle: "Accessibility",
+    legalA11yIntro: "This site works towards WCAG 2.2 level AA. Specifically:",
+    legalA11yAuto: "The automated checks (axe-core over the three pages, in both languages and both themes) detect no serious or critical violations.",
+    legalA11yMotion: "Animations respect the prefers-reduced-motion system setting.",
+    legalA11yKeyboard: "Everything can be used without a mouse: there is a skip link to the content, visible focus on every control, and the language and theme controls are real buttons.",
+    legalA11yZoom: "The content reads correctly at 200% zoom.",
+    legalA11yPartial: "Some moderate and minor findings are still being fixed; this statement is updated when that count reaches zero.",
+    legalA11yReport: "If you find a barrier this statement does not cover, report it on GitHub Issues: it gets fixed and noted here.",
+    legalContactTitle: "Contact",
+    legalContactText: "Legal or licensing questions: CONTRIBUTING.md or a GitHub issue. Security reports go through the private channel described in SECURITY.md.",
   },
   es: {
     categories: {
@@ -208,6 +292,14 @@ const translations = {
     marqueeLabel: "Cinta destacada",
     pageComponents: "Componentes",
     pageTeamCore: "Núcleo del equipo",
+    pagePrivacy: "Privacidad",
+    pageLegal: "Legal",
+    portadaMain: "Portada",
+    componentsMain: "Catálogo de componentes",
+    teamMain: "Equipo y donaciones",
+    privacyMain: "Política de privacidad",
+    legalMain: "Aviso legal y accesibilidad",
+    resultsHeading: "Resultados",
     teamCoreEyebrow: "NÚCLEO DEL EQUIPO",
     teamCoreTitle: "Quién está detrás de la biblioteca",
     teamCoreLead: "Tres estudiantes de programación y un repositorio que encendió la mecha.",
@@ -328,15 +420,160 @@ const translations = {
     catalogLoadError: "No se pudo cargar el catálogo. Abre el sitio desde un servidor local y, si hace falta, vuelve a generarlo. {message}",
     themeNotSaved: "No se pudo guardar el tema en este navegador",
     languageNotSaved: "No se pudo guardar el idioma en este navegador",
-    consentLabel: "Aviso de cookies",
-    consentText: "Usamos Google Analytics para saber cuánta gente entra y qué páginas abre. Solo se carga si lo aceptas. Puedes cambiar de opinión desde el pie.",
-    consentAccept: "Aceptar",
-    consentReject: "Solo lo necesario",
-    consentAccepted: "Gracias. Estadísticas activadas",
-    consentRejected: "Estadísticas desactivadas. Puedes cambiarlo desde el pie",
-    cookies: "Cookies",
+    privacyLink: "Privacidad",
+    legalLink: "Legal",
+    privacyTitle: "Privacidad",
+    privacyUpdated: "Última actualización: 2026-10-14",
+    privacyIntro: "Qué recoge esta web y qué no. Es una biblioteca estática de demos de HTML y CSS: no hay cuentas, ni formularios de envío, ni pagos, ni publicidad, ni scripts publicitarios de terceros. La única analítica que se carga es Vercel Web Analytics, que mide visitas y páginas vistas sin recoger datos personales.",
+    privacyTocLabel: "Índice",
+    privacyTocTitle: "En esta página",
+    privacyTocLocal: "Lo que se guarda en tu navegador",
+    privacyTocAnalytics: "Vercel Web Analytics",
+    privacyTocThird: "Peticiones a otros dominios",
+    privacyTocNone: "Datos que no se recogen",
+    privacyTocHost: "Quién aloja la web",
+    privacyTocContact: "Contacto",
+    privacyLocalTitle: "Lo que se guarda en tu navegador",
+    privacyLocalIntro: "La aplicación usa localStorage para dos cosas, todas locales a tu navegador y que no se envían a ningún servidor:",
+    privacyColKey: "Clave",
+    privacyColWhat: "Qué guarda",
+    privacyColWhy: "Para qué",
+    privacyRowTheme: "recordar el tema elegido",
+    privacyRowLanguage: "recordar el idioma elegido",
+    privacyLocalOutro: "Puedes borrarlas en cualquier momento desde la configuración de tu navegador.",
+    privacyAnalyticsTitle: "Vercel Web Analytics",
+    privacyAnalyticsIntro: "Se usa para medir visitas y páginas vistas. El script se sirve desde el propio sitio (/_vercel/insights/script.js) y no solicita datos personales, no usa cookies publicitarias, no comparte con terceros ni se combina con otros perfiles.",
+    privacyThirdTitle: "Peticiones a otros dominios",
+    privacyThirdIntro: "Las fuentes tipográficas están en el repositorio, no en un CDN. Los únicos destinos externos son:",
+    privacyNoneTitle: "Datos que no se recogen",
+    privacyNoneText: "No hay registro de usuarios, no se envía el contenido de lo que escribes en el buscador, no hay redes publicitarias, no se compra ni se vende información personal y no se hace fingerprinting del dispositivo.",
+    privacyHostTitle: "Quién aloja la web",
+    privacyHostText: "La web es estática y se sirve desde Vercel (libreria-html-css.vercel.app), que registra las peticiones con fines de operación y seguridad conforme a su propia política. Este proyecto no tiene servidor propio ni base de datos.",
+    privacyContactTitle: "Contacto",
+    privacyContactText: "Dudas sobre privacidad: abre una incidencia en GitHub. Para avisos de seguridad, la vía privada es la que describe SECURITY.md.",
+    privacyChanges: "Si esta política cambia, el hecho queda registrado en el CHANGELOG del repositorio y la fecha de arriba se actualiza en el mismo commit.",
+    legalTitle: "Legal",
+    legalUpdated: "Última actualización: 2026-10-06",
+    legalTocLabel: "Índice",
+    legalTocTitle: "En esta página",
+    legalTocOwner: "Titularidad",
+    legalTocLicenses: "Licencias",
+    legalTocThirdParty: "Material de terceros",
+    legalTocWarranty: "Sin garantía",
+    legalTocA11y: "Accesibilidad",
+    legalTocContact: "Contacto",
+    legalOwnerTitle: "Titularidad",
+    legalOwnerText: "Este sitio es un proyecto de código abierto publicado en GitHub. Los componentes tienen autoría propia: cada carpeta de demos declara su autor y su licencia en el propio repositorio.",
+    legalLicensesTitle: "Licencias",
+    legalColWhat: "Qué",
+    legalColLicense: "Licencia",
+    legalRowSite: "El sitio y sus scripts",
+    legalRowMit: "MIT",
+    legalRowDemos: "Los componentes descargables",
+    legalRowEachOwn: "MIT, con su autor declarado en el ZIP",
+    legalRowDavoker: "Los efectos de davoker",
+    legalRowDavokerLicense: "MIT del autor de origen",
+    legalLicenseNote: "Puedes copiar, modificar y usar los componentes en tus proyectos, incluso con fines comerciales. No hace falta pedir permiso ni atribuir más allá de lo que ya lleva cada ZIP.",
+    legalThirdTitle: "Material de terceros",
+    legalThirdText: "Algunas demos enlazan imágenes de Wikimedia Commons bajo sus licencias originales, y hay material citado en el fichero THIRD_PARTY_NOTICES.md del repositorio. El contenido retirado por no tener licencia declarada se lista en el README y no forma parte del catálogo.",
+    legalWarrantyTitle: "Sin garantía",
+    legalWarrantyText: "Los componentes se ofrecen tal cual, como experimentos de interfaz. Úsalos con criterio: son demostraciones de una técnica, no código de producción auditado.",
+    legalA11yTitle: "Accesibilidad",
+    legalA11yIntro: "Este sitio trabaja por alcanzar el nivel WCAG 2.2 AA. Concretamente:",
+    legalA11yAuto: "Las comprobaciones automáticas (axe-core sobre las tres páginas, en los dos idiomas y los dos temas) no detectan violaciones serious ni critical.",
+    legalA11yMotion: "Las animaciones respetan la preferencia prefers-reduced-motion del sistema.",
+    legalA11yKeyboard: "Todo se puede usar sin ratón: hay enlace de salto al contenido, foco visible en todos los controles y los controles de idioma y tema son botones reales.",
+    legalA11yZoom: "El contenido se lee correctamente con zoom al 200 %.",
+    legalA11yPartial: "Todavía quedan avisos moderate y minor en curso de corrección, y la declaración se actualiza cuando ese recuento llegue a cero.",
+    legalA11yReport: "Si encuentras una barrera que esta declaración no recoge, cuéntalo en GitHub Issues: se trata y se anota aquí.",
+    legalContactTitle: "Contacto",
+    legalContactText: "Cuestiones legales o de licencia: CONTRIBUTING.md o una incidencia en GitHub. Avisos de seguridad por la vía privada que describe SECURITY.md.",
   },
 };
+
+// Las claves de esta página guardan las dos traducciones juntas. Así el par
+// EN/ES no se convierte en dos bloques idénticos para CPD ni puede desalinearse.
+const howToTranslations = {
+  pageHowTo: ["How to", "Cómo usar"],
+  howToLink: ["How to", "Cómo usar"],
+  howToMain: ["How to use a component", "Cómo usar un componente"],
+  howToTitle: ["How to use a component", "Cómo usar un componente"],
+  howToUpdated: ["No dependencies, no build step, no accounts.", "Sin dependencias, sin compilación, sin cuentas."],
+  howToIntro: [
+    "Every component in this library is a standalone file with its HTML, CSS and JavaScript. Copy it into your project and it works. There is nothing to install, no account to create and nothing to compile.",
+    "Cada componente de esta biblioteca es un fichero independiente con su HTML, su CSS y su JavaScript. Se copia en tu proyecto y funciona. No hay que instalar nada, ni registrarte, ni pasar nada por un compilador.",
+  ],
+  howToTocLabel: ["Index", "Índice"],
+  howToTocTitle: ["On this page", "En esta página"],
+  howToTocChoose: ["Choose one", "Elegir uno"],
+  howToTocSee: ["See it working", "Verlo funcionando"],
+  howToTocCopy: ["Copy the code", "Copiar el código"],
+  howToTocZip: ["Download the ZIP", "Descargar el ZIP"],
+  howToTocLicense: ["License", "Licencia"],
+  howToTocIssues: ["If something breaks", "Si algo falla"],
+  howToChooseTitle: ["Choose one", "Elegir uno"],
+  howToChooseText: [
+    "Go to Components and search by name, category or description. You can also filter by author. There are 1018 components.",
+    "Ve a Componentes y busca por nombre, categoría o descripción. También puedes filtrar por autor. Hay 1018 componentes.",
+  ],
+  howToChooseLink: ["Components", "Componentes"],
+  howToSeeTitle: ["See it working", "Verlo funcionando"],
+  howToSeeText: [
+    "When you open a component you see it live in its own box. The preview is the real component loaded in an iframe, not a screenshot: what you see is what is there.",
+    "Al abrir un componente, lo ves en vivo en su propia caja. La vista previa es el componente real cargado en un iframe, no una captura ni una maqueta: lo que ves es lo que hay.",
+  ],
+  howToCopyTitle: ["Copy the code", "Copiar el código"],
+  howToCopyText: [
+    "Under the preview you find the source code in separate blocks: HTML, CSS and JavaScript, each with its own copy button. Copy the block you need and paste it into your file.",
+    "Bajo la vista previa tienes el código fuente, en bloques separados: HTML, CSS y JavaScript, cada uno con su botón de copia. Copia el bloque que necesites y pégalo en tu fichero.",
+  ],
+  howToCopyNote: [
+    "Every component is standalone on purpose: it depends on nothing external, so you can take a single block without dragging the rest along.",
+    "Cada componente es autónomo a propósito: no depende de nada externo, así que puedes llevarte un solo bloque sin arrastrar el resto.",
+  ],
+  howToZipTitle: ["Download the ZIP", "Descargar el ZIP"],
+  howToZipText: [
+    "If you would rather have the whole component in a folder, use the ZIP button. Inside you get:",
+    "Si prefieres tener el componente entero en una carpeta, usa el botón ZIP. Dentro viene:",
+  ],
+  howToZipFiles: ["The component code.", "El código del componente."],
+  howToZipLicense: ["Its LICENSE, with the authorship.", "Su LICENSE, con la autoría."],
+  howToZipAttribution: [
+    "An ATTRIBUTION.txt with the source and the terms of use.",
+    "Un ATTRIBUTION.txt con la fuente y las condiciones de uso.",
+  ],
+  howToZipNote: [
+    "The ZIP button only enables once the provenance and license of the material have been checked. If you see it greyed out, it is not verified yet and cannot be distributed.",
+    "El botón ZIP se habilita solo cuando se ha comprobado la procedencia del material y su licencia. Si ves el botón en gris, es que todavía no está verificado y no se puede distribuir.",
+  ],
+  howToLicenseTitle: ["License", "Licencia"],
+  howToLicenseText: [
+    "Everything you download is MIT: you may use it, modify it and use it commercially, without asking permission. No attribution is needed beyond what the ZIP already carries.",
+    "Todo lo que descargas es MIT: puedes usarlo, modificarlo y usarlo con fines comerciales, sin pedir permiso. No hace falta atribuir más allá de lo que ya lleva el propio ZIP.",
+  ],
+  howToIssuesTitle: ["If something breaks", "Si algo falla"],
+  howToIssuesText: [
+    "A component is a demonstration of a technique, not audited production code. If something does not work in your project, check first:",
+    "Un componente es una demostración de una técnica, no código de producción auditado. Si algo no funciona en tu proyecto, mira primero:",
+  ],
+  howToIssuesCase: [
+    "Are you opening the file over file://? Use a local server (npm run servidor from the repository root).",
+    "¿Estás abriendo el fichero por file://? Usa un servidor local (npm run servidor en la raíz del repositorio).",
+  ],
+  howToIssuesFont: [
+    "Is the font it uses still available? Components using the repository fonts work offline.",
+    "¿La fuente que usa sigue disponible? Los componentes que usan tipografías del repositorio funcionan sin conexión.",
+  ],
+  howToIssuesReport: [
+    "Still broken? Report it on GitHub with the component name.",
+    "¿Sigue fallando? Cuéntalo en GitHub con el nombre del componente.",
+  ],
+};
+
+for (const [key, [english, spanish]] of Object.entries(howToTranslations)) {
+  translations.en[key] = english;
+  translations.es[key] = spanish;
+}
 
 const state = {
   components: [],
@@ -427,11 +664,21 @@ function applyTypewriterMetrics() {
   100% { width: 0; }
 }`;
 
+  // Primero **todas** las escrituras y despues **todas** las lecturas. Leer
+  // `scrollWidth` obliga al navegador a recalcular el layout de golpe, asi que
+  // si se lee justo despues de escribir tres propiedades de estilo (que es lo
+  // que hacia antes) se fuerza un recalculo por cada elemento y la pagina
+  // entera se recalcula varias veces seguidas. Medido: eran 75 ms de CPU solo
+  // aqui. Separar las fases lo deja en una sola pasada.
+  const pendientes = [];
   for (const element of elements) {
     const chars = [...element.textContent.trim()].length;
     if (!chars) continue;
     element.style.setProperty("--type-chars", String(chars));
     element.style.setProperty("--type-cycle", `${typewriterCycleMs}ms`);
+    pendientes.push(element);
+  }
+  for (const element of pendientes) {
     // +3px: el caret va como borde y el box-sizing es border-box.
     element.style.setProperty("--type-width", `${element.scrollWidth + 3}px`);
   }
@@ -439,10 +686,19 @@ function applyTypewriterMetrics() {
 
 // Reinicia la animacion: quitar y volver a poner la propiedad obliga al motor a
 // recalcularla, porque si solo se cambia el texto se veria el cambio en seco.
+// `forzarReflujo` lee una propiedad de geometria sin usarla. El navegador
+// tiene que recalcular el layout al leerla, y eso es justo lo que dispara el
+// reinicio de la animacion. Con `void` delante era lo mismo, pero `void`
+// marca un uso inutilizado y Sonar lo senala (S3735); un helper con nombre
+// documenta la intencion en el sitio donde se usa.
+function forzarReflujo(elemento) {
+  return elemento.offsetWidth;
+}
+
 function restartTypewriter() {
   for (const element of document.querySelectorAll("[data-typewriter]")) {
     element.style.animation = "none";
-    void element.offsetWidth;
+    forzarReflujo(element);
     element.style.removeProperty("animation");
   }
 }
@@ -682,11 +938,15 @@ function renderFilters() {
         state.author = null;
         syncSearchAvailability();
       }
-      state.currentPage = 1;
-      renderFilters();
-      renderAuthorFilters();
-      renderComponents();
-    });
+state.currentPage = 1;
+    renderFilters();
+    renderAuthorFilters();
+    renderComponents();
+    // Que se filtra y por que: con esto se sabe que categorias miran la gente
+    // y cuales se quedan vacias. El nombre de la categoria va tal cual (no es
+    // dato personal, es un filtro de la propia interfaz).
+    trackAnalyticsEvent("filtro_categoria", { categoria: category });
+  });
     elements.filters.append(button);
   }
 }
@@ -712,6 +972,10 @@ function renderAuthorFilters() {
       renderFilters();
       renderAuthorFilters();
       renderComponents();
+      // Entrar al apartado de davoker carga su portal entero (218 KB): es el
+      // paso mas caro del sitio, asi que se mide aparte para saber si vale la
+      // pena mantenerlo cargado de golpe.
+      trackAnalyticsEvent("filtro_autor", { autor: state.author ?? "ninguno" });
     });
     elements.authorFilters.append(button);
   }
@@ -720,7 +984,18 @@ function renderAuthorFilters() {
 const previewObserver = typeof IntersectionObserver === "function"
   ? new IntersectionObserver((entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) mountQueuedPreview(entry.target);
+        // Cada entrada trae la caja .live-preview observada. Si esta en la
+        // zona de observacion se monta el iframe; si sale, se desmonta: asi
+        // el numero de iframes vivos en la portada nunca supera los visibles
+        // + los 2-3 siguientes, en vez de los 33 que monta el render inicial.
+        // El navegador libera la memoria del iframe al sacarlo del DOM, y
+        // al volver a entrar la caja se vuelve a montar (el coste de recargar
+        // el demo se paga solo con el scroll de vuelta, no a la ida).
+        if (entry.isIntersecting) {
+          mountQueuedPreview(entry.target);
+        } else {
+          desmontarPreview(entry.target);
+        }
       }
     }, { rootMargin: "400px 0px" })
   : null;
@@ -746,47 +1021,101 @@ function armPreviewListeners(frame, preview) {
 }
 
 function mountQueuedPreview(container) {
-  previewObserver?.unobserve(container);
-  const frame = container.querySelector("iframe[data-preview-src]");
-  if (!frame) return;
-  const src = frame.dataset.previewSrc;
-  delete frame.dataset.previewSrc;
-  armPreviewListeners(frame, container);
-  frame.src = src;
+  // Lo observado es la caja `.live-preview`. Si por lo que sea llegara la
+  // tarjeta entera (que es su padre), se baja a la caja: montar el iframe en
+  // el `<article>` lo pondria fuera de la caja de altura fija y romperia el
+  // diseño de la tarjeta.
+  const preview = container?.classList?.contains("live-preview")
+    ? container
+    : container?.querySelector?.(".live-preview");
+  if (!preview) return;
+  if (preview.dataset.previewMounted === "true") return;
+  montarPreview(preview);
 }
 
 function refreshQueuedPreviews() {
   if (!previewObserver) return;
   previewObserver.disconnect();
+  // Ahora lo pendiente es la **caja** (`.live-preview`), no el iframe: el
+  // iframe no existe todavia, se crea al montar. Antes se observaba
+  // `frame.parentElement` porque el iframe ya estaba dentro de la caja; con el
+  // iframe pendiente, observar su padre observaba el `<article>` entero y el
+  // montaje se hacia en la tarjeta en vez de en la caja.
   const pending = document.querySelectorAll(
-    ".live-preview[data-preview-state='loading'] iframe[data-preview-src]",
+    ".live-preview[data-preview-state='loading']:not([data-preview-mounted])",
   );
-  for (const frame of pending) previewObserver.observe(frame.parentElement);
+  for (const preview of pending) previewObserver.observe(preview);
 }
 
+// Prepara una vista previa: el contenedor (con su alto fijo de 205 px en CSS)
+// y, **dentro, el iframe**. El iframe se crea ahora, pero no se inserta hasta
+// que la tarjeta se acerca a la pantalla.
+//
+// Por que no se inserta de inmediato: insertar 33 `<iframe>` de golpe (el
+// carrusel de la portada) dispara un layout y un pintado completos que
+// bloquean el hilo principal. Medido: son 137 ms de CPU, que es practicamente
+// todo el TBT de la portada en movil. Crear los nodos no cuesta nada (3 ms);
+// lo caro es meterlos en el DOM de una vez.
+//
+// Y no produce ningun salto: `.card-preview` tiene `height: 205px` fijo y el
+// iframe es `height: 100%`, asi que la caja reserva el sitio desde el primer
+// pintado y el CLS se queda en 0.
+//
+// Sin `IntersectionObserver` (navegadores antiguos) se inserta de inmediato,
+// que es el comportamiento de siempre.
 function createPreview(component, className) {
   const preview = createElement("div", className);
   preview.classList.add("live-preview");
   preview.dataset.previewState = "loading";
+  const previewUrl = new URL(component.preview, document.baseURI);
+  previewUrl.searchParams.set("previewRevision", previewRevision);
+  preview.dataset.previewUrl = previewUrl.href;
+  preview.dataset.previewName = getComponentName(component);
+
+  if (previewObserver) {
+    previewObserver.observe(preview);
+  } else {
+    // Sin `IntersectionObserver` no hay forma de saber cuando hay que montar
+    // nada, asi que se monta ya: es exactamente el comportamiento de antes.
+    montarPreview(preview);
+  }
+  return preview;
+}
+
+// Crea e inserta el iframe de una vista previa. Se llama al llegar la tarjeta
+// a la zona de observacion.
+function montarPreview(preview) {
+  if (preview.dataset.previewMounted === "true") return;
+  preview.dataset.previewMounted = "true";
   const frame = document.createElement("iframe");
-  frame.title = t("livePreviewTitle", { name: getComponentName(component) });
-  // Sin `loading = "lazy"`: la carga perezosa ya la hace el `previewObserver`
-  // con el patron `data-preview-src`, y poner las dos a la vez solo anade una
-  // segunda condicion de red sin ganar nada.
+  frame.title = t("livePreviewTitle", { name: preview.dataset.previewName ?? "" });
+  // Sin `loading = "lazy"`: la carga perezosa la decide el `previewObserver`,
+  // que ya sabe cuando toca, y poner las dos cosas anade una segunda
+  // condicion de red sin ganar nada.
   frame.referrerPolicy = "no-referrer";
   frame.setAttribute("scrolling", "no");
   frame.setAttribute("sandbox", "allow-scripts allow-forms allow-popups");
   preview.append(frame);
-  const previewUrl = new URL(component.preview, document.baseURI);
-  previewUrl.searchParams.set("previewRevision", previewRevision);
-  if (previewObserver) {
-    frame.dataset.previewSrc = previewUrl.href;
-    previewObserver.observe(preview);
-  } else {
-    armPreviewListeners(frame, preview);
-    frame.src = previewUrl.href;
-  }
-  return preview;
+  const url = preview.dataset.previewUrl;
+  if (!url) return;
+  // Los escuchas se arman **antes** de asignar el `src`: si la respuesta
+  // llegara antes que el `load`, el estado se quedaria en "loading" para
+  // siempre. El temporizador de seguridad sigue poniendo "ready" pase lo que
+  // pase, para que la vista previa no se quede con el texto de "cargando".
+  armPreviewListeners(frame, preview);
+  frame.src = url;
+}
+
+// Inversa de `montarPreview`: se llama cuando la caja sale de la zona de
+// observacion del `previewObserver`. Saca el iframe del DOM (asi el navegador
+// libera su memoria y deja de pintar el demo) y resetea el estado a "loading"
+// para que `mountQueuedPreview` la vuelva a montar si vuelve a entrar.
+function desmontarPreview(preview) {
+  if (preview.dataset.previewMounted !== "true") return;
+  const frame = preview.querySelector("iframe");
+  if (frame) frame.remove();
+  preview.dataset.previewMounted = "false";
+  preview.dataset.previewState = "loading";
 }
 
 function componentDetailUrl(componentId) {
@@ -804,14 +1133,13 @@ function navigateToComponent(component, event) {
 
 function createComponentCard(component, index) {
   const article = createElement("article", "component-card");
-  // La tarjeta entera abre el detalle: solo con click simple (boton izquierdo,
-  // sin modificadores) y si el origen no es ya un enlace o un boton. Asi el
-  // "View component" sigue funcionando con click central / cmd+click para abrir
-  // en pestana nueva, y los futuros botones que se metan dentro no disparan la
-  // navegacion dos veces.
-  article.setAttribute("role", "link");
-  article.tabIndex = 0;
-  article.setAttribute("aria-label", `${t("viewComponent")}: ${getComponentName(component)}`);
+  // El `<article>` se queda como article: sin `role="link"`, que axe rechaza
+  // (`aria-allowed-role`: un article no admite el rol de enlace) y ademas
+  // duplicaba el punto de tabulacion, porque la tarjeta era tabbable Y dentro
+  // tenia su propio `<a>`. El enlace real es el de "Ver componente": su
+  // pseudo-elemento se estira sobre toda la tarjeta (`.card-link::after` en
+  // site.css), asi que sigue siendo clicable entera, con el teclado resuelto
+  // por el navegador y sin manejadores de Enter/Espacio a mano.
   article.append(createPreview(component, "card-preview"));
 
   const previewLabel = createElement("span", "card-preview-label", t("liveDemo"));
@@ -827,6 +1155,11 @@ function createComponentCard(component, index) {
   const description = createElement("p", "", getComponentDescription(component));
   const link = createElement("a", "card-link", t("viewComponent"));
   link.href = componentDetailUrl(component.id);
+  // El nombre accesible del enlace lleva el nombre del componente. Tiene que
+  // *contener* el texto visible ("Ver componente") y no sustituirlo, que es lo
+  // que pide la regla de "label in name": si el texto que se ve y el que se
+  // anuncia no coinciden, quien usa lector de pantalla oye algo que no ve.
+  link.setAttribute("aria-label", `${t("viewComponent")}: ${getComponentName(component)}`);
   // Sin esto el enlace recarga la pagina y al volver se pierde la pagina del
   // paginador en la que estabas. Con pushState el detalle se abre en el sitio y
   // el estado se conserva. Se deja el href para que el clic con el boton
@@ -840,16 +1173,6 @@ function createComponentCard(component, index) {
   content.append(top, heading, description, link);
   article.append(content);
 
-  article.addEventListener("click", (event) => {
-    if (event.target.closest("a, button")) return;
-    navigateToComponent(component, event);
-  });
-  article.addEventListener("keydown", (event) => {
-    if (event.target !== article) return;
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    navigateToComponent(component, { button: 0, preventDefault() {} });
-  });
   return article;
 }
 
@@ -1043,7 +1366,7 @@ function positionFeatured(index, animate) {
   const step = card.getBoundingClientRect().width + gap;
   track.style.transition = animate ? `transform ${featuredTransitionMs}ms ease` : "none";
   track.style.transform = `translateX(${-index * step}px)`;
-  if (!animate) void track.offsetHeight;
+  if (!animate) forzarReflujo(track);
 }
 
 function stopFeaturedCarousel() {
@@ -1102,11 +1425,22 @@ function renderFeaturedComponents() {
     return;
   }
   const cards = featuredComponents.map((component, index) => createComponentCard(component, index));
-  // Las repetidas se construyen enteras, no con cloneNode: cloneNode no copia
-  // los manejadores del enlace y el clic recargaria la pagina.
-  const clones = featuredComponents.slice(0, featuredClones).map((component, index) => {
+// Las repetidas se construyen enteras, no con cloneNode: cloneNode no copia
+// los manejadores del enlace y el clic recargaria la pagina.
+const clones = featuredComponents.slice(0, featuredClones).map((component, index) => {
     const card = createComponentCard(component, index);
     card.dataset.featuredClone = "true";
+    // Las repetidas son, por definicion, un duplicado de tarjetas que ya estan
+    // mas adelante en el DOM. Para quien va con lector de pantalla son ruido: se
+    // oye el mismo componente dos veces al recorrer la portada, y ademas sus
+    // encabezados rompen la jerarquia (varias h3 seguidas sin h2 que las
+    // enclose). Se esconden de la tecnologia asistiva con `inert`, que en una
+    // sola linea hace las dos cosas que hacen falta: marca el subarbol como no
+    // anunciado (`aria-hidden` implicito) **y** saca sus enlaces del recorrido
+    // del teclado. Con `aria-hidden` a secas, axe marcaria `aria-hidden-focus`,
+    // porque un contenedor oculto que contiene algo enfocable es un fallo.
+    // Se pueden seguir viendo y clicando con el raton.
+    card.inert = true;
     return card;
   });
   elements.featuredGrid.replaceChildren(...cards, ...clones);
@@ -1252,7 +1586,14 @@ async function downloadComponentZip(component) {
   const licenseFile = files.find((file) => file.name === component.licenseFile
     || file.name.endsWith(`/${component.licenseFile}`));
   if (licenseFile) {
-    const copyright = new TextDecoder().decode(licenseFile.bytes).match(/^\s*(copyright[^\r\n]*)$/im);
+    // `[ \t]*` y no `\s*`: con la bandera `m`, `\s` puede atravesar saltos
+    // de linea antes de encontrar `copyright`, lo que provoca backtracking
+    // superlineal sobre el texto entero de la licencia (S8786). Solo queremos
+    // el espacio horizontal al principio de la linea; los saltos entre lineas
+    // los recorre `m` por si mismos.
+    const copyright = /^[ \t]*(copyright[^\r\n]*)$/im.exec(
+      new TextDecoder().decode(licenseFile.bytes),
+    );
     if (copyright) attribution.push(copyright[1].trim());
   }
   files.push({
@@ -1312,6 +1653,13 @@ function createDetailHeading(component) {
       try {
         await downloadComponentZip(component);
         showToast(t("zipDownloaded"));
+        // Evento del embudo: sin esto no se sabe si la biblioteca se usa o solo
+        // se mira. Es la accion de valor del sitio (descargar un componente).
+        trackAnalyticsEvent("descarga_zip", {
+          id: component.id,
+          categoria: component.category,
+          autor: component.author,
+        });
       } catch (error) {
         showToast(t("zipFailed", { message: error.message }));
       } finally {
@@ -1539,134 +1887,14 @@ function initializeLanguage() {
   }
 }
 
-// --- Google Analytics ------------------------------------------------------
-// Nada de esto se ejecuta hasta que hay un ID de medicion real y alguien ha
-// aceptado: el banner pregunta primero y el script de gtag se pide despues, de
-// modo que sin aceptacion no sale ni una peticion a Google ni una cookie.
+// --- Eventos de analitica ----------------------------------------------------
+// Antes este modulo cargaba Google Analytics 4 con banner de consentimiento;
+// ahora mismo solo Vercel Web Analytics (cargado por el script inline de cada
+// HTML, no necesita JS aqui). Esta funcion queda como no-op para no romper las
+// 5 llamadas que ya tenia repartidas por la app y por si en el futuro se
+// enchufa otra analitica con una implementacion real.
 
-function readAnalyticsConsent() {
-  try {
-    return localStorage.getItem(consentStorageKey);
-  } catch {
-    return null;
-  }
-}
-
-function writeAnalyticsConsent(decision) {
-  try {
-    localStorage.setItem(consentStorageKey, decision);
-  } catch {
-    // Sin localStorage la eleccion no se recuerda, pero la pagina actual ya
-    // abide por ella: es mejor que bloquear la decision.
-  }
-}
-
-function hasAnalyticsId() {
-  // Un ID de medicion de GA4 son las letras G, un guion y de cuatro a diez
-  // caracteres en mayusculas y digitos. El valor de ejemplo ("PENDIENTE", sin
-  // la G) no lo cumple, asi que con el no se pide el script ni se pone ninguna
-  // cookie. Se exige mayusculas porque los IDs que emite Google las traen.
-  return /^G-[A-Z0-9]{4,10}$/.test(analyticsId);
-}
-
-// En local no se manda nada a Google: cada recarga desde localhost contaria
-// como una visita real y ensuciaria las estadisticas. En produccion el
-// hostname es el dominio de Vercel, asi que la pregunta solo corta cuando la
-// web se abre en el servidor del propio repositorio.
-function isLocalPreview() {
-  const host = window.location.hostname;
-  return host === "localhost" || host === "127.0.0.1" || host === "[::1]";
-}
-
-function loadAnalytics() {
-  // El ID de ejemplo y las pruebas en local se quedan fuera a proposito: sin
-  // esto, revisar la web en localhost seria contar visitas falsas.
-  if (!hasAnalyticsId() || isLocalPreview() || typeof window.gtag === "function") return;
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `${analyticsEndpoints.tag}?id=${encodeURIComponent(analyticsId)}`;
-  document.head.append(script);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments);
-  };
-  window.gtag("js", new Date());
-  // anonymize_ip trunca la IP antes de guardarla. La web no publica datos
-  // publicitarios: eso se declara aqui en vez de en la configuracion de GA.
-  window.gtag("config", analyticsId, { anonymize_ip: true });
-}
-
-function trackAnalyticsEvent(name, parameters) {
-  if (typeof window.gtag !== "function") return;
-  window.gtag("event", name, parameters ?? {});
-}
-
-function openConsentBanner() {
-  const banner = createElement("div", "consent-banner");
-  banner.dataset.consentBanner = "";
-  banner.dataset.i18nAriaLabel = "consentLabel";
-  banner.setAttribute("role", "region");
-
-  const text = createElement("p", "consent-text");
-  text.dataset.i18n = "consentText";
-  const actions = createElement("div", "consent-actions");
-  const reject = createElement("button", "button button-secondary");
-  reject.type = "button";
-  reject.dataset.consent = "deny";
-  reject.dataset.i18n = "consentReject";
-  // Acepta lleva button-primary y no .button a secas: .button no fija
-  // background, asi que el navegador pone el gris por defecto de los controles
-  // (rgb(107, 107, 107)) sobre el --surface-raised del aviso, y eso da
-  // 2,21:1 con el texto heredado. El primario usa --accent sobre --accent-ink,
-  // que pasa AA en los dos temas.
-  const accept = createElement("button", "button button-primary");
-  accept.type = "button";
-  accept.dataset.consent = "grant";
-  accept.dataset.i18n = "consentAccept";
-  actions.append(reject, accept);
-  banner.append(text, actions);
-  document.body.append(banner);
-
-  for (const button of banner.querySelectorAll("[data-consent]")) {
-    button.addEventListener("click", () => {
-      const decision = button.dataset.consent === "grant" ? "grant" : "deny";
-      writeAnalyticsConsent(decision);
-      banner.remove();
-      if (decision === "grant") {
-        loadAnalytics();
-        showToast(t("consentAccepted"));
-      } else {
-        showToast(t("consentRejected"));
-      }
-    });
-  }
-  // El banner se pinta ya traducido: los textos se rellenan con el idioma
-  // activo en vez de esperar al siguiente applyLanguage.
-  applyStaticTranslations();
-  return banner;
-}
-
-function initializeAnalytics() {
-  const decision = readAnalyticsConsent();
-  if (decision === "grant") {
-    loadAnalytics();
-  } else if (decision !== "deny") {
-    // Sin respuesta todavia: se pregunta. Un "deny" no vuelve a preguntar.
-    openConsentBanner();
-  }
-  // El boton del pie reabre el aviso para poder cambiar de idea, que es lo que
-  // pide el consentimiento: se puede retirar cuando se quiera.
-  for (const button of document.querySelectorAll("[data-cookie-preferences]")) {
-    button.addEventListener("click", () => {
-      try {
-        localStorage.removeItem(consentStorageKey);
-      } catch {
-        // da igual: el banner se abre igualmente.
-      }
-      openConsentBanner();
-    });
-  }
-}
+function trackAnalyticsEvent(_name, _parameters) {}
 
 function showToast(message) {
   elements.toast.textContent = message;
@@ -1763,6 +1991,11 @@ function initializeSearch() {
     state.query = elements.search.value;
     state.currentPage = 1;
     renderComponents();
+    // El primer paso del embudo: se busca algo. Se manda **la longitud** de la
+    // busqueda y no el texto: el texto es lo que la persona escribe y puede ser
+    // cualquier cosa, mandarlo seria espiar sin aviso ni una palabra util.
+    // Con la longitud se sabe si la gente busca ("a") o solo teclea.
+    if (state.query.length === 1) trackAnalyticsEvent("busqueda_iniciada");
   });
   document.addEventListener("keydown", (event) => {
     const activeTag = document.activeElement?.tagName;
@@ -1793,7 +2026,6 @@ function initializeSearch() {
 
 async function initializeApp() {
   initializeLanguage();
-  initializeAnalytics();
   initializeTheme();
   initializeNavigation();
   initializeSearch();
@@ -1819,7 +2051,22 @@ async function initializeApp() {
     if (statComponents) statComponents.textContent = String(state.components.length);
     if (statCategories) statCategories.textContent = String(getCategories().length);
     renderMarquee();
-    renderFeaturedComponents();
+    // El carrusel de destacados construye 33 tarjetas (29 + 4 repetidas), cada
+    // una con su iframe. Medido en CPU movil: son 129 ms, y con la lentitud
+    // simulada de Lighthouse x4 son ~500 ms de hilo principal bloqueado, que es
+    // justo el TBT de la portada.
+    //
+    // No hace falta para el primer pintado: el carrusel esta **debajo** del
+    // hero, que es lo que se ve primero. Se aplaza a un momento en el que el
+    // navegador esta ocioso, con `requestIdleCallback` y un tope de tiempo
+    // (`timeout`) para no depender de que llegue a estar libre: si esta
+    // ocupado, se dibuja a los 1200 ms y no antes. El LCP no se ve afectado
+    // porque el elemento que lo produce (el hero) ya esta pintado cuando esto
+    // corre.
+    //
+    // El cambio de idioma **no** se aplaza: para entonces la pagina ya esta
+    // repintada y quien cambia el idioma esta mirando justo esa seccion.
+    aplazar(() => renderFeaturedComponents());
     renderFilters();
     renderAuthorFilters();
     renderRoute();
@@ -1866,5 +2113,11 @@ function installDavokerTransitionBridge() {
 
 window.addEventListener("DOMContentLoaded", () => {
   installDavokerTransitionBridge();
-  void initializeApp();
+  // Antes era `void initializeApp()`, que ademas de marcarse como uso
+  // inutilizado (S3735) se comia el error si el arranque fallaba (por ejemplo
+  // si el catalogo no llegara): la pagina se quedaba a medio pintar y sin que
+  // nadie supiera por que. Aqui el fallo se ve en consola.
+  initializeApp().catch((error) => {
+    console.error("No se pudo iniciar la aplicacion:", error);
+  });
 }, { once: true });

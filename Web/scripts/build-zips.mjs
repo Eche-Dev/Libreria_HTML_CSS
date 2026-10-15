@@ -17,10 +17,11 @@
 // En local es inocuo por seguridad (al estilo de WS audita). Con flag --force
 // se regeneran todos. Se integra en vercel.json con `node Web/scripts/generate-catalog.mjs &&
 // node Web/scripts/build-zips.mjs`, en ese orden: el catalogo es la entrada.
-import { createWriteStream } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { comprobarFichero } from "./lib/extensiones.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const webDirectory = path.resolve(scriptDirectory, "..");
@@ -80,17 +81,17 @@ class ZipWriter {
     const crc = crc32(bytes);
     const modificacion = new Date(0); // 1980-01-01: ZIP requiere <= 2038-01-18.
     const cabeceraLocal = Buffer.alloc(30 + rutaInterna.length);
-    cabeceraLocal.writeUInt32LE(0x04034b50, 0);                 // firma
-    cabeceraLocal.writeUInt16LE(20, 4);                         // version necesaria
-    cabeceraLocal.writeUInt16LE(0, 6);                           // flags
-    cabeceraLocal.writeUInt16LE(STORED, 8);                      // método (sin comprimir)
+    cabeceraLocal.writeUInt32LE(0x04034b50, 0); // firma
+    cabeceraLocal.writeUInt16LE(20, 4); // version necesaria
+    cabeceraLocal.writeUInt16LE(0, 6); // flags
+    cabeceraLocal.writeUInt16LE(STORED, 8); // método (sin comprimir)
     cabeceraLocal.writeUInt16LE(((modificacion.getTime() / 1000) >> 0) & 0xffff, 10);
     cabeceraLocal.writeUInt16LE((((modificacion.getTime() / 1000) >> 0) >> 16) & 0xffff, 12);
     cabeceraLocal.writeUInt32LE(crc, 14);
-    cabeceraLocal.writeUInt32LE(bytes.length, 18);                // tamano comprimido
-    cabeceraLocal.writeUInt32LE(bytes.length, 22);                // tamano sin comprimir
+    cabeceraLocal.writeUInt32LE(bytes.length, 18); // tamano comprimido
+    cabeceraLocal.writeUInt32LE(bytes.length, 22); // tamano sin comprimir
     cabeceraLocal.writeUInt16LE(rutaInterna.length, 26);
-    cabeceraLocal.writeUInt16LE(0, 28);                          // longitud extra
+    cabeceraLocal.writeUInt16LE(0, 28); // longitud extra
     cabeceraLocal.write(rutaInterna, 30);
     this.entries.push({ cabeceraLocal, crc, tamano: bytes.length, datos: bytes, modificacion });
   }
@@ -100,7 +101,7 @@ class ZipWriter {
     let tamanoCentral = 0;
     for (const e of entradas) {
       const cabCentral = Buffer.alloc(46 + e.cabeceraLocal.length - 30);
-      cabCentral.writeUInt32LE(0x02014b50, 0);                   // firma
+      cabCentral.writeUInt32LE(0x02014b50, 0); // firma
       cabCentral.writeUInt16LE(20, 4);
       cabCentral.writeUInt16LE(20, 6);
       cabCentral.writeUInt16LE(0, 8);
@@ -151,7 +152,7 @@ function rutaSalidaZip(componente) {
   const preview = componente.preview ?? "";
   const root = componente.root;
   const base = path.join(repositoryDirectory, root);
-  let relativa = preview
+  const relativa = preview
     .replace(/^\.\.\//, "")
     .replace(/^[^/]+\//, "")
     .replace(/\/index\.html$/, "");
@@ -184,6 +185,17 @@ for (const componente of catalog) {
     const rutaRelativa = archivo.path.replace(/^\.\.\//, "");
     const rutaFisica = path.join(repositoryDirectory, rutaRelativa);
     const bytes = await readFile(rutaFisica);
+    // Lista blanca (P0-3): lo que se empaqueta pasa por la misma regla que
+    // el catalogo. Un ZIP con un `.exe` dentro seria peor que uno con un
+    // `.svg` con script, porque viaja con sello de "descarga oficial".
+    const fallosExtension = comprobarFichero(
+      rutaRelativa,
+      rutaFisica.toLowerCase().endsWith(".svg") ? bytes.toString("utf8") : undefined,
+    );
+    if (fallosExtension.length > 0) {
+      console.error(`extensiones: ${rutaRelativa}: ${fallosExtension.join("; ")}`);
+      process.exit(1);
+    }
     if (!copyright && esLicenciaDe(archivo.archivePath, sourceData.licenseFile)) {
       copyright = lineaCopyright(bytes.toString("utf8"));
     }
@@ -216,6 +228,8 @@ for (const componente of catalog) {
 }
 
 console.log(`Generados ${verificadas.length} ZIPs redistribuibles en DavokerDiseñador/<categoria>/<efecto>/`);
-console.log(`(el catalogo tiene ${catalogoReducido.not_redistributable} componentes no redistribuibles que no se han generado)`);
+console.log(
+  `(el catalogo tiene ${catalogoReducido.not_redistributable} componentes no redistribuibles que no se han generado)`,
+);
 const tamanoTotal = verificadas.reduce((acc, v) => acc + v.tamano, 0);
 console.log(`Tamano total: ${tamanoTotal} bytes (~${Math.round(tamanoTotal / 1024)} KB)`);

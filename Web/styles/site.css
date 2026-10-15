@@ -798,6 +798,12 @@ input:focus-visible {
   /* Puede llevar una segunda linea con el aviso de davoker, asi que no se
      impide el salto de linea: sin mas, una linea larga desbordaria la barra. */
   white-space: normal;
+  /* Reserva la altura de las dos lineas que pone app.js al hidratar
+     ("{count} componentes..." + "{davoker} mas..."). Sin esto, "Cargando
+     coleccion..." (1 linea) -> "899 componentes..." + "<br>" + "119 mas..."
+     (2 lineas) empuja la rejilla 13 px hacia abajo y dispara el CLS de
+     componentes (medido ~0.08). line-height por defecto = 1.5. */
+  min-height: 30px;
 }
 
 .category-filters {
@@ -1210,6 +1216,7 @@ input:focus-visible {
 }
 
 .component-card {
+  position: relative;
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1219,7 +1226,12 @@ input:focus-visible {
   cursor: pointer;
 }
 
-.component-card:focus-visible {
+/* Foco sobre la tarjeta entera cuando el enlace de dentro la recibe. Antes
+   era `.component-card:focus-visible`, que solo funcionaba porque la tarjeta
+   era tabbable; ahora lo que tiene el foco es el `<a>` de "Ver componente", y
+   `:focus-within` hace que el anillo se dibuje alrededor de la tarjeta, que es
+   lo que la persona ve. */
+.component-card:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -1359,6 +1371,19 @@ input:focus-visible {
   color: var(--accent);
   font-size: 11px;
   font-weight: 800;
+}
+
+/* Aqui esta el "enlace de tarjeta": este pseudo-elemento no se ve, pero se
+   extiende por toda la tarjeta, asi que un clic en cualquier punto (tambien
+   sobre la vista previa) abre el detalle. Es el patron habitual para tarjetas
+   clicables, y deja que sea el `<a>` de verdad el que recibe el foco y el
+   teclado, en vez de un `role="link"` sobre el `<article>` con sus
+   manejadores de Enter y Espacio a mano. */
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .card-link span {
@@ -1836,49 +1861,6 @@ input:focus-visible {
   color: var(--accent);
 }
 
-/* Aviso de consentimiento. Va sobre el pie, en una sola barra, y solo existe
-   hasta que se contesta: despues se borra del DOM. Los `env(safe-area-inset-*)`
-   son los huecos que reserva el notch y la barra de inicio: sin ellos, en iPhone
-   el borde de abajo cae debajo del indicador de gesto y en horizontal los lados
-   quedan bajo el notch. Donde no exista `env()`, el valor vale 0 y el margen
-   original se respeta igual. */
-.consent-banner {
-  position: fixed;
-  z-index: 40;
-  right: 16px;
-  right: calc(16px + env(safe-area-inset-right));
-  bottom: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  left: 16px;
-  left: calc(16px + env(safe-area-inset-left));
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 20px;
-  max-width: 620px;
-  margin-inline: auto;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  background: var(--surface-raised);
-  box-shadow: 0 14px 34px rgb(0 0 0 / 35%);
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.consent-text {
-  margin: 0;
-  flex: 1 1 260px;
-}
-
-.consent-actions {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 8px;
-}
-
 .toast {
   position: fixed;
   z-index: 30;
@@ -2067,7 +2049,7 @@ input:focus-visible {
     order: 3;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 8px 10px;
     padding-block: 11px;
     font-size: 10px;
@@ -2224,8 +2206,9 @@ input:focus-visible {
   }
 
   .team-avatar {
-    width: 54px;
-    height: 54px;
+    width: 70px;
+    height: 70px;
+    place-self: center;
     margin-bottom: 0;
     grid-row: span 3;
   }
@@ -2358,5 +2341,213 @@ input:focus-visible {
     width: auto !important;
     border-right: none !important;
     animation: none !important;
+  }
+}
+/* --- PAGINAS DE TEXTO LARGO (privacidad, legal) -----------------------
+No son demos ni la portada: son documentos para leer. Se diferencian del
+   resto en tres cosas, y las tres importan al leer en un movil:
+
+   1. Ancho de linea acotado (~68 caracteres). Un parrafo a lo ancho de una
+      pantalla de telefono es ilegible: el ojo vuelve al principio de cada
+      linea y pierde el sitio.
+   2. Interlineado amplio. A 1.6 como el resto del sitio, un bloque de texto
+      de 40 lineas se ve como una pared.
+   3. Encabezados con `scroll-margin-top`, porque el encabezado del sitio es
+      fijo: al saltar a una seccion el titulo quedaria debajo.
+
+   Los `li` y las tablas tambien se reparten: en este sitio las tablas del
+   catalogo son anchas, aqui son de tres columnas. */
+.legal-doc {
+  max-width: 68ch;
+  margin-inline: auto;
+  padding: 2.5rem 1.25rem 4rem;
+  line-height: 1.75;
+}
+
+.legal-doc > h1 {
+  margin-top: 0;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.legal-doc h2 {
+  margin-top: 2.75rem;
+  margin-bottom: .6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  font-size: 1.25rem;
+  /* El encabezado del sitio va fijo: sin esto el titulo de la seccion queda
+     escondido debajo al llegar con un ancla. */
+  scroll-margin-top: 5rem;
+}
+
+.legal-doc h3 {
+  margin-top: 1.8rem;
+  margin-bottom: .4rem;
+  font-size: 1.02rem;
+  scroll-margin-top: 5rem;
+}
+
+.legal-doc p,
+.legal-doc li {
+  color: var(--text);
+  /* Sin esto, un identificador largo o una URL larga rompen la maqueta en
+     movil, que es justo donde se lee esto. */
+  overflow-wrap: break-word;
+}
+
+.legal-doc p {
+  margin: 0 0 1rem;
+}
+
+.legal-doc ul,
+.legal-doc ol {
+  margin: 0 0 1rem;
+  padding-left: 1.35rem;
+}
+
+.legal-doc li {
+  margin-bottom: .45rem;
+}
+
+.legal-doc li::marker {
+  color: var(--accent);
+}
+
+.legal-doc strong {
+  color: var(--text);
+}
+
+/* Tabla de las claves de localStorage: en movil no cabe en tres columnas, asi
+   que pasa a apilarse y cada fila rotula su valor con `data-label`. */
+.legal-doc .legal-table {
+  width: 100%;
+  margin: 0 0 1.5rem;
+  border-collapse: collapse;
+  font-size: .92rem;
+}
+
+.legal-doc .legal-table th,
+.legal-doc .legal-table td {
+  padding: .6rem .7rem;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-doc .legal-table th {
+  background: var(--surface-raised);
+  font-weight: 700;
+}
+
+.legal-doc code {
+  padding: .1rem .3rem;
+  border-radius: 4px;
+  background: var(--surface-raised);
+  font-size: .88em;
+  overflow-wrap: anywhere;
+}
+
+.legal-doc blockquote {
+  margin: 1.2rem 0;
+  padding: .2rem 0 .2rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--text);
+}
+
+.legal-doc .legal-updated {
+  margin-bottom: 2rem;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+/* Indice de secciones: en movil es la unica forma de saltar a la parte que
+   interesa sin recorrer el documento entero. */
+.legal-toc {
+  margin: 0 0 2.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-raised);
+}
+
+.legal-toc p {
+  margin: 0 0 .5rem;
+  font-weight: 700;
+}
+
+.legal-toc ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  columns: 2;
+  column-gap: 1.5rem;
+}
+
+.legal-toc li {
+  break-inside: avoid;
+  margin-bottom: .2rem;
+}
+
+/* Los enlaces internos llevan una flecha para que se distingan de los externos
+   al leer en el movil. */
+.legal-doc a {
+  color: var(--accent);
+}
+
+.legal-doc a[href^="http"]::after {
+  content: " \2197";
+  font-size: .85em;
+}
+/* --- OBJETIVOS TACTILES (WCAG 2.2, 2.5.8 Target Size Minimum) -------------
+   Medido a 360 px de ancho: varios controles quedaban por debajo de 24 px de
+   alto (la altura de su texto), por muy grande que fuera el area clicable que
+   hubiera alrededor. El umbral minimo que se pide es 24x24 CSS px, y 44x44 es
+   el objetivo comodo para el dedo. Se aplica solo con `pointer: coarse` (hay
+   dedo): en escritorio, con raton, ampliar estos controles solo ocupa sitio de
+   mas. */
+@media (pointer: coarse) {
+  .main-nav a,
+  .nav-github,
+  .footer-link,
+  .footer-meta a,
+  .language-button,
+  .theme-toggle,
+  .pagination-arrow,
+  .pagination-page {
+    /* `min-height` en vez de `height`: deja crecer el bloque en vertical sin
+       descuadrar la fila. */
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* El icono de GitHub es un SVG de 18 px: hay que darle ancho, que el
+     `min-height` de arriba no toca. */
+  .nav-github {
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  /* El buscador. Su altura la fija el padding; con el dedo hay que llegar a los
+     24 px minimos del criterio. */
+  .search-box,
+  .search-box input,
+  #component-search {
+    min-height: 44px;
+  }
+
+  /* El enlace "Ver componente" de la tarjeta: 15 px de texto. */
+  .card-link {
+    min-height: 44px;
+    padding-block: 14px;
+    align-items: center;
+  }
+
+  /* Boton de dirección de donacion y demas botones de texto del pie. */
+  .footer-address,
+  .footer-link {
+    min-height: 44px;
+    align-items: center;
   }
 }

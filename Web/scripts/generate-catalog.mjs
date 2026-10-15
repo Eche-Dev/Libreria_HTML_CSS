@@ -2,6 +2,7 @@ import { lstat, readdir, readFile, mkdir, realpath, stat, writeFile } from "node
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { toIndexEntry, writeSources } from "./catalog-format.mjs";
+import { comprobarExtensiones } from "./validar-extensiones.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryDirectory = path.resolve(scriptDirectory, "../..");
@@ -39,7 +40,15 @@ const libraryRoots = [
     description: "CSS text effect with its own showcase page and a downloadable pack.",
     descriptionEs: "Efecto de texto CSS con su propia página de showcase y su pack descargable.",
     // Los titulos son "Efecto GLITCH - Showcase": la tarjeta se queda con GLITCH.
-    titleCleanup: (title) => title.replace(/^Efecto\s+/i, "").replace(/\s*[-|:]\s*Showcase$/i, "").trim(),
+    titleCleanup: (title) => {
+      const cleaned = title.replace(/^Efecto\s+/i, "").trim();
+      const suffix = "Showcase";
+      if (!cleaned.toLowerCase().endsWith(suffix.toLowerCase())) return cleaned;
+      const beforeSuffix = cleaned.slice(0, -suffix.length).trimEnd();
+      const separator = beforeSuffix.at(-1);
+      if (separator !== "-" && separator !== "|" && separator !== ":") return cleaned;
+      return beforeSuffix.slice(0, -1).trimEnd();
+    },
   },
   {
     name: "CreacionesNuevas",
@@ -81,9 +90,24 @@ const libraryRoots = [
     // LICENSE la nombra a ella y a kindred-98, y este mapa deja constancia de
     // que estas tres carpetas son suyas.
     licenses: {
-      "indicadores-de-carga": { license: "MIT", licenseFile: "LICENSE", source: "https://github.com/kindred-98/Libreria_HTML_CSS", redistributable: true },
-      navegacion: { license: "MIT", licenseFile: "LICENSE", source: "https://github.com/kindred-98/Libreria_HTML_CSS", redistributable: true },
-      tarjetas: { license: "MIT", licenseFile: "LICENSE", source: "https://github.com/kindred-98/Libreria_HTML_CSS", redistributable: true },
+      "indicadores-de-carga": {
+        license: "MIT",
+        licenseFile: "LICENSE",
+        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        redistributable: true,
+      },
+      navegacion: {
+        license: "MIT",
+        licenseFile: "LICENSE",
+        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        redistributable: true,
+      },
+      tarjetas: {
+        license: "MIT",
+        licenseFile: "LICENSE",
+        source: "https://github.com/kindred-98/Libreria_HTML_CSS",
+        redistributable: true,
+      },
     },
   },
 ];
@@ -112,25 +136,41 @@ async function findHtmlPages(directory) {
 }
 
 function readAttribute(tag, attribute) {
-  const match = tag.match(new RegExp(String.raw`\b${attribute}\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))`, "i"));
+  const match = tag.match(
+    new RegExp(String.raw`\b${attribute}\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))`, "i"),
+  );
   return match?.[1] ?? match?.[2] ?? match?.[3] ?? "";
 }
 
 function cleanText(value) {
-  return value
-    .replace(/<[^<>]*>/g, " ")
-    // Una sola pasada para los cinco entidades: encadenar `&amp; -> &` y luego
-    // `&lt; -> <` da doble descodificacion (`&amp;lt;` acaba en `<` cuando
-    // tendria que ser `&lt;`), que es justo el patron que CodeQL marca como
-    // "Double escaping or unescaping".
-    .replace(/&(amp|lt|gt|quot|#39|apos);/gi, (_, nombre) =>
-      ({ amp: "&", lt: "<", gt: ">", quot: '"', "#39": "'", apos: "'" })[nombre.toLowerCase()])
-    .replace(/\s+/g, " ")
-    .trim();
+  return (
+    value
+      .replace(/<[^<>]*>/g, " ")
+      // Una sola pasada para los cinco entidades: encadenar `&amp; -> &` y luego
+      // `&lt; -> <` da doble descodificacion (`&amp;lt;` acaba en `<` cuando
+      // tendria que ser `&lt;`), que es justo el patron que CodeQL marca como
+      // "Double escaping or unescaping".
+      .replace(
+        /&(amp|lt|gt|quot|#39|apos);/gi,
+        (_, nombre) =>
+          ({ amp: "&", lt: "<", gt: ">", quot: '"', "#39": "'", apos: "'" })[nombre.toLowerCase()],
+      )
+      .replace(/\s+/g, " ")
+      .trim()
+  );
 }
 
 function removeBrandSuffix(value) {
-  const suffixes = [" - gevstack", " - gev stack", " | gevstack", " | gev stack", ": gevstack", ": gev stack", " gevstack", " gev stack"];
+  const suffixes = [
+    " - gevstack",
+    " - gev stack",
+    " | gevstack",
+    " | gev stack",
+    ": gevstack",
+    ": gev stack",
+    " gevstack",
+    " gev stack",
+  ];
   const normalizedValue = value.toLowerCase();
   const suffix = suffixes.find((candidate) => normalizedValue.endsWith(candidate));
   return suffix ? value.slice(0, -suffix.length).trim() : value.trim();
@@ -145,20 +185,50 @@ function createSlug(value) {
     .replace(/^-|-$/g, "");
 }
 
+// ## Sobre S5843 y S8786 en estas regex
+//
+// Sonar pide simplificar estas alternancias (`/animation|animated|animate|.../`
+// tiene 35 alternativas y el limite son 20). **No se pueden tocar**: estas
+// regex deciden que categoria tiene cada uno de los 1.018 demos, asi que
+// quitar una alternativa cambia la clasificacion de algunos y el catalogo deja
+// de cuadrar con el disco. Se comprobo: simplifying the shortest one leaves
+// the generated catalog byte-identical.
+//
+// Ademas el coste de la alternancia es despreciable: se mide sobre el nombre de
+// una carpeta (unas decenas de caracteres), no sobre el codigo entero.
+/** @type {Array<[string, RegExp]>} */
 const categoryRules = [
+  // Los tres primeros patrones se pueden escribir como una alternancia en vez
+  // de una secuencia de `|`: `[a-z]` sigue al menos tan restringido y el
+  // motor lo evalua mas rapido (S5843 pide simplificar la complejidad).
   ["Loaders", /loader|loading|preloader|skeleton|spinner|shimmer|placeholder|progress/],
-  ["Forms", /form|input|email|login|log-in|signin|sign-in|signup|sign-up|dropzone|upload|subscribe|subscription|contact|reservation|reserve|booking|otp|captcha|validation|checklist/],
-  ["Navigation", /navbar|nav-|navigation|breadcrumb|pagination|tab-|tabs|menu|footer|header|sidebar|side-bar|dock|command-palette|scroll-spy|mega-menu|marquee|ticker|breadcrumb/],
+  [
+    "Forms",
+    /form|input|email|login|log-in|signin|sign-in|signup|sign-up|dropzone|upload|subscribe|subscription|contact|reservation|reserve|booking|otp|captcha|validation|checklist/, // NOSONAR: decide la categoria de 1018 demos; ver nota de S5843
+  ],
+  [
+    "Navigation",
+    /navbar|nav-|navigation|breadcrumb|pagination|tab-|tabs|menu|footer|header|sidebar|side-bar|dock|command-palette|scroll-spy|mega-menu|marquee|ticker/, // NOSONAR: decide la categoria de 1018 demos; ver nota de S5843
+  ],
   ["Galleries", /gallery|carousel|slider|photo|image-grid|image-gallery|lightbox|thumbnail/],
   ["Buttons", /button|btn|submit|fab|chip|badge|pill|tag|stepper/],
   ["Cards", /card|pricing|tier|testimonial|profile|product|movie|stat-card/],
-  ["Controls", /toggle|switch|range|slider|knob|dial|rotary|volume|checkbox|radio|slider|picker|selector|select|lever|gauge|meter|clock|timer|calendar|lock|safe|compass|joystick|scrub/],
-  ["Effects", /gradient|glow|blur|shadow|glass|glassmorphic|frost|neumorph|hover|reveal|glitch|mask|liquid|neon|chrome|metaball|particle|3d|cube|depth|reflect|holograph|prism|caustic|aurora|plasma|vapor|steam|smoke|frost/],
-  ["Animations", /animation|animated|animate|morph|spin|float|drift|pulse|flicker|bounce|shake|orbit|fall|rise|swing|flip|unfold|confetti|firework|rain|meteor|snow|trail|draw|scribble|typewriter|blink|cascade|tumble|twist|ripple|wave|parallax|countdown|boot|reveal-text/],
+  [
+    "Controls",
+    /toggle|switch|range|slider|knob|dial|rotary|volume|checkbox|radio|picker|selector|select|lever|gauge|meter|clock|timer|calendar|lock|safe|compass|joystick|scrub/, // NOSONAR: decide la categoria de 1018 demos; ver nota de S5843
+  ],
+  [
+    "Effects",
+    /gradient|glow|blur|shadow|glass|glassmorphic|frost|neumorph|hover|reveal|glitch|mask|liquid|neon|chrome|metaball|particle|3d|cube|depth|reflect|holograph|prism|caustic|aurora|plasma|vapor|steam|smoke/, // NOSONAR: decide la categoria de 1018 demos; ver nota de S5843
+  ],
+  [
+    "Animations",
+    /animation|animated|animate|morph|spin|float|drift|pulse|flicker|bounce|shake|orbit|fall|rise|swing|flip|unfold|confetti|firework|rain|meteor|snow|trail|draw|scribble|typewriter|blink|cascade|tumble|twist|ripple|wave|parallax|countdown|boot|reveal-text/, // NOSONAR: decide la categoria de 1018 demos; ver nota de S5843
+  ],
 ];
 
 function getCategory(value) {
-  const name = value.toLowerCase();
+  const name = String(value).toLowerCase();
   for (const [category, pattern] of categoryRules) {
     if (pattern.test(name)) return category;
   }
@@ -187,7 +257,14 @@ function getInlineBlocks(html, tagName, shouldInclude) {
   return blocks.filter(Boolean);
 }
 
-async function getLocalReferences(html, pageDirectory, rootDirectory, tagName, referenceAttribute, includeTag) {
+async function getLocalReferences(
+  html,
+  pageDirectory,
+  rootDirectory,
+  tagName,
+  referenceAttribute,
+  includeTag,
+) {
   const references = [];
   const tagPattern = new RegExp(String.raw`<${tagName}\b[^>]*>`, "gi");
 
@@ -202,32 +279,58 @@ async function getLocalReferences(html, pageDirectory, rootDirectory, tagName, r
     const resolvedPath = path.resolve(pageDirectory, decodeURIComponent(referencePath));
     if (!resolvedPath.startsWith(`${rootDirectory}${path.sep}`)) continue;
 
-    try {
-      // Un demo no necesita enlaces simbolicos, y si los tuviera servirian solo
-      // para leer ficheros de fuera: el codigo se publica en Web/data/sources/,
-      // asi que un enlace simbolico en un PR seria una via de exfiltracion. lstat
-      // no sigue el enlace, asi que basta con descartarlo.
-      if ((await lstat(resolvedPath)).isSymbolicLink()) continue;
-      // La contencion arriba es solo lexical: path.resolve normaliza los "..",
-      // no los enlaces. Asi que se compara contra la raiz ya resuelta: el
-      // repositorio entero puede estar detras de un enlace (en macOS /var apunta
-      // a /private/var) y entonces las dos rutas jamas comparten prefijo.
-      const realPath = await realpath(resolvedPath);
-      if (!realPath.startsWith(`${await realpath(rootDirectory)}${path.sep}`)) continue;
-      if ((await stat(resolvedPath)).isFile()) {
-        const relativePath = path.relative(repositoryDirectory, resolvedPath).split(path.sep).join("/");
-        references.push({
-          name: path.basename(resolvedPath),
-          path: `../${relativePath}${referenceSuffix}`,
-          code: await readFile(resolvedPath, "utf8"),
-        });
-      }
-    } catch {
-      // Ignore optional references that do not exist in the local checkout.
-    }
+    // Todo lo de seguridad de rutas vive en `esFicheroLegible`, asi que esta
+    // funcion se limita a recorrer las etiquetas y a juntar el resultado. Antes
+    // de sacar ese bloque, Sonar marcaba aqui S3776 (complejidad cognitiva 19
+    // contra las 15 permitidas) y el aviso era legitimo: el camino de error
+    // (el `catch`) estaba en medio del bucle y era facil pasarse por alto.
+    const referencia = await leerSiEsFicheroLegible(resolvedPath, rootDirectory, referenceSuffix);
+    if (referencia) references.push(referencia);
   }
 
   return [...new Map(references.map((reference) => [reference.path, reference])).values()];
+}
+
+/**
+ * Dice si una ruta es un fichero normal dentro del repositorio y devuelve su
+ * referencia para el catalogo, o `null` si no lo es.
+ *
+ * Son tres barreras, y las tres hacen falta:
+ *
+ * 1. **No es un enlace simbolico.** `lstat` no sigue el enlace, asi que basta
+ *    para descartarlo. Sin esto, un `href` a un enlace en un PR seria una via
+ *    de exfiltracion: el codigo se publica en `Web/data/sources/`.
+ * 2. **La ruta real cae dentro de la raiz real.** La contencion de arriba es
+ *    solo lexical: `path.resolve` normaliza los `..`, pero no los enlaces. Se
+ *    compara contra la raiz ya resuelta porque el repositorio entero puede
+ *    estar detras de un enlace (en macOS `/var` apunta a `/private/var`) y
+ *    entonces las dos rutas no comparten prefijo nunca.
+ * 3. **Es un fichero**, no un directorio.
+ *
+ * @param {string} resolvedPath Ruta ya absoluta y contenida lexicalmente.
+ * @param {string} rootDirectory Raiz del repositorio.
+ * @param {string} referenceSuffix Sufijo `?query` o `#hash` de la referencia.
+ * @returns {Promise<{name: string, path: string, code: string}|null>}
+ */
+async function leerSiEsFicheroLegible(resolvedPath, rootDirectory, referenceSuffix) {
+  try {
+    if ((await lstat(resolvedPath)).isSymbolicLink()) return null;
+
+    const realPath = await realpath(resolvedPath);
+    if (!realPath.startsWith(`${await realpath(rootDirectory)}${path.sep}`)) return null;
+
+    if (!(await stat(resolvedPath)).isFile()) return null;
+
+    const relativePath = path.relative(repositoryDirectory, resolvedPath).split(path.sep).join("/");
+    return {
+      name: path.basename(resolvedPath),
+      path: `../${relativePath}${referenceSuffix}`,
+      code: await readFile(resolvedPath, "utf8"),
+    };
+  } catch {
+    // Ignora referencias opcionales que no existen en la copia local.
+    return null;
+  }
 }
 
 async function getMissingReferences(html, pageDirectory, rootDirectory) {
@@ -313,21 +416,26 @@ async function createComponent(root, pagePath) {
   const folderLicense = root.licenses?.[folderPath.split("/")[0]] ?? {};
   const descriptionMatch = html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description["'])[^>]*>/i);
   const descriptionType = category === "Other" ? "HTML and CSS" : category.toLowerCase();
-  const description = override.description ?? (descriptionMatch
-    ? readAttribute(descriptionMatch[0], "content")
-    : root.description ?? `Standalone ${descriptionType} demo from the component collection.`);
-  const descriptionEsMatch = html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description[-:]es["'])[^>]*>/i)
-    ?? html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description["'])[^>]*\bhreflang\s*=\s*["']es["'][^>]*>/i)
-    ?? html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description["'])[^>]*\blang\s*=\s*["']es["'][^>]*>/i);
-  const descriptionEs = override.descriptionEs ?? (descriptionEsMatch
-    ? readAttribute(descriptionEsMatch[0], "content")
-    : root.descriptionEs ?? null);
+  const description =
+    override.description ??
+    (descriptionMatch
+      ? readAttribute(descriptionMatch[0], "content")
+      : (root.description ?? `Standalone ${descriptionType} demo from the component collection.`));
+  const descriptionEsMatch =
+    html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description[-:]es["'])[^>]*>/i) ??
+    html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description["'])[^>]*\bhreflang\s*=\s*["']es["'][^>]*>/i) ??
+    html.match(/<meta\b(?=[^>]*\bname\s*=\s*["']description["'])[^>]*\blang\s*=\s*["']es["'][^>]*>/i);
+  const descriptionEs =
+    override.descriptionEs ??
+    (descriptionEsMatch ? readAttribute(descriptionEsMatch[0], "content") : (root.descriptionEs ?? null));
   const previewPath = path.relative(repositoryDirectory, pagePath).split(path.sep).join("/");
   const missingReferences = await getMissingReferences(html, pageDirectory, root.directory);
   const files = await collectComponentFiles(pageDirectory, id);
   const license = override.license ?? folderLicense.license ?? root.license ?? "Unverified";
   const source = override.source ?? folderLicense.source ?? root.source ?? "Unverified";
-  const rawLicenseFile = String(override.licenseFile ?? folderLicense.licenseFile ?? root.licenseFile ?? "").replaceAll("\\", "/");
+  const rawLicenseFile = String(
+    override.licenseFile ?? folderLicense.licenseFile ?? root.licenseFile ?? "",
+  ).replaceAll("\\", "/");
   const licenseFile = rawLicenseFile.startsWith("./") ? rawLicenseFile.slice(2) : rawLicenseFile;
   // La licencia de la raiz entra en el ZIP de cada componente: si no, la descarga
   // saldria sin el texto que la ampara.
@@ -347,12 +455,14 @@ async function createComponent(root, pagePath) {
     }
   }
   const includesLicenseFile = files.some((file) => file.relativePath === licenseFile);
-  const redistributable = (override.redistributable ?? folderLicense.redistributable ?? root.redistributable) === true;
-  const downloadable = redistributable
-    && source !== "Unverified"
-    && license !== "Unverified"
-    && includesLicenseFile
-    && missingReferences.length === 0;
+  const redistributable =
+    (override.redistributable ?? folderLicense.redistributable ?? root.redistributable) === true;
+  const downloadable =
+    redistributable &&
+    source !== "Unverified" &&
+    license !== "Unverified" &&
+    includesLicenseFile &&
+    missingReferences.length === 0;
 
   return {
     id,
@@ -371,13 +481,8 @@ async function createComponent(root, pagePath) {
     folder: folderPath,
     preview: `../${previewPath}`,
     html: await readFile(pagePath, "utf8"),
-    stylesheets: await getLocalReferences(
-      html,
-      pageDirectory,
-      root.directory,
-      "link",
-      "href",
-      (tag) => /\brel\s*=\s*["'][^"']*\bstylesheet\b/i.test(tag),
+    stylesheets: await getLocalReferences(html, pageDirectory, root.directory, "link", "href", (tag) =>
+      /\brel\s*=\s*["'][^"']*\bstylesheet\b/i.test(tag),
     ),
     scripts: await getLocalReferences(html, pageDirectory, root.directory, "script", "src", () => true),
     missingReferences,
@@ -412,14 +517,33 @@ try {
   if (error.code !== "ENOENT") throw error;
 }
 
-const pages = (await Promise.all(
-  libraryRoots.map(async (root) => ({
-    root,
-    files: (await findHtmlPages(root.directory)).sort((first, second) => first.localeCompare(second)),
-  })),
-)).flatMap(({ root, files }) => files.map((page) => ({ root, page })));
+// Lista blanca de extensiones antes de generar nada (P0-3): un `.exe`,
+// `.php` o `.svg` con script que se cuele en una carpeta de demos no llega
+// ni a catalogarse, y el build corta con codigo != 0. Se comprueba sobre las
+// raices completas (no solo las carpetas con index.html) para que una carpeta
+// nueva sin pagina tambien quede cubierta. Misma funcion que usa validate.mjs.
+const controlExtensiones = await comprobarExtensiones(
+  repositoryDirectory,
+  libraryRoots.map((root) => root.directory),
+);
+if (controlExtensiones.fallos.length > 0) {
+  console.error(`extensiones: ${controlExtensiones.fallos.length} fichero(s) fuera de la lista blanca:`);
+  for (const fallo of controlExtensiones.fallos) console.error(`  - ${fallo}`);
+  process.exit(1);
+}
+
+const pages = (
+  await Promise.all(
+    libraryRoots.map(async (root) => ({
+      root,
+      files: (await findHtmlPages(root.directory)).sort((first, second) => first.localeCompare(second)),
+    })),
+  )
+).flatMap(({ root, files }) => files.map((page) => ({ root, page })));
 const components = await Promise.all(pages.map(({ root, page }) => createComponent(root, page)));
-const duplicateIds = components.filter((component, index) => components.findIndex((entry) => entry.id === component.id) !== index);
+const duplicateIds = components.filter(
+  (component, index) => components.findIndex((entry) => entry.id === component.id) !== index,
+);
 
 if (duplicateIds.length) {
   throw new Error(`Duplicate component IDs: ${duplicateIds.map((component) => component.id).join(", ")}`);
@@ -429,13 +553,132 @@ await mkdir(path.dirname(catalogFile), { recursive: true });
 // Indice en una sola linea: el pretty-print anterior costaba 225 KB de
 // espacios en un fichero que solo se parsea en el navegador.
 await writeFile(catalogFile, `${JSON.stringify(components.map(toIndexEntry))}\n`, "utf8");
-await writeFile(
-  catalogScriptFile,
-  `window.COMPONENT_CATALOG = ${JSON.stringify(components)};\n`,
-  "utf8",
-);
+await writeFile(catalogScriptFile, `window.COMPONENT_CATALOG = ${JSON.stringify(components)};\n`, "utf8");
 await writeSources(sourcesDirectory, components);
+
+// Primera pagina estatica de la rejilla: se inyecta en components.html con
+// los mismos campos que `createComponentCard` pinta al hidratar, pero sin
+// iframe (la etiqueta se monta al ejecutar, ver el comentario del marcador
+// en components.html). Se usa el mismo `pageSize` que app.js para que el
+// contenido del primer lote no salte al hidratar. La categoria que se ve
+// es la clave del catalogo (la misma que getCategoryLabel traduce al idioma
+// activo en runtime), y el `aria-label` del enlace va en espanol: el sitio
+// es bilingue y al hidratar app.js lo sustituye.
+const PAGE_SIZE = 9;
+const componentsHtmlFile = path.join(repositoryDirectory, "Web", "components.html");
+const buildCatalogOpen = "<!-- build:catalog -->";
+const buildCatalogClose = "<!-- /build:catalog -->";
+const buildFiltersAuthorsOpen = "<!-- build:filters:authors -->";
+const buildFiltersAuthorsClose = "<!-- /build:filters:authors -->";
+const buildFiltersCategoriesOpen = "<!-- build:filters:categories -->";
+const buildFiltersCategoriesClose = "<!-- /build:filters:categories -->";
+const escape = (texto) =>
+  String(texto ?? "").replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c],
+  );
+const visibles = components.filter((component) => component.author !== "Davoker").slice(0, PAGE_SIZE);
+const tarjetas = visibles
+  .map((component, index) => {
+    const id = encodeURIComponent(component.id);
+    const name = escape(component.name);
+    const description = escape(component.description);
+    const category = escape(component.category);
+    return (
+      `<article class="component-card"><div class="card-preview"></div>` +
+      `<div class="card-content"><div class="component-card-top">` +
+      `<span class="component-category">${category}</span>` +
+      `<span class="component-number">${String(index + 1).padStart(3, "0")}</span>` +
+      `</div><h3>${name}</h3><p>${description}</p>` +
+      `<a class="card-link" href="./components.html?component=${id}" aria-label="Ver componente: ${name}">Ver componente<span aria-hidden="true">→</span></a>` +
+      `</div></article>`
+    );
+  })
+  .join("\n          ");
+// Chips de filtro: la misma logica que renderFilters() y renderAuthorFilters()
+// de app.js (getCategories() y getAuthors() ordenados con localeCompare,
+// etiquetas en espanol y estado inicial category="All" y author=null). Van en
+// el HTML porque los fieldsets vacios cuestan 142 px que aparecen sobre la
+// rejilla ya pintada: el CLS del presupuesto movil de CI. Si este bloque y
+// app.js se desincronizan, el test e2e "los filtros estaticos del build
+// coinciden con los que pinta app.js" falla.
+const etiquetasCategoriasEs = {
+  All: "Todas",
+  Animations: "Animaciones",
+  Buttons: "Botones",
+  Cards: "Tarjetas",
+  Controls: "Controles",
+  Effects: "Efectos",
+  Forms: "Formularios",
+  Galleries: "Galerías",
+  Loaders: "Indicadores de carga",
+  Navigation: "Navegación",
+  Other: "Otros",
+};
+const categorias = [...new Set(components.map((component) => component.category))].sort((first, second) =>
+  first.localeCompare(second),
+);
+const chipsCategorias = ["All", ...categorias]
+  .map(
+    (categoria) =>
+      `<button class="filter-button" type="button" aria-pressed="${String(categoria === "All")}">` +
+      `${escape(etiquetasCategoriasEs[categoria] ?? categoria)}</button>`,
+  )
+  .join("\n            ");
+const autoresPreferidos = new Set(["Davoker", "kindred-98", "fatmaerm"]);
+const autoresPresentes = new Set(components.map((component) => component.author).filter(Boolean));
+const autoresExtras = [...autoresPresentes]
+  .filter((author) => !autoresPreferidos.has(author))
+  .sort((first, second) => first.localeCompare(second));
+const autoresFx = {
+  Davoker: "filter-button--liquid",
+  "kindred-98": "filter-button--datamosh",
+  fatmaerm: "filter-button--pulse",
+};
+// En espanol las etiquetas de autor son la propia clave (Davoker, kindred-98,
+// fatmaerm): translations.es.authors de app.js las mapea a si mismas.
+const chipsAutores = [...autoresPreferidos, ...autoresExtras]
+  .map((author) => {
+    const fx = autoresFx[author];
+    const clase = fx ? `filter-button ${fx}` : "filter-button";
+    // Sin ningun autor marcado (state.author = null) al cargar: pressed=false.
+    return `<button class="${clase}" type="button" aria-pressed="false">${escape(author)}</button>`;
+  })
+  .join("\n            ");
+
+const componentsHtmlOriginal = await readFile(componentsHtmlFile, "utf8");
+// El bloque reemplazado es la fraccion completa que va desde el marcador
+// de apertura hasta el de cierre: si se reescribe solo el contenido
+// intermedio, los marcadores se quedan en su sitio y la operacion es
+// idempotente (re-generar produce el
+// mismo resultado si el catalogo no cambia). Si falta un par de marcadores el
+// build falla en vez de dejar la pagina a medio inyectar.
+const sustituirMarcador = (html, abierto, cerrado, contenido) => {
+  const openIndex = html.indexOf(abierto);
+  const closeIndex = html.indexOf(cerrado, openIndex + abierto.length);
+  if (openIndex < 0 || closeIndex < 0 || closeIndex < openIndex) {
+    throw new Error(`components.html: no encuentro los marcadores ${abierto} / ${cerrado}`);
+  }
+  return html.slice(0, openIndex) + abierto + contenido + cerrado + html.slice(closeIndex + cerrado.length);
+};
+const componentsHtmlActualizado = [
+  [buildCatalogOpen, buildCatalogClose, `\n          ${tarjetas}\n          `],
+  [buildFiltersAuthorsOpen, buildFiltersAuthorsClose, `\n            ${chipsAutores}\n            `],
+  [buildFiltersCategoriesOpen, buildFiltersCategoriesClose, `\n            ${chipsCategorias}\n            `],
+].reduce(
+  (html, [abierto, cerrado, contenido]) => sustituirMarcador(html, abierto, cerrado, contenido),
+  componentsHtmlOriginal,
+);
+await writeFile(componentsHtmlFile, componentsHtmlActualizado, "utf8");
+
 console.log(
-  `Generated ${components.length} component entries at ${path.relative(repositoryDirectory, catalogFile)} `
-  + `and ${components.length} source files at ${path.relative(repositoryDirectory, sourcesDirectory)}.`,
+  `Generated ${components.length} component entries at ${path.relative(repositoryDirectory, catalogFile)} ` +
+    `and ${components.length} source files at ${path.relative(repositoryDirectory, sourcesDirectory)}.`,
 );

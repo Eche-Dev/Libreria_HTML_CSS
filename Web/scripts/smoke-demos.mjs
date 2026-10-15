@@ -38,12 +38,11 @@
  *
  * En el CI hace falta el navegador: `npx playwright install --with-deps chromium`.
  */
-import { spawn } from "node:child_process";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { arrancarServidor, puertoLibre } from "./lib/servidor.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryDirectory = path.resolve(scriptDirectory, "..", "..");
@@ -57,52 +56,6 @@ const CONCURRENCIA = 6;
 const ESPERA_TRAS_LOAD = 1000;
 const TIMEOUT_PAGINA = 30000;
 const guardarLineaBase = process.argv.includes("--linea-base");
-
-// Puerto libre, en vez de uno fijo: en local casi siempre hay ya un servidor
-// de desarrollo levantado, y si este tropezara con el suyo la comprobacion
-// fallaria por un motivo que no tiene que ver con los demos.
-async function puertoLibre() {
-  const fijado = Number(process.env.PORT ?? 0);
-  if (fijado) return fijado;
-  return new Promise((resolve, reject) => {
-    const sonda = net.createServer();
-    sonda.on("error", reject);
-    sonda.listen(0, "127.0.0.1", () => {
-      const { port } = sonda.address();
-      sonda.close(() => resolve(port));
-    });
-  });
-}
-
-function arrancarServidor(puerto) {
-  return new Promise((resolve, reject) => {
-    const proceso = spawn(process.execPath, [path.join(scriptDirectory, "serve.mjs")], {
-      env: { ...process.env, PORT: String(puerto) },
-      stdio: ["ignore", "pipe", "pipe"],
-    });
-    let salida = "";
-    let arrancado = false;
-    const listo = () => {
-      if (arrancado) return;
-      arrancado = true;
-      resolve(proceso);
-    };
-    proceso.stdout.on("data", (trozo) => {
-      salida += trozo;
-      if (salida.includes("Sirviendo el repositorio")) listo();
-    });
-    proceso.stderr.on("data", (trozo) => { salida += trozo; });
-    proceso.on("error", reject);
-    proceso.on("exit", (codigo) => {
-      if (!arrancado) {
-        reject(new Error(`serve.mjs no arranco en el puerto ${puerto} (codigo ${codigo}):\n${salida.trim()}`));
-      }
-    });
-    setTimeout(() => {
-      if (!arrancado) reject(new Error(`serve.mjs no arranco en 15 s en el puerto ${puerto}:\n${salida.trim()}`));
-    }, 15000).unref();
-  });
-}
 
 function esperar(milisegundos) {
   return new Promise((resolve) => setTimeout(resolve, milisegundos));
@@ -130,7 +83,12 @@ const MONTAR_IFRAME = (src) =>
       `style="width:100%;height:600px;border:0"></iframe>`;
     const marco = document.getElementById("smoke");
     let hecho = false;
-    const fin = () => { if (!hecho) { hecho = true; resolver(true); } };
+    const fin = () => {
+      if (!hecho) {
+        hecho = true;
+        resolver(true);
+      }
+    };
     marco.addEventListener("load", fin);
     setTimeout(fin, 30000);
   });
@@ -244,7 +202,11 @@ try {
         // Las externas se abortan nosotros: no son un fallo del demo, son la
         // política de "externo". Solo cuenta lo que deberia salir de este origen.
         if (!url.startsWith(ORIGEN)) return;
-        anotarFallo(idActual, "fallida", `${peticion.method()} ${url} -> ${peticion.failure()?.errorText ?? "?"}`);
+        anotarFallo(
+          idActual,
+          "fallida",
+          `${peticion.method()} ${url} -> ${peticion.failure()?.errorText ?? "?"}`,
+        );
       });
 
       pestana.on("response", (respuesta) => {
@@ -255,8 +217,12 @@ try {
         anotarFallo(idActual, "http400", `${respuesta.request().method()} ${url} -> ${respuesta.status()}`);
       });
 
-      while (cola.length) {
-        const demo = cola.shift();
+      // El trabajo de **un** demo vive en su propia funcion, y el bucle solo la
+      // llama. Los demos se abren **de uno en uno a proposito**. `S9382` sugiere
+      // paralelizarlos, pero eso romperia dos cosas: los 1018 demos cargando a
+      // la vez darian timeouts falsos por falta de recursos, y `idActual`, que
+      // es una sola variable compartida, ya no sabria a que demo atribuir un error.
+      const procesarDemo = async (demo) => {
         // El demo vive en la raiz (`/CreacionesNuevas/...`), no bajo /Web/: la
         // ruta del catalogo ya es absoluta desde la raiz.
         const destino = `${ORIGEN}${demo.url}`;
@@ -264,20 +230,29 @@ try {
           // El wrapper se abre con `idActual` todavia a null: lo que haga
           // 404.html en su propio arranque (su guion inline) no es culpa del
           // demo, y anotarlo aqui ensuciaria las mil entradas por igual.
-          await pestana.goto(`${ORIGEN}/404.html`, { waitUntil: "domcontentloaded", timeout: TIMEOUT_PAGINA });
+          await pestana.goto(`${ORIGEN}/404.html`, {
+            waitUntil: "domcontentloaded",
+            timeout: TIMEOUT_PAGINA,
+          });
           idActual = demo.id;
           await pestana.evaluate(MONTAR_IFRAME, destino);
           await esperar(ESPERA_TRAS_LOAD);
           // Desmontar el iframe CON el demo aun atribuido hace que las
           // peticiones que queden en vuelo se anoten contra el, en vez de
           // colarse en el siguiente.
-          await pestana.evaluate(() => { document.body.innerHTML = ""; });
+          await pestana.evaluate(() => {
+            document.body.innerHTML = "";
+          });
           await esperar(50);
         } catch (error) {
           anotarFallo(demo.id, "timeout", String(error.message ?? error).split("\n")[0]);
         } finally {
           idActual = null;
         }
+      };
+
+      while (cola.length) {
+        await procesarDemo(cola.shift()); // NOSONAR (S9382): serializa navegación y telemetría compartidas.
       }
       await pestana.close();
     }),
@@ -300,15 +275,16 @@ const hostsExternos = new Map();
 
 for (const entrada of catalogo) {
   const registro = resultados.get(entrada.id) ?? { fallos: new Map(), externos: new Map() };
-  const fallos = [...registro.fallos.values()].sort((a, b) =>
-    a.tipo.localeCompare(b.tipo) || a.mensaje.localeCompare(b.mensaje),
+  const fallos = [...registro.fallos.values()].sort(
+    (a, b) => a.tipo.localeCompare(b.tipo) || a.mensaje.localeCompare(b.mensaje),
   );
   const externos = [...registro.externos.keys()].sort((a, b) => a.localeCompare(b));
   if (fallos.length) conFallos += 1;
   for (const fallo of fallos) porTipo[fallo.tipo] = (porTipo[fallo.tipo] ?? 0) + 1;
   if (externos.length) {
     demosConExternos.push({ id: entrada.id, externos });
-    for (const [host, veces] of registro.externos) hostsExternos.set(host, (hostsExternos.get(host) ?? 0) + veces);
+    for (const [host, veces] of registro.externos)
+      hostsExternos.set(host, (hostsExternos.get(host) ?? 0) + veces);
   }
   if (fallos.length || externos.length) lineas.push({ id: entrada.id, fallos, externos });
 }
@@ -336,7 +312,8 @@ await writeFile(reportFile, `${JSON.stringify(informe, null, 2)}\n`, "utf8");
 // y el mismo mensaje con otra redaccion es un fallo nuevo que hay que ver.
 // El mensaje se normaliza aqui y no al anotarlo, para que la linea base guarde
 // el texto original y el informe siga siendo legible.
-const claveDe = (fallo) => `${fallo.id}\u0000${fallo.tipo}\u0000${normalizarMensaje(fallo.tipo, fallo.mensaje)}`;
+const claveDe = (fallo) =>
+  `${fallo.id}\u0000${fallo.tipo}\u0000${normalizarMensaje(fallo.tipo, fallo.mensaje)}`;
 const actuales = catalogo.flatMap((entrada) => {
   const registro = resultados.get(entrada.id);
   if (!registro) return [];
@@ -348,7 +325,9 @@ if (guardarLineaBase) {
     .sort((a, b) => claveDe(a).localeCompare(claveDe(b)))
     .map(({ id, tipo, mensaje }) => ({ id, tipo, mensaje }));
   await writeFile(baselineFile, `${JSON.stringify(lineaBase, null, 2)}\n`, "utf8");
-  console.log(`\nLinea base escrita: ${path.relative(repositoryDirectory, baselineFile)} (${lineaBase.length} fallos)`);
+  console.log(
+    `\nLinea base escrita: ${path.relative(repositoryDirectory, baselineFile)} (${lineaBase.length} fallos)`,
+  );
 } else {
   let lineaBase;
   try {

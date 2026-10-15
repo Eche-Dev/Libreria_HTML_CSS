@@ -1,10 +1,10 @@
 /**
  * Arranca `serve.mjs` en un puerto libre.
  *
- * Por que existe: `validar-a11y.mjs` y `validar-lighthouse.mjs` necesitan el
- * mismo servidor local, y los dos traian su propia copia identica de estas dos
- * funciones. Son 42 lineas repetidas palabra por palabra, y esa repeticion es
- * la que contaba SonarCloud como duplicacion en la PR. Aqui estan una sola vez.
+ * Por que existe: `validar-a11y.mjs`, `validar-lighthouse.mjs`,
+ * `validar-layout.mjs` y `smoke-demos.mjs` usan el mismo servidor local. Antes
+ * layout y smoke duplicaban el arranque que ya compartian a11y y Lighthouse;
+ * estas funciones lo mantienen en un unico modulo.
  *
  * Que hace:
  *
@@ -31,8 +31,12 @@ export async function puertoLibre() {
     const sonda = net.createServer();
     sonda.on("error", reject);
     sonda.listen(0, "127.0.0.1", () => {
-      const { port } = sonda.address();
-      sonda.close(() => resolve(port));
+      const direccion = sonda.address();
+      // `address()` devuelve `string | AddressInfo | null`: solo tiene puerto
+      // cuando el servidor esta escuchando enTCP, que es lo que se acaba de
+      // pedir. El caso `null` no puede ocurrir aqui.
+      const puerto = typeof direccion === "object" && direccion !== null ? direccion.port : 0;
+      sonda.close(() => resolve(puerto));
     });
   });
 }
@@ -54,15 +58,20 @@ export function arrancarServidor(puerto) {
       salida += trozo;
       if (salida.includes("Sirviendo el repositorio")) listo();
     });
-    proceso.stderr.on("data", (trozo) => { salida += trozo; });
+    proceso.stderr.on("data", (trozo) => {
+      salida += trozo;
+    });
     proceso.on("error", reject);
     proceso.on("exit", (codigo) => {
       if (!arrancado) {
-        reject(new Error(`serve.mjs no arranco en el puerto ${puerto} (codigo ${codigo}):\n${salida.trim()}`));
+        reject(
+          new Error(`serve.mjs no arranco en el puerto ${puerto} (codigo ${codigo}):\n${salida.trim()}`),
+        );
       }
     });
     setTimeout(() => {
-      if (!arrancado) reject(new Error(`serve.mjs no arranco en 15 s en el puerto ${puerto}:\n${salida.trim()}`));
+      if (!arrancado)
+        reject(new Error(`serve.mjs no arranco en 15 s en el puerto ${puerto}:\n${salida.trim()}`));
     }, 15000).unref();
   });
 }

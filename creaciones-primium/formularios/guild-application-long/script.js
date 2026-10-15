@@ -4,7 +4,9 @@ const $ = (sel, raiz) => (raiz || document).querySelector(sel);
 const $$ = (sel, raiz) => Array.prototype.slice.call((raiz || document).querySelectorAll(sel));
 
 const CLASSES = { guardia: 'Guardian', asalto: 'Assault', apoyo: 'Support', sigilo: 'Sigil', artillero: 'Artillery' };
+/** @type {Record<string, string>} */
 const REGIONES = { na: 'North America', eu: 'Europe', oce: 'Oceania', sa: 'South America' };
+/** @type {Record<string, string>} */
 const IDIOMAS = { en: 'English', es: 'Spanish', fr: 'French', de: 'German', pt: 'Portuguese' };
 
 const ROLES = [
@@ -137,7 +139,11 @@ function pintarFicha() {
   $('#tPct').textContent = pct + ' %';
   $('#tRelleno').style.transform = 'scaleX(' + pct / 100 + ')';
   $('#tSecciones').textContent = seccionesHechas() + ' of ' + TRAMOS.length;
-  $('#tPie').textContent = (REGIONES[$('#region').value] || 'no region') + ' · ' + (IDIOMAS[$('#idioma').value] || 'no language');
+  const region = REGIONES[$('#region').value];
+  const idioma = IDIOMAS[$('#idioma').value];
+  const regionTexto = typeof region === 'string' ? region : 'no region';
+  const idiomaTexto = typeof idioma === 'string' ? idioma : 'no language';
+  $('#tPie').textContent = regionTexto + ' · ' + idiomaTexto;
   $('#tarjeta').dataset.clase = nivelClase(nivel);
 
   const etiquetas = rolEtiquetas();
