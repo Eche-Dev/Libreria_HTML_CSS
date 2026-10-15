@@ -2080,7 +2080,7 @@ asi:
 
 - **Fase 1.5.** El parrafo «Alternativa por correo» de `SECURITY.md:22` se
   sustituye por un enlace directo a
-  `https://github.com/kindred-98/Libreria_HTML_CSS/security/advisories/new`. El
+  `https://github.com/Eche-Dev/Libreria_HTML_CSS/security/advisories/new`. El
   STOP de la fase pedia activar antes el reporte privado de vulnerabilidades en
   GitHub, y ya esta activo, asi que se podia hacer.
 - **La unica otra aparicion no se toca, y se avisa.** El correo sigue en

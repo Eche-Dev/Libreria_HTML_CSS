@@ -107,7 +107,7 @@ Con ~1.000 demos CodeQL puede generar muchos avisos informativos (`innerHTML` y 
 ### 1.5 `SECURITY.md` sin correo personal
 
 **STOP:** haz esto solo si Ángel confirma que activó el reporte privado de vulnerabilidades (Fase 0). Después:
-- `grep -rn "<correo-personal-del-mantenedor>" .` en todo el repo (excluye `.git`) y sustituye en `SECURITY.md` el párrafo "Alternativa por correo" por un enlace a `https://github.com/kindred-98/Libreria_HTML_CSS/security/advisories/new`.
+- `grep -rn "<correo-personal-del-mantenedor>" .` en todo el repo (excluye `.git`) y sustituye en `SECURITY.md` el párrafo "Alternativa por correo" por un enlace a `https://github.com/Eche-Dev/Libreria_HTML_CSS/security/advisories/new`.
 - Si el correo aparece en otros ficheros, lista cada aparición en el informe y no los cambies sin avisar.
 - Nota para el informe: el correo seguirá en el historial de git. Eso no se arregla con esta fase.
 
@@ -212,7 +212,7 @@ Script `Web/scripts/localizar-imagenes.mjs` con modo `--dry-run`. Debe sacar el 
 - Guarda cada imagen en `<demo>/img/<sha256-12>.<ext>` **dentro de cada demo** (un demo = una carpeta autónoma que se descarga en su ZIP; no uses una carpeta compartida).
 - Reescribe las referencias en html, css y js a rutas relativas.
 - Usa la variante `thumb` que ya referencia cada demo. No recomprimas ni cambies las imágenes.
-- Cumple la política de Wikimedia: `User-Agent` identificable (`Libreria_HTML_CSS-asset-fetcher/1.0 (https://github.com/kindred-98/Libreria_HTML_CSS)`), máximo 2 peticiones por segundo, reintentos con espera creciente ante un 429.
+- Cumple la política de Wikimedia: `User-Agent` identificable (`Libreria_HTML_CSS-asset-fetcher/1.0 (https://github.com/Eche-Dev/Libreria_HTML_CSS)`), máximo 2 peticiones por segundo, reintentos con espera creciente ante un 429.
 
 ### 5.3 Atribución y licencia
 - Para cada imagen consulta la API de Commons (`action=query&prop=imageinfo&iiprop=extmetadata|url`) y obtén autor, nombre corto de licencia y URL de la licencia.

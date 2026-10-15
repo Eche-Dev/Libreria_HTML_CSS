@@ -258,7 +258,7 @@ gh release create v1.0.0 \
 Y la PR en sí, recuerda, se abre desde el navegador con:
 
 ```text
-https://github.com/kindred-98/Libreria_HTML_CSS/compare/main...Update
+https://github.com/Eche-Dev/Libreria_HTML_CSS/compare/main...Update
 ```
 
 ---
@@ -418,7 +418,7 @@ y las 1-4 y 6 antes de esta sesión, la 5 **cancelada por Ángel** (87,26 MB
 **Último paso, el que no se hace desde aquí:**
 
 ```text
-https://github.com/kindred-98/Libreria_HTML_CSS/compare/main...Update
+https://github.com/Eche-Dev/Libreria_HTML_CSS/compare/main...Update
 ```
 
 Al abrir la PR se disparará `validate.yml` en las tres versiones de Node; el

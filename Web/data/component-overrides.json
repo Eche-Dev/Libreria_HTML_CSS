@@ -2,7 +2,7 @@
 	"3d-cube-rubiks-twist": {
 		"description": "A 3D Rubik's cube whose faces twist and scramble with the drag.",
 		"descriptionEs": "Cubo de Rubik 3D cuyas caras giran y se desordenan al arrastrar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -10,7 +10,7 @@
 	"3d-range-slider": {
 		"description": "A range slider that tracks in 3D, with a perspective handle.",
 		"descriptionEs": "Control de rango que se mueve en 3D, con un tirador en perspectiva.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -19,7 +19,7 @@
 	"3d-split-flap-board": {
 		"description": "A departure board whose letters flip like a real split-flap display.",
 		"descriptionEs": "Tablero de salidas cuyas letras giran como un display(split-flap real.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -27,7 +27,7 @@
 	"8bit-game-heart-hud": {
 		"description": "An 8-bit style life meter with a beating pixel heart.",
 		"descriptionEs": "Medidor de vida estilo 8 bits con un corazón de píxeles que late.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -36,7 +36,7 @@
 	"alien-glyph-translator": {
 		"description": "A translator that renders your text as invented alien glyphs.",
 		"descriptionEs": "Traductor que convierte tu texto en glifos alienígenas inventados.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -45,7 +45,7 @@
 	"analog-crt-oscilloscope": {
 		"description": "An oscilloscope drawing a live waveform on a curved CRT screen.",
 		"descriptionEs": "Osciloscopio que dibuja una onda en vivo sobre una pantalla CRT curvada.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -70,7 +70,7 @@
 	"animated-gradient-border": {
 		"description": "A card border that cycles through a moving colour gradient.",
 		"descriptionEs": "Borde de tarjeta que recorre un degradado de color en movimiento.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -78,7 +78,7 @@
 	"api-status-ping-pill": {
 		"description": "A pill that pings to show the current status of an API.",
 		"descriptionEs": "Píldora que hace un ping para mostrar el estado actual de una API.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -87,7 +87,7 @@
 	"ascii-art-generator": {
 		"description": "A tool that turns a short text into ASCII art banners.",
 		"descriptionEs": "Herramienta que convierte un texto corto en banners de arte ASCII.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -96,7 +96,7 @@
 	"audio-cassette-synth": {
 		"description": "A retro cassette deck that plays as you press its keys.",
 		"descriptionEs": "Decreto de casete retro que suena al pulsar sus teclas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -105,7 +105,7 @@
 	"audio-equalizer-music-pill": {
 		"description": "A small pill-shaped player with a live audio equalizer.",
 		"descriptionEs": "Reproductor pequeño con forma de píldora y ecualizador de audio en vivo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -114,7 +114,7 @@
 	"aurora-borealis-mountain-sky": {
 		"description": "Northern lights drifting over a silhouetted mountain range.",
 		"descriptionEs": "Auroras boreales desplazándose sobre una silueta de montañas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -122,7 +122,7 @@
 	"aurora-wave-loader": {
 		"description": "A loading indicator made of shifting aurora-like ribbons.",
 		"descriptionEs": "Indicador de carga formado por cintas tipo aurora que se desplazan.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -130,7 +130,7 @@
 	"autumn-leaf-wind-drift": {
 		"description": "Autumn leaves that drift and tumble across the screen on the wind.",
 		"descriptionEs": "Hojas de otoño que giran y se arrastran por la pantalla con el viento.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -138,7 +138,7 @@
 	"background-aurora-gradient": {
 		"description": "A soft aurora gradient that flows behind your content.",
 		"descriptionEs": "Degradado de aurora que fluye por detrás de tu contenido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -146,7 +146,7 @@
 	"battery-lightning-charge": {
 		"description": "A battery level that fills with crackling lightning as it charges.",
 		"descriptionEs": "Batería que se llena de chispas eléctricas mientras carga.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -155,7 +155,7 @@
 	"bioluminescent-jellyfish-glow": {
 		"description": "Jellyfish pulsing with a soft bioluminescent glow.",
 		"descriptionEs": "Medusas que laten con un suave brillo bioluminiscente.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -163,7 +163,7 @@
 	"biometric-iris-auth-scan": {
 		"description": "An iris scanner that unlocks after reading your eye.",
 		"descriptionEs": "Escáner de iris que se desbloquea tras leer tu ojo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -172,7 +172,7 @@
 	"border-draw-button": {
 		"description": "A button whose outline is drawn around it on hover.",
 		"descriptionEs": "Botón cuyo contorno se dibuja alrededor al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -184,7 +184,7 @@
 	"bouncing-ball-animation": {
 		"description": "A ball that bounces along a floor with a squash on impact.",
 		"descriptionEs": "Bola que rebota en el suelo deformándose al impactar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -192,7 +192,7 @@
 	"breadcrumb-trail-navigation": {
 		"description": "A breadcrumb trail that lights up as you move through the steps.",
 		"descriptionEs": "Ruta de migas que se ilumina al avanzar entre los pasos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -200,7 +200,7 @@
 	"campfire-embers-floating": {
 		"description": "A campfire with embers drifting upward into the dark.",
 		"descriptionEs": "Hoguera con ascuas que suben flotando hacia la oscuridad.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -208,7 +208,7 @@
 	"candle-flame-flicker": {
 		"description": "A candle flame that flickers and sways realistically.",
 		"descriptionEs": "Llama de vela que parpadea y oscila de forma realista.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -216,7 +216,7 @@
 	"card-tilt-specular-sheen": {
 		"description": "A card that tilts in 3D with a sheen that follows the pointer.",
 		"descriptionEs": "Tarjeta que se inclina en 3D con un brillo que sigue al puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -224,7 +224,7 @@
 	"carousel-fade-gallery": {
 		"description": "A gallery where the images cross-fade as they change.",
 		"descriptionEs": "Galería en la que las imágenes se funden al cambiar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -232,7 +232,7 @@
 	"ci-cd-pipeline-flow": {
 		"description": "A pipeline that animates builds and deployments stage by stage.",
 		"descriptionEs": "Tubería que anima las compilaciones y despliegues etapa a etapa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -241,7 +241,7 @@
 	"circuit-board-energy-pulse": {
 		"description": "Circuit traces lighting up as an energy pulse travels across them.",
 		"descriptionEs": "Pistas de circuito que se encienden al recorrerlas un pulso de energía.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -249,7 +249,7 @@
 	"circular-activity-rings-fitness": {
 		"description": "Overlapping activity rings that fill as you log each goal.",
 		"descriptionEs": "Anillos de actividad superpuestos que se rellenan según cada objetivo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -258,7 +258,7 @@
 	"circular-progress-loader": {
 		"description": "A progress ring that fills smoothly as the task advances.",
 		"descriptionEs": "Anillo de progreso que se rellena suavemente según avanza la tarea.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -266,7 +266,7 @@
 	"code-diff-slider-preview": {
 		"description": "A slider that wipes between the before and after of a code change.",
 		"descriptionEs": "Control deslizante que revela el antes y el después de un cambio de código.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -275,7 +275,7 @@
 	"code-snippet-terminal-badge": {
 		"description": "A terminal-styled badge that presents a snippet of code.",
 		"descriptionEs": "Insignia con estética de terminal que presenta un fragmento de código.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -284,7 +284,7 @@
 	"color-hex-picker-dropper": {
 		"description": "A colour picker with a dropper that reads any pixel on the page.",
 		"descriptionEs": "Selector de color con conta gotas que lee cualquier píxel de la página.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -293,7 +293,7 @@
 	"color-palette-generator": {
 		"description": "A generator that builds a balanced palette from one base colour.",
 		"descriptionEs": "Generador que crea una paleta equilibrada a partir de un color base.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -302,7 +302,7 @@
 	"color-swatch-toggle": {
 		"description": "A toggle whose knob changes colour as it slides.",
 		"descriptionEs": "Interruptor cuyo cursor cambia de color según se desliza.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -310,7 +310,7 @@
 	"command-palette-hud": {
 		"description": "A command palette that filters actions as you type.",
 		"descriptionEs": "Paleta de comandos que filtra acciones mientras escribes.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -318,7 +318,7 @@
 	"confetti-burst-badge": {
 		"description": "A badge that celebrates with a burst of confetti.",
 		"descriptionEs": "Insignia que celebra con una explosión de confeti.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -327,7 +327,7 @@
 	"contact-form-animated": {
 		"description": "A contact form whose fields animate as you fill them in.",
 		"descriptionEs": "Formulario de contacto cuyos campos se animan al rellenarlos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -335,7 +335,7 @@
 	"copy-code-success-burst": {
 		"description": "A copy button that celebrates the moment the code is copied.",
 		"descriptionEs": "Botón de copiar que celebra en el instante en que se copia el código.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -344,7 +344,7 @@
 	"countdown-submit-button": {
 		"description": "A submit button that counts you down before it sends.",
 		"descriptionEs": "Botón de envío que hace una cuenta atrás antes de mandar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -352,7 +352,7 @@
 	"cpu-core-load-matrix": {
 		"description": "A grid of cores lighting up with the load each one is under.",
 		"descriptionEs": "Rejilla de núcleos que se encienden según la carga de cada uno.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -361,7 +361,7 @@
 	"crt-green-terminal-boot": {
 		"description": "A green phosphor terminal that boots up line by line.",
 		"descriptionEs": "Terminal de fósforo verde que arranca línea a línea.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -369,7 +369,7 @@
 	"crt-scanline-loader": {
 		"description": "A loading indicator drawn inside CRT scanlines.",
 		"descriptionEs": "Indicador de carga dibujado dentro de líneas de barrido de CRT.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -377,7 +377,7 @@
 	"cryo-stasis-chamber-pod": {
 		"description": "A cryogenic pod with frosted glass and a slow blinking readout.",
 		"descriptionEs": "Cápsula criogénica de cristal esmerilado con lectura parpadeante.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -386,7 +386,7 @@
 	"crystal-geode-sparkle-cave": {
 		"description": "Sparkling crystal geodes glowing inside a dark cave.",
 		"descriptionEs": "Geodas de cristal que brillan dentro de una cueva oscura.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -395,7 +395,7 @@
 	"css-animated-counter": {
 		"description": "A counter that rolls up to its final value on its own.",
 		"descriptionEs": "Contador que sube solo hasta su valor final.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -403,7 +403,7 @@
 	"css-infinite-scroll-carousel": {
 		"description": "A carousel that loops endlessly with pure CSS.",
 		"descriptionEs": "Carrusel que se repite sin fin con solo CSS.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -411,7 +411,7 @@
 	"css-particle-orbit-animation": {
 		"description": "Particles that orbit a centre point, drawn entirely with CSS.",
 		"descriptionEs": "Partículas que orbitan un punto central, dibujadas solo con CSS.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -420,7 +420,7 @@
 	"css-typewriter-line": {
 		"description": "A line of text that types itself out letter by letter.",
 		"descriptionEs": "Línea de texto que se escribe letra a letra.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -428,7 +428,7 @@
 	"cursor-trail-effect": {
 		"description": "A trail of dots that follows the cursor as it moves.",
 		"descriptionEs": "Rastro de puntos que sigue al cursor al moverse.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -437,7 +437,7 @@
 	"cyber-hex-diagnostics-tile": {
 		"description": "A cyberpunk diagnostics tile with live hex readouts.",
 		"descriptionEs": "Baldosa de diagnóstico cyberpunk con lecturas hexadecimales en vivo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -446,7 +446,7 @@
 	"cyber-matrix-rain": {
 		"description": "Falling code of the classic green digital rain.",
 		"descriptionEs": "Código en caída de la lluvia digital verde clásica.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -454,7 +454,7 @@
 	"cyber-retrowave-sun": {
 		"description": "A retrowave sun setting over a glowing wireframe grid.",
 		"descriptionEs": "Sol retrowave poniéndose sobre una cuadrícula de rejilla luminosa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -462,7 +462,7 @@
 	"cyber-shield-passcode-keypad": {
 		"description": "A passcode keypad guarded by a pulsing cyber shield.",
 		"descriptionEs": "Teclado de código protegido por un escudo cyber que late.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -471,7 +471,7 @@
 	"cyberpunk-glitch-barcode": {
 		"description": "A barcode that keeps glitching between readable and corrupted.",
 		"descriptionEs": "Código de barras que parpadea entre legible y corrupto.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -479,7 +479,7 @@
 	"dark-mode-solar-lunar-switch": {
 		"description": "A switch that swaps the page between a sun and a moon.",
 		"descriptionEs": "Interruptor que cambia la página entre un sol y una luna.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -487,7 +487,7 @@
 	"database-query-cluster": {
 		"description": "A database cluster that lights up as a query travels through it.",
 		"descriptionEs": "Clúster de base de datos que se enciende al recorrerlo una consulta.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -496,7 +496,7 @@
 	"deep-abyss-submarine-porthole": {
 		"description": "A submarine porthole looking down into the dark abyss.",
 		"descriptionEs": "Portilla de submarino que mira al abismo oscuro.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -505,7 +505,7 @@
 	"desert-dune-heat-haze": {
 		"description": "Desert dunes rippling with heat haze under a burning sun.",
 		"descriptionEs": "Dunas del desierto que ondulan con el calor bajo un sol ardiente.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -514,7 +514,7 @@
 	"dev-console-easter-egg": {
 		"description": "An easter egg you can trigger from the browser console.",
 		"descriptionEs": "Un huevo de pascua que se activa desde la consola del navegador.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -523,7 +523,7 @@
 	"dna-double-helix": {
 		"description": "A DNA double helix turning slowly against the dark.",
 		"descriptionEs": "Doble hélice de ADN girando despacio sobre el fondo oscuro.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -534,7 +534,7 @@
 		"featuredOrder": 12,
 		"description": "A loading indicator shaped as a turning DNA helix.",
 		"descriptionEs": "Indicador de carga con forma de doble hélice de ADN girando.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -542,7 +542,7 @@
 	"docker-container-pod-status": {
 		"description": "A pod of containers showing their state as they start and stop.",
 		"descriptionEs": "Un pod de contenedores que muestra su estado al arrancar y parar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -551,7 +551,7 @@
 	"dot-step-pagination": {
 		"description": "Pagination where numbered dots show each step of the journey.",
 		"descriptionEs": "Paginación con puntos numerados que muestran cada paso del recorrido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -559,7 +559,7 @@
 	"elastic-gooey-fab": {
 		"description": "A floating action button that stretches elastically when pressed.",
 		"descriptionEs": "Botón de acción flotante que se estira elásticamente al pulsarlo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -567,7 +567,7 @@
 	"email-validation-form": {
 		"description": "A form that validates an email address and explains what is wrong.",
 		"descriptionEs": "Formulario que valida un correo y explica qué falla.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -575,7 +575,7 @@
 	"env-variables-secret-toggle": {
 		"description": "A list of environment variables that reveals the masked secrets.",
 		"descriptionEs": "Lista de variables de entorno que revela los secretos ocultos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -583,7 +583,7 @@
 	"expandable-info-card": {
 		"description": "An information card that grows to reveal its extra details.",
 		"descriptionEs": "Tarjeta de información que crece para mostrar sus detalles extra.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -591,7 +591,7 @@
 	"file-upload-dropzone-modern": {
 		"description": "A modern drop zone that previews the files you drag over it.",
 		"descriptionEs": "Zona de arrastre moderna que previsualiza los archivos que sueltas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -599,7 +599,7 @@
 	"fireworks-celebration-burst": {
 		"description": "Fireworks that burst across the night sky to celebrate.",
 		"descriptionEs": "Fuegos artificiales que estallan en el cielo nocturno para celebrar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -607,7 +607,7 @@
 	"flip-reveal-card": {
 		"description": "A card that flips in 3D to reveal its hidden face.",
 		"descriptionEs": "Tarjeta que gira en 3D para revelar su cara oculta.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -615,7 +615,7 @@
 	"flip-segment-clock": {
 		"description": "A clock whose digits flip over like a departure board.",
 		"descriptionEs": "Reloj cuyos dígitos giran como los de un tablero de salidas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -623,7 +623,7 @@
 	"floating-astronaut-visor": {
 		"description": "An astronaut drifting with light glinting on the visor.",
 		"descriptionEs": "Astronauta a la deriva con reflejos de luz en el visor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -631,7 +631,7 @@
 	"floating-glass-action-dock": {
 		"description": "A dock of glass action buttons that floats over the page.",
 		"descriptionEs": "Dock de botones de cristal que flota sobre la página.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -639,7 +639,7 @@
 	"floating-gradient-orbs": {
 		"description": "Soft gradient orbs floating slowly in the background.",
 		"descriptionEs": "Orbes de degradado suaves que flotan despacio al fondo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -647,7 +647,7 @@
 	"floating-label-input": {
 		"description": "An input whose label floats up into the field as you type.",
 		"descriptionEs": "Campo cuya etiqueta flota hacia arriba al escribir en él.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -655,7 +655,7 @@
 	"floating-pill-navbar": {
 		"description": "A navbar of floating pills that slides between the sections.",
 		"descriptionEs": "Barra de navegación de píldoras flotantes que se desliza entre secciones.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -663,7 +663,7 @@
 	"floppy-disk-save-prompt": {
 		"description": "A retro save prompt that slides a floppy disk into the drive.",
 		"descriptionEs": "Aviso de guardado retro que introduce un disquete en la unidad.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -672,7 +672,7 @@
 	"fluid-tab-morph-indicator": {
 		"description": "A tab indicator that morphs fluidly into the active tab.",
 		"descriptionEs": "Indicador de pestañas que se transforma con suavidad en la activa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -680,7 +680,7 @@
 	"fluid-wave-radio-tuner": {
 		"description": "A retro radio tuner whose needle ripples with sound.",
 		"descriptionEs": "Sintonizador de radio retro cuya aguja se ondula con el sonido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -688,7 +688,7 @@
 	"footer-wave-links": {
 		"description": "A footer whose links rise and fall like waves.",
 		"descriptionEs": "Pie de página cuyos enlaces suben y bajan como olas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -708,7 +708,7 @@
 	"frost-crystal-freeze-window": {
 		"description": "Frost crystals creeping across a window as it freezes over.",
 		"descriptionEs": "Cristales de hielo que avanzan por una ventana al congelarse.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -716,7 +716,7 @@
 	"frosted-glass-pricing-tier": {
 		"description": "A frosted glass pricing card that lifts on hover.",
 		"descriptionEs": "Tarjeta de precios de cristal esmerilado que se eleva al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -748,7 +748,7 @@
 	"git-branch-graph-visualizer": {
 		"description": "A branching graph that draws a commit history tree.",
 		"descriptionEs": "Gráfico de ramas que dibuja el árbol de un historial de commits.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -757,7 +757,7 @@
 	"github-contribution-matrix-heat": {
 		"description": "A contribution heatmap where every cell shades by intensity.",
 		"descriptionEs": "Mapa de calor de contribuciones donde cada celda se tone por intensidad.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -766,7 +766,7 @@
 	"glass-shimmer-card": {
 		"description": "A glass card with a shimmer of light sliding across it.",
 		"descriptionEs": "Tarjeta de cristal con un destello de luz que la recorre.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -775,7 +775,7 @@
 	"glassmorphic-calendar-widget": {
 		"description": "A frosted glass calendar showing a month at a glance.",
 		"descriptionEs": "Calendario de cristal esmerilado que muestra un mes de un vistazo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -783,7 +783,7 @@
 	"glassmorphism-product-card": {
 		"description": "A glassmorphism product card with soft blur and highlights.",
 		"descriptionEs": "Tarjeta de producto con cristal esmerilado, desenfoque y brillos suaves.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -791,7 +791,7 @@
 	"glitch-404-cyber-portal": {
 		"description": "A 404 page that looks like a glitching cyber portal.",
 		"descriptionEs": "Página 404 que parece un portal cyber con fallos de imagen.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -799,7 +799,7 @@
 	"glitch-image-hover-effect": {
 		"description": "An image that tears into RGB slices on hover.",
 		"descriptionEs": "Imagen que se rompe en rebanadas RGB al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -807,7 +807,7 @@
 	"glitch-neon-button": {
 		"description": "A neon button that stutters and glitches when pressed.",
 		"descriptionEs": "Botón de neón que parpadea y falla al pulsarlo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -815,7 +815,7 @@
 	"gravitational-wormhole-vortex": {
 		"description": "A wormhole that bends light and swirls everything around it.",
 		"descriptionEs": "Agujero de gusano que curva la luz y hace girar todo a su alrededor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -824,7 +824,7 @@
 	"gravity-black-hole": {
 		"description": "A black hole pulling light and matter into its event horizon.",
 		"descriptionEs": "Agujero negro que atrae luz y materia hacia su horizonte de sucesos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -833,7 +833,7 @@
 	"grid-image-slider": {
 		"description": "An image slider that reveals the next image in a grid.",
 		"descriptionEs": "Carrusel de imágenes que revela la siguiente en una cuadrícula.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -841,7 +841,7 @@
 	"hamburger-morphing-menu": {
 		"description": "A hamburger button that morphs into a close icon.",
 		"descriptionEs": "Botón de hamburguesa que se transforma en una X para cerrar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -849,7 +849,7 @@
 	"haptic-checkbox-toggle": {
 		"description": "A checkbox that presses in as if it were a physical switch.",
 		"descriptionEs": "Casilla que se hunde como si fuera un interruptor físico.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -857,7 +857,7 @@
 	"hex-honeycomb-pulse": {
 		"description": "A honeycomb of hexagons pulsing like a living beehive.",
 		"descriptionEs": "Panal de hexágonos que late como una colmena viva.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -865,7 +865,7 @@
 	"holographic-data-prism": {
 		"description": "A prism that splits a beam of light into its colours.",
 		"descriptionEs": "Prisma que divide un haz de luz en sus colores.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -875,7 +875,7 @@
 		"featuredOrder": 25,
 		"description": "A holographic trading card whose foil catches the light.",
 		"descriptionEs": "Carta coleccionista holográfica cuyo foil refleja la luz.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -883,7 +883,7 @@
 	"holographic-wrist-watch": {
 		"description": "A wrist watch rendered in holographic projection lines.",
 		"descriptionEs": "Reloj de muñeca dibujado con líneas de proyección holográfica.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -891,7 +891,7 @@
 	"horizontal-scroll-gallery": {
 		"description": "A gallery you scroll sideways with a wheel or drag.",
 		"descriptionEs": "Galería que se desplaza lateralmente con la rueda o arrastrando.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -899,7 +899,7 @@
 	"hourglass-sand-loader": {
 		"description": "A loading indicator drawn as an hourglass trickling sand.",
 		"descriptionEs": "Indicador de carga dibujado como un reloj de arena que cae arena.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -909,7 +909,7 @@
 		"featuredOrder": 23,
 		"description": "A hyperspace speedometer that swings past the red line.",
 		"descriptionEs": "Velocímetro de hiperespacio que pasa de la línea roja.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -917,7 +917,7 @@
 	"icon-segmented-switch": {
 		"description": "A segmented switch whose segments light up as you choose.",
 		"descriptionEs": "Interruptor segmentado cuyos segmentos se encienden al elegir.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -925,7 +925,7 @@
 	"image-reveal-hover-effect": {
 		"description": "An image revealed through a shape that follows the pointer.",
 		"descriptionEs": "Imagen que se revela con una forma que sigue al puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -954,7 +954,7 @@
 	"infinite-loader-animation": {
 		"description": "A looping loader that never shows the same frame twice in a row.",
 		"descriptionEs": "Cargador en bucle que nunca repite dos fotogramas seguidos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -962,7 +962,7 @@
 	"infinite-marquee-pill-tags": {
 		"description": "Pill-shaped tags scrolling endlessly in both directions.",
 		"descriptionEs": "Etiquetas con forma de píldora que se desplazan sin fin en ambos sentidos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -970,7 +970,7 @@
 	"ink-drop-water-diffusion": {
 		"description": "A drop of ink diffusing slowly through clear water.",
 		"descriptionEs": "Gota de tinta que se difunde despacio en agua cristalina.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -979,7 +979,7 @@
 	"interactive-card-fan-deck": {
 		"description": "A deck of cards that fans out as you hover over it.",
 		"descriptionEs": "Mazo de cartas que se abre en abanico al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -987,7 +987,7 @@
 	"interactive-scratch-reveal": {
 		"description": "A surface you scratch away with the pointer to reveal what is under it.",
 		"descriptionEs": "Superficie que se rasca con el puntero para revelar lo que hay debajo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -997,7 +997,7 @@
 		"featuredOrder": 8,
 		"description": "An isometric city block glowing with lights at night.",
 		"descriptionEs": "Manzana de ciudad isométrica iluminada de noche.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1006,7 +1006,7 @@
 	"isometric-cube-spinner": {
 		"description": "A stack of isometric cubes that spins as a loader.",
 		"descriptionEs": "Pila de cubos isométricos que gira como indicador de carga.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1014,7 +1014,7 @@
 	"json-collapsible-tree-node": {
 		"description": "A JSON tree where each node expands and collapses.",
 		"descriptionEs": "Árbol JSON en el que cada nodo se despliega y se pliega.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1023,7 +1023,7 @@
 	"kaleidoscope-mandala-spin": {
 		"description": "A kaleidoscopic mandala that rotates and reshapes itself.",
 		"descriptionEs": "Mandala calidoscópico que gira y se reconfigura solo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1031,7 +1031,7 @@
 	"keyboard-shortcut-display": {
 		"description": "Keyboard shortcuts that appear as you press the actual keys.",
 		"descriptionEs": "Atajos de teclado que aparecen al pulsar las teclas reales.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1040,7 +1040,7 @@
 	"kinetic-fluid-slider": {
 		"description": "A slider that leaves a fluid trail behind its handle.",
 		"descriptionEs": "Control deslizante que deja un rastro líquido tras su tirador.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1049,7 +1049,7 @@
 	"knob-rotary-switch": {
 		"description": "A rotary knob you can drag or spin to change the value.",
 		"descriptionEs": "Mando giratorio que se arrastra o se gira para cambiar el valor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1057,7 +1057,7 @@
 	"lava-metaballs-lamp": {
 		"description": "Metaballs of lava that bulge and merge like a lamp.",
 		"descriptionEs": "Metaballs de lava que se abomban y se funden como una lámpara.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1066,7 +1066,7 @@
 	"lightbox-image-slider": {
 		"description": "A gallery that opens its images in a full-screen lightbox.",
 		"descriptionEs": "Galería que abre sus imágenes en una ventana ampliada a pantalla completa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1074,7 +1074,7 @@
 	"liquid-blob-loader": {
 		"description": "A loading indicator made of a morphing liquid blob.",
 		"descriptionEs": "Indicador de carga formado por una gota líquida que se deforma.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1084,7 +1084,7 @@
 		"featuredOrder": 28,
 		"description": "A button that fills with liquid when you hover it.",
 		"descriptionEs": "Botón que se llena de líquido al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1092,7 +1092,7 @@
 	"liquid-fill-progress-button": {
 		"description": "A button whose fill doubles as a progress indicator.",
 		"descriptionEs": "Botón cuyo relleno hace de indicador de progreso.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1103,7 +1103,7 @@
 		"featuredOrder": 24,
 		"description": "A countdown timer shaped as a liquid hourglass.",
 		"descriptionEs": "Temporizador de cuenta atrás con forma de reloj de arena líquido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1111,7 +1111,7 @@
 	"liquid-hover-background": {
 		"description": "A background of liquid that swirls around the pointer.",
 		"descriptionEs": "Fondo líquido que gira alrededor del puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1119,7 +1119,7 @@
 	"liquid-mercury-droplet": {
 		"description": "A droplet of mercury that rolls and reflects light.",
 		"descriptionEs": "Gota de mercurio que rueda y refleja la luz.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1127,7 +1127,7 @@
 	"liquid-morph-blob-animation": {
 		"description": "A blob that flows between shapes in a continuous loop.",
 		"descriptionEs": "Gota que fluye entre formas en un bucle continuo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1136,7 +1136,7 @@
 	"liquid-pull-to-refresh-spinner": {
 		"description": "A pull-to-refresh spinner whose arc stretches like liquid.",
 		"descriptionEs": "Indicador de «tira para actualizar» cuyo arco se estira como líquido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1144,7 +1144,7 @@
 	"liquid-tab-counter-badge": {
 		"description": "A tab with a counter badge that moves like a drop of liquid.",
 		"descriptionEs": "Pestaña con contador que se mueve como una gota de líquido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1152,7 +1152,7 @@
 	"live-crypto-ticker-ribbon": {
 		"description": "A ticker ribbon scrolling live cryptocurrency prices.",
 		"descriptionEs": "Cinta que desliza precios de criptomonedas en vivo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1160,7 +1160,7 @@
 	"login-form-split": {
 		"description": "A split login layout with the form beside a marketing panel.",
 		"descriptionEs": "Diseño de acceso dividido, con el formulario junto a un panel.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1168,7 +1168,7 @@
 	"lunar-phases-cycle-disc": {
 		"description": "A disc that cycles through every phase of the moon.",
 		"descriptionEs": "Disco que recorre todas las fases de la luna.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1177,7 +1177,7 @@
 	"magma-volcano-crack-surface": {
 		"description": "A crust of rock cracking open over glowing magma.",
 		"descriptionEs": "Costra de roca que se agrieta sobre magma incandescente.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1186,7 +1186,7 @@
 	"magnetic-ball-newton-cradle": {
 		"description": "A Newton's cradle of magnetic balls that swing and collide.",
 		"descriptionEs": "Péndulo de Newton con bolas magnéticas que chocan entre sí.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1195,7 +1195,7 @@
 	"magnetic-compass-rose": {
 		"description": "A compass rose that swings to point the way north.",
 		"descriptionEs": "Rosa de los vientos que gira hasta señalar el norte.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1203,7 +1203,7 @@
 	"magnetic-cursor-follow-pill": {
 		"description": "A pill that is pulled towards the cursor and snaps back.",
 		"descriptionEs": "Píldora atraída hacia el cursor que vuelve a su sitio con rebote.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1212,7 +1212,7 @@
 	"magnetic-field-background": {
 		"description": "A background of magnetic field lines that bend around the content.",
 		"descriptionEs": "Fondo de líneas de campo magnético que se curvan alrededor del contenido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1221,7 +1221,7 @@
 	"magnetic-hover-button": {
 		"description": "A button that is magnetically drawn towards the pointer.",
 		"descriptionEs": "Botón que se atrae magnéticamente hacia el puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1229,7 +1229,7 @@
 	"magnetic-social-dock-cluster": {
 		"description": "Social icons that cluster and separate magnetically on hover.",
 		"descriptionEs": "Iconos sociales que se agrupan y separan magnéticamente al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1237,7 +1237,7 @@
 	"markdown-checklist-strike": {
 		"description": "A checklist whose items get struck through as you tick them.",
 		"descriptionEs": "Lista de comprobación con los elementos tachados al marcarlos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1246,7 +1246,7 @@
 	"markdown-preview-live": {
 		"description": "A Markdown editor with a live preview beside the source.",
 		"descriptionEs": "Editor de Markdown con vista previa en vivo junto al código.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1255,7 +1255,7 @@
 	"masonry-photo-gallery": {
 		"description": "A masonry photo gallery that packs images with no gaps.",
 		"descriptionEs": "Galería de fotos en masonry que encaja las imágenes sin huecos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1263,7 +1263,7 @@
 	"material-ripple-surface": {
 		"description": "A surface that sends a ripple out from each touch.",
 		"descriptionEs": "Superficie que lanza una onda desde cada toque.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1272,7 +1272,7 @@
 	"mech-robot-hud-targeting": {
 		"description": "A mech targeting HUD that locks on as you aim.",
 		"descriptionEs": "HUD de puntería de un mech que se fija al apuntar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1281,7 +1281,7 @@
 	"mechanical-gear-clockwork-train": {
 		"description": "Interlocking gears turning like a clockwork mechanism.",
 		"descriptionEs": "Engranajes acoplados que giran como un mecanismo de reloj.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1290,7 +1290,7 @@
 	"mechanical-toggle-lever": {
 		"description": "A metal lever that flips between two positions.",
 		"descriptionEs": "Palanca metálica que alterna entre dos posiciones.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1298,7 +1298,7 @@
 	"mega-menu-navigation": {
 		"description": "A navigation menu that opens large panels of links.",
 		"descriptionEs": "Menú de navegación que abre paneles grandes de enlaces.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1306,7 +1306,7 @@
 	"memory-heap-ram-gauge": {
 		"description": "A gauge showing heap and RAM usage filling up.",
 		"descriptionEs": "Medidor que muestra el uso de memoria y RAM llenándose.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1315,7 +1315,7 @@
 	"metaball-skeleton-loader": {
 		"description": "A skeleton placeholder made of merging metaballs.",
 		"descriptionEs": "Marcador esqueleto formado por metaballs que se fusionan.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1323,7 +1323,7 @@
 	"meteor-cosmic-shower": {
 		"description": "A shower of meteors streaking across the night sky.",
 		"descriptionEs": "Lluvia de meteoros cruzando el cielo nocturno.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1331,7 +1331,7 @@
 	"morphing-blob-avatar": {
 		"description": "An avatar that morphs like a living blob.",
 		"descriptionEs": "Avatar que se deforma como una gota viva.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1339,7 +1339,7 @@
 	"morphing-blob-bg": {
 		"description": "A background of blobs that morph and drift out of sight.",
 		"descriptionEs": "Fondo de gotas que se deforman y se van de la vista.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1347,7 +1347,7 @@
 	"morphing-shape-animation": {
 		"description": "A single shape that morphs between several forms.",
 		"descriptionEs": "Una figura que se transforma entre varias formas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1355,7 +1355,7 @@
 	"multi-range-slider": {
 		"description": "A slider with two handles for setting a range at once.",
 		"descriptionEs": "Control con dos tiradores para marcar un rango de una vez.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1364,7 +1364,7 @@
 	"neon-bar-equalizer-loader": {
 		"description": "A neon equalizer whose bars bounce while the page loads.",
 		"descriptionEs": "Ecualizador de neón cuyas barras saltan mientras carga la página.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1372,7 +1372,7 @@
 	"neon-cassette-audio-visualizer": {
 		"description": "A neon cassette deck wrapped around an audio visualizer.",
 		"descriptionEs": "Casete de neón envuelto alrededor de un visualizador de audio.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1382,7 +1382,7 @@
 		"featuredOrder": 26,
 		"description": "A profile card drawn in glowing neon lines.",
 		"descriptionEs": "Tarjeta de perfil dibujada con líneas de neón brillante.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1390,7 +1390,7 @@
 	"neon-sign-flicker": {
 		"description": "A neon sign that flickers on with a starter's stutter.",
 		"descriptionEs": "Rótulo de neón que parpadea al encenderse como un fluorescente.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1398,7 +1398,7 @@
 	"neon-toggle-switch": {
 		"description": "A toggle switch lit with a neon tube.",
 		"descriptionEs": "Interruptor iluminado como un tubo de neón.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1406,7 +1406,7 @@
 	"neumorphic-stat-card": {
 		"description": "A statistics card with soft neumorphic shading.",
 		"descriptionEs": "Tarjeta de estadísticas con sombreado neumórfico suave.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1416,7 +1416,7 @@
 		"featuredOrder": 29,
 		"description": "Synapses firing between connected nodes in a neural network.",
 		"descriptionEs": "Sinapsis que se disparan entre nodos de una red neuronal.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1425,7 +1425,7 @@
 	"newsletter-subscription-form": {
 		"description": "A newsletter form that confirms the signup inline.",
 		"descriptionEs": "Formulario de boletín que confirma el alta en el momento.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1433,7 +1433,7 @@
 	"nixie-tube-counter-clock": {
 		"description": "A clock counting on glowing nixie tubes.",
 		"descriptionEs": "Reloj que marca con tubos nixie brillantes.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1441,7 +1441,7 @@
 	"noise-grain-texture-background": {
 		"description": "A fine film-grain texture over a solid background.",
 		"descriptionEs": "Textura fina de grano de película sobre un fondo liso.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1450,7 +1450,7 @@
 	"notification-stack-expand": {
 		"description": "Notifications that stack up and expand when you click them.",
 		"descriptionEs": "Notificaciones que se apilan y se despliegan al pulsarlas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1459,7 +1459,7 @@
 	"notification-toast-system": {
 		"description": "A toast system for showing notifications in the corner.",
 		"descriptionEs": "Sistema de toasts para mostrar avisos en la esquina.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1468,7 +1468,7 @@
 	"npm-package-stat-card": {
 		"description": "A card with the stats of an npm package.",
 		"descriptionEs": "Tarjeta con las estadísticas de un paquete de npm.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1476,7 +1476,7 @@
 	"orbit-hover-icons": {
 		"description": "Icons that spread out in an orbit around the pointer.",
 		"descriptionEs": "Iconos que se abren en órbita alrededor del puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1484,7 +1484,7 @@
 	"orbital-dot-ring": {
 		"description": "A ring of dots orbiting at different speeds.",
 		"descriptionEs": "Anillo de puntos que orbitan a distintas velocidades.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1492,7 +1492,7 @@
 	"origami-crane-wings": {
 		"description": "An origami crane whose wings fold and unfold.",
 		"descriptionEs": "Grulla de papiro origami que pliega y despliega las alas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1501,7 +1501,7 @@
 	"origami-fortune-teller-cootie": {
 		"description": "A paper fortune teller that opens and closes as you tap it.",
 		"descriptionEs": "Papeleta de la suerte que se abre y se cierra al tocarla.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1510,7 +1510,7 @@
 	"otp-code-input-form": {
 		"description": "A one-time-code form with a box per digit.",
 		"descriptionEs": "Formulario de código de un solo uso con una casilla por dígito.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1518,7 +1518,7 @@
 	"paper-origami-fold-card": {
 		"description": "A card that folds like a sheet of origami paper.",
 		"descriptionEs": "Tarjeta que se pliega como una hoja de papel origami.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1526,7 +1526,7 @@
 	"particle-constellation-hover": {
 		"description": "A constellation of particles drawn between nearby points.",
 		"descriptionEs": "Constelación de partículas que se une entre puntos cercanos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1534,7 +1534,7 @@
 	"particle-explosion-hover": {
 		"description": "Particles bursting outwards from the point you hover.",
 		"descriptionEs": "Partículas que estallan desde el punto que señalas.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1542,7 +1542,7 @@
 	"pearl-caustic-sphere": {
 		"description": "A pearl-like sphere refracting caustics on its surface.",
 		"descriptionEs": "Esfera perlada que refracta cáusticas en su superficie.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1550,7 +1550,7 @@
 	"pendulum-sync-dots": {
 		"description": "Dots swinging in pendulum motion, in sync.",
 		"descriptionEs": "Puntos que oscilan como péndulos, todos al mismo tiempo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1559,7 +1559,7 @@
 	"plasma-arc-reactor": {
 		"description": "An arc reactor with a swirling plasma core.",
 		"descriptionEs": "Reactor de arco con un núcleo de plasma en remolino.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1567,7 +1567,7 @@
 	"plasma-orb-touch-lightning": {
 		"description": "A plasma orb that throws lightning at your touch.",
 		"descriptionEs": "Orbe de plasma que lanza rayos al tocarlo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1575,7 +1575,7 @@
 	"plasma-shield-barrier": {
 		"description": "A shimmering barrier that a plasma shield projects.",
 		"descriptionEs": "Barrera parpadeante que proyecta un escudo de plasma.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1583,7 +1583,7 @@
 	"polaroid-stack-gallery": {
 		"description": "A stack of Polaroids you pull apart one by one.",
 		"descriptionEs": "Pila de polaroids que vas separando una a una.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1591,7 +1591,7 @@
 	"pomodoro-timer-widget": {
 		"description": "A Pomodoro timer with a work and a break cycle.",
 		"descriptionEs": "Temporizador Pomodoro con ciclo de trabajo y descanso.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1599,7 +1599,7 @@
 	"prism-light-refraction": {
 		"description": "Light refracting through a prism into a rainbow.",
 		"descriptionEs": "Luz que se refracta en un prisma y forma un arcoíris.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1607,7 +1607,7 @@
 	"prismatic-soap-bubble-float": {
 		"description": "Soap bubbles floating with prismatic colour on their surface.",
 		"descriptionEs": "Burbujas de jabón que flotan con colores prismáticos en su superficie.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1616,7 +1616,7 @@
 	"progress-scroll-navbar": {
 		"description": "A navbar with a progress bar that follows the page scroll.",
 		"descriptionEs": "Barra de navegación con una barra de progreso que sigue el scroll.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1625,7 +1625,7 @@
 	"pulse-ring-sonar-loader": {
 		"description": "A sonar loader sending out expanding pulse rings.",
 		"descriptionEs": "Cargador de sonar que lanza anillos de pulso en expansión.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1633,7 +1633,7 @@
 	"pulsing-sonar-radar": {
 		"description": "A radar sweep with a pulse that lights up as it passes.",
 		"descriptionEs": "Barrido de radar con un pulso que se enciende al pasar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1642,7 +1642,7 @@
 	"quantum-entanglement-particles": {
 		"description": "Particles that stay linked however far apart they drift.",
 		"descriptionEs": "Partículas que permanecen enlazadas por lejos que se separen.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1651,7 +1651,7 @@
 	"quantum-qubit-bloch-sphere": {
 		"description": "A qubit drawn on a Bloch sphere as its state rotates.",
 		"descriptionEs": "Qubit dibujado en una esfera de Bloch mientras gira su estado.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1660,7 +1660,7 @@
 	"quantum-spin-loader": {
 		"description": "A loading indicator drawn as a spinning qubit.",
 		"descriptionEs": "Indicador de carga dibujado como un qubit girando.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1668,7 +1668,7 @@
 	"rainy-window-glass-droplets": {
 		"description": "Raindrops running down a window, blurring what is outside.",
 		"descriptionEs": "Gotas de lluvia bajando por una ventana y difuminando el exterior.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1676,7 +1676,7 @@
 	"receipt-ticket-card": {
 		"description": "A perforated ticket-style card that looks like a receipt.",
 		"descriptionEs": "Tarjeta con forma de resguardo troquelado.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1684,7 +1684,7 @@
 	"regex-token-matcher": {
 		"description": "A regular expression field that highlights the matches live.",
 		"descriptionEs": "Campo de expresión regular que resalta las coincidencias al escribir.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1693,7 +1693,7 @@
 	"reservation-form-modern": {
 		"description": "A modern booking form with date and guest selectors.",
 		"descriptionEs": "Formulario de reservas moderno con selectores de fecha ySafari.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1701,7 +1701,7 @@
 	"retro-arcade-coin-slot": {
 		"description": "An arcade coin slot that swallows the coin on click.",
 		"descriptionEs": "Ranura de moneda de recreativa que se traga la moneda al pulsar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1710,7 +1710,7 @@
 	"ripple-ink-button": {
 		"description": "A button that releases a ripple of ink with each click.",
 		"descriptionEs": "Botón que libera una onda de tinta con cada clic.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1718,7 +1718,7 @@
 	"rotary-combination-safe-lock": {
 		"description": "A combination lock whose dial turns smoothly between numbers.",
 		"descriptionEs": "Cerradura de combinación cuyo disco gira entre números con suavidad.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1726,7 +1726,7 @@
 	"rotary-dial-number-picker": {
 		"description": "A rotary dial for picking a number one step at a time.",
 		"descriptionEs": "Disco giratorio para elegir un número paso a paso.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1734,7 +1734,7 @@
 	"sand-zen-garden-rake": {
 		"description": "Rake lines drawn through zen-garden sand that slowly fade.",
 		"descriptionEs": "Surcos de rastrillo en la arena de un jardín zen que se borran despacio.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1743,7 +1743,7 @@
 	"satellite-telemetry-globe": {
 		"description": "A globe with satellites streaming telemetry around it.",
 		"descriptionEs": "Globo con satélites que envían telemetría a su alrededor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1752,7 +1752,7 @@
 	"scroll-reveal-text-effect": {
 		"description": "Text that reveals itself as you scroll down the page.",
 		"descriptionEs": "Texto que se revela a medida que bajas por la página.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1761,7 +1761,7 @@
 	"scroll-spy-menu": {
 		"description": "A menu that highlights the section you are reading.",
 		"descriptionEs": "Menú que resalta la sección que estás leyendo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1769,7 +1769,7 @@
 	"search-autocomplete-input": {
 		"description": "A search field that suggests matches while you type.",
 		"descriptionEs": "Campo de búsqueda que sugiere coincidencias mientras escribes.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1777,7 +1777,7 @@
 	"server-rack-led-blinker": {
 		"description": "A server rack whose LEDs blink with activity.",
 		"descriptionEs": "Rack de servidores con LED que parpadean según la actividad.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1786,7 +1786,7 @@
 	"sidebar-icon-menu": {
 		"description": "A sidebar of icons with the active item marked.",
 		"descriptionEs": "Barra lateral de iconos con el elemento activo resaltado.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1794,7 +1794,7 @@
 	"skeleton-shimmer-developer-card": {
 		"description": "A developer profile card shown as a shimmering skeleton.",
 		"descriptionEs": "Tarjeta de perfil de desarrollador mostrada como esqueleto con brillo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1805,7 +1805,7 @@
 		"featuredOrder": 5,
 		"description": "A skewed strip of text scrolling like a marquee.",
 		"descriptionEs": "Franja de texto inclinada que se desplaza como un marquesín.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1813,7 +1813,7 @@
 	"slider-bar-opacity": {
 		"description": "A slider that changes the opacity of the example live.",
 		"descriptionEs": "Control deslizante que cambia la opacidad del ejemplo en vivo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1822,7 +1822,7 @@
 	"slider-liquid-color-mixer": {
 		"description": "Sliders that mix liquid colours as you drag them.",
 		"descriptionEs": "Mandos que mezclan colores líquidos según los arrastras.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1831,7 +1831,7 @@
 	"smoke-particle-button": {
 		"description": "A button that puffs smoke when pressed.",
 		"descriptionEs": "Botón que echa humo al pulsarlo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1839,7 +1839,7 @@
 	"solar-corona-eclipse": {
 		"description": "A solar eclipse with the corona flaring around the moon.",
 		"descriptionEs": "Eclipse solar con la corona brillando alrededor de la luna.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1848,7 +1848,7 @@
 	"solar-flare-prominence": {
 		"description": "A solar prominence arcing off the surface of the star.",
 		"descriptionEs": "Protuberancia solar que se arquea desde la superficie de la estrella.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1857,7 +1857,7 @@
 	"split-color-hover-button": {
 		"description": "A button that wipes two colours in from opposite sides.",
 		"descriptionEs": "Botón que barre dos colores desde lados opuestos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1865,7 +1865,7 @@
 	"spotify-music-card": {
 		"description": "A music card with a track, its cover and playback controls.",
 		"descriptionEs": "Tarjeta de música con pista, portada y controles de reproducción.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1873,7 +1873,7 @@
 	"spotlight-photo-gallery": {
 		"description": "A gallery where a spotlight follows the image you are on.",
 		"descriptionEs": "Galería donde un foco sigue la imagen en la que estás.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1881,7 +1881,7 @@
 	"stagger-fade-in-animation": {
 		"description": "Elements that fade in one after another down the page.",
 		"descriptionEs": "Elementos que aparecen en fundido uno detrás de otro al bajar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1890,7 +1890,7 @@
 	"staircase-blocks-loader": {
 		"description": "A loader of blocks that stack like a staircase.",
 		"descriptionEs": "Cargador de bloques que se apilan como una escalera.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1898,7 +1898,7 @@
 	"star-rating-button": {
 		"description": "A row of stars you click to set a rating.",
 		"descriptionEs": "Fila de estrellas que pulsas para puntuar.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1906,7 +1906,7 @@
 	"status-badge-glow-matrix": {
 		"description": "A matrix of status badges each glowing a different colour.",
 		"descriptionEs": "Matriz de insignias de estado que brillan en colores distintos.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1915,7 +1915,7 @@
 	"steampunk-pressure-manometer": {
 		"description": "A steampunk pressure gauge with a swinging needle.",
 		"descriptionEs": "Manómetro steampunk con una aguja que oscila.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1923,7 +1923,7 @@
 	"stripe-progress-bar": {
 		"description": "A progress bar drawn as a moving stripe pattern.",
 		"descriptionEs": "Barra de progreso dibujada con rayas en movimiento.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1932,7 +1932,7 @@
 	"supernova-remnant-nebula": {
 		"description": "The glowing remnant of a supernova in a nebula.",
 		"descriptionEs": "El resto brillante de una supernova dentro de una nebulosa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1941,7 +1941,7 @@
 	"tab-menu-neon-underline": {
 		"description": "A tab menu with a neon underline under the active tab.",
 		"descriptionEs": "Menú de pestañas con un subrayado de neón en la activa.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1949,7 +1949,7 @@
 	"tag-input-chip-form": {
 		"description": "A tag field where each entry becomes a removable chip.",
 		"descriptionEs": "Campo de etiquetas donde cada entrada se convierte en una ficha.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1957,7 +1957,7 @@
 	"teletext-80s-weather-screen": {
 		"description": "An 80s teletext weather screen with its blocky graphics.",
 		"descriptionEs": "Pantalla meteorológica de teletexto de los 80 con sus gráficos de bloques.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1966,7 +1966,7 @@
 	"terminal-code-matrix-decode": {
 		"description": "A terminal that decodes a stream of falling code.",
 		"descriptionEs": "Terminal que descodifica un flujo de código que cae.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1975,7 +1975,7 @@
 	"terminal-cursor-loader": {
 		"description": "A loading indicator shaped as a blinking terminal cursor.",
 		"descriptionEs": "Indicador de carga con forma de cursor de terminal parpadeante.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -1983,7 +1983,7 @@
 	"terminal-syntax-highlighter": {
 		"description": "A code block that colours itself like a real terminal.",
 		"descriptionEs": "Bloque de código que se colorea como una terminal real.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -1992,7 +1992,7 @@
 	"testimonial-quote-card": {
 		"description": "A testimonial card with a quote, an author and a photo.",
 		"descriptionEs": "Tarjeta de testimonio con cita, autor y fotografía.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2000,7 +2000,7 @@
 	"text-scramble-hover-effect": {
 		"description": "Text that scrambles into unreadable glyphs on hover.",
 		"descriptionEs": "Texto que se descompone en glifos ilegibles al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2008,7 +2008,7 @@
 	"theater-curtain-reveal": {
 		"description": "A stage curtain that opens to reveal the content behind.",
 		"descriptionEs": "Telón de teatro que se abre para revelar el contenido.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2017,7 +2017,7 @@
 	"theme-switcher-multi": {
 		"description": "A switcher that moves between several themes at once.",
 		"descriptionEs": "Selector que pasa entre varios temas de una vez.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2025,7 +2025,7 @@
 	"thunderstorm-lightning-strike": {
 		"description": "Lightning striking through a rolling thunderstorm.",
 		"descriptionEs": "Rayo que cae a través de una tormenta en movimiento.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2034,7 +2034,7 @@
 	"tilt-perspective-card": {
 		"description": "A card that tilts in perspective as you move the pointer.",
 		"descriptionEs": "Tarjeta que se inclina en perspectiva al mover el puntero.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2042,7 +2042,7 @@
 	"toggle-3d-button": {
 		"description": "A button that flips in 3D to its other state.",
 		"descriptionEs": "Botón que gira en 3D hacia su otro estado.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2050,7 +2050,7 @@
 	"toggle-switch-group": {
 		"description": "A group of switches you can turn on together.",
 		"descriptionEs": "Grupo de interruptores que se activan a la vez.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2058,7 +2058,7 @@
 	"typewriter-mechanical-key-press": {
 		"description": "A typewriter that presses each key as the text appears.",
 		"descriptionEs": "Máquina de escribir que golpea cada tecla al aparecer el texto.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2066,7 +2066,7 @@
 	"url-qr-code-generator": {
 		"description": "A form that turns any URL into a scannable QR code.",
 		"descriptionEs": "Formulario que convierte cualquier URL en un código QR escaneable.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2075,7 +2075,7 @@
 	"vcr-glitch-recording-osd": {
 		"description": "A VHS on-screen display with tracking glitches and timecode.",
 		"descriptionEs": "Información en pantalla de VHS con fallos de tracking y código de tiempo.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2083,7 +2083,7 @@
 	"vertical-volume-slider": {
 		"description": "A volume control that slides up and down.",
 		"descriptionEs": "Control de volumen que sube y baja.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2092,7 +2092,7 @@
 	"vintage-film-projector-reel": {
 		"description": "A film projector whose reels turn and flicker.",
 		"descriptionEs": "Proyector de cine con las bobinas girando y parpadeando.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2101,7 +2101,7 @@
 	"vintage-meter-vu-audio": {
 		"description": "A VU meter whose needle swings with the audio level.",
 		"descriptionEs": "Vúmetro cuya aguja se mueve con el nivel de audio.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2110,7 +2110,7 @@
 	"warp-speed-star-hyperdrive": {
 		"description": "Stars stretching into streaks at warp speed.",
 		"descriptionEs": "Estrellas estirándose en trazadas a velocidad impulso.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2119,7 +2119,7 @@
 	"wave-accordion-stack": {
 		"description": "An accordion whose panels stack in a wave.",
 		"descriptionEs": "Acordeón cuyos paneles se apilan en forma de ola.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2127,7 +2127,7 @@
 	"wave-text-animation": {
 		"description": "Text that undulates in a wave, letter by letter.",
 		"descriptionEs": "Texto que ondea en forma de ola, letra a letra.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2135,7 +2135,7 @@
 	"weather-forecast-card": {
 		"description": "A weather card with the forecast for the coming days.",
 		"descriptionEs": "Tarjeta meteorológica con el previsión de los próximos días.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2143,7 +2143,7 @@
 	"webhook-event-payload-stream": {
 		"description": "A stream of webhook payloads arriving one after another.",
 		"descriptionEs": "Flujo de cargas útiles de webhooks que llegan una tras otra.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2154,7 +2154,7 @@
 		"featuredOrder": 15,
 		"description": "A WebSocket handshake shown step by step as it opens.",
 		"descriptionEs": "Apertura de sesión WebSocket mostrada paso a paso mientras se conecta.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true,
@@ -2163,7 +2163,7 @@
 	"wifi-signal-preloader": {
 		"description": "A loading indicator shaped like rising WiFi bars.",
 		"descriptionEs": "Indicador de carga con forma de barras de WiFi que crecen.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
@@ -2171,7 +2171,7 @@
 	"zoom-hover-photo-gallery": {
 		"description": "A photo gallery that zooms in on hover.",
 		"descriptionEs": "Galería de fotos que hace zoom al pasar el cursor.",
-		"source": "https://github.com/kindred-98/Libreria_HTML_CSS",
+		"source": "https://github.com/Eche-Dev/Libreria_HTML_CSS",
 		"license": "MIT",
 		"licenseFile": "LICENSE",
 		"redistributable": true
