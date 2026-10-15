@@ -2049,7 +2049,7 @@ input:focus-visible {
     order: 3;
     width: 100%;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 8px 10px;
     padding-block: 11px;
     font-size: 10px;
@@ -2206,8 +2206,9 @@ input:focus-visible {
   }
 
   .team-avatar {
-    width: 54px;
-    height: 54px;
+    width: 70px;
+    height: 70px;
+    place-self: center;
     margin-bottom: 0;
     grid-row: span 3;
   }
