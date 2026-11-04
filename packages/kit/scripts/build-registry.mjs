@@ -2,6 +2,7 @@ import { mkdir, readFile, readdir, writeFile, rm, access } from "node:fs/promise
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
+import { extractSnippet } from "../src/utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,34 +27,9 @@ async function ensureCatalogExists() {
   }
 }
 
-/**
- * Extrae el snippet HTML puro del cuerpo del documento.
- *
- * @param {string} rawHtml
- * @returns {string}
- */
-export function extractSnippet(rawHtml) {
-  const bodyMatch = rawHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  let content = bodyMatch ? bodyMatch[1] : rawHtml;
-
-  // Eliminar referencias a scripts
-  content = content.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
-
-  // Eliminar etiquetas <link rel="stylesheet" ...>
-  content = content.replace(/<link\b[^>]*rel=["']?stylesheet["']?[^>]*>/gi, "");
-
-  // Eliminar comentarios HTML para dejar el snippet limpio
-  content = content.replace(/<!--[\s\S]*?-->/g, "");
-
-  return content.trim();
-}
-
-/**
- * Builds the standalone component registry for @echedev/kit.
- */
 async function buildRegistry() {
   console.log("==========================================");
-  console.log("  @echedev/kit - Compilador de Registro   ");
+  console.log("  @echedev98/kit - Compilador de Registro   ");
   console.log("==========================================");
 
   await ensureCatalogExists();
@@ -149,7 +125,7 @@ async function buildRegistry() {
     // Guardar README de uso rápido para el desarrollador que instale el componente
     const componentReadme = `# ${meta.name}
 
-> Componente de la librería [@echedev/kit](https://www.npmjs.com/package/@echedev/kit)  
+> Componente de la librería [@echedev98/kit](https://www.npmjs.com/package/@echedev98/kit)  
 > Categoría: **${meta.category}** | Autor: **${meta.author}**
 
 ## Archivos incluidos

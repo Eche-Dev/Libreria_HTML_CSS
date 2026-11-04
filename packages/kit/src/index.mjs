@@ -83,22 +83,22 @@ export async function listComponents(options = {}) {
 
   if (category) {
     const catLower = category.toLowerCase();
-    items = items.filter((item) => item.category.toLowerCase() === catLower);
+    items = items.filter((item) => item.category?.toLowerCase() === catLower);
   }
 
   if (author) {
     const authorLower = author.toLowerCase();
-    items = items.filter((item) => item.author.toLowerCase() === authorLower);
+    items = items.filter((item) => item.author?.toLowerCase() === authorLower);
   }
 
   if (search) {
     const q = search.toLowerCase();
     items = items.filter(
       (item) =>
-        item.id.toLowerCase().includes(q) ||
-        item.name.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q) ||
-        item.tags.some((tag) => tag.toLowerCase().includes(q))
+        (item.id && item.id.toLowerCase().includes(q)) ||
+        (item.name && item.name.toLowerCase().includes(q)) ||
+        (item.description && item.description.toLowerCase().includes(q)) ||
+        (Array.isArray(item.tags) && item.tags.some((tag) => typeof tag === "string" && tag.toLowerCase().includes(q)))
     );
   }
 
@@ -137,21 +137,27 @@ export async function searchComponents(query, options = {}) {
   const scored = [];
   for (const item of items) {
     let score = 0;
-    const idLower = item.id.toLowerCase();
-    const nameLower = item.name.toLowerCase();
+    const idLower = item.id ? item.id.toLowerCase() : "";
+    const nameLower = item.name ? item.name.toLowerCase() : "";
 
     if (idLower === q) score += 100;
     else if (idLower.startsWith(q)) score += 50;
     else if (idLower.includes(q)) score += 20;
 
-    if (nameLower.toLowerCase() === q) score += 80;
+    if (nameLower === q) score += 80;
     else if (nameLower.includes(q)) score += 15;
 
-    if (item.tags.some((t) => t.toLowerCase() === q)) score += 30;
-    else if (item.tags.some((t) => t.toLowerCase().includes(q))) score += 10;
+    if (Array.isArray(item.tags)) {
+      if (item.tags.some((t) => typeof t === "string" && t.toLowerCase() === q)) score += 30;
+      else if (item.tags.some((t) => typeof t === "string" && t.toLowerCase().includes(q))) score += 10;
+    }
 
-    if (item.description.toLowerCase().includes(q)) score += 5;
-    if (item.category.toLowerCase().includes(q)) score += 10;
+    if (item.description && typeof item.description === "string" && item.description.toLowerCase().includes(q)) {
+      score += 5;
+    }
+    if (item.category && typeof item.category === "string" && item.category.toLowerCase().includes(q)) {
+      score += 10;
+    }
 
     if (score > 0) {
       scored.push({ item, score });

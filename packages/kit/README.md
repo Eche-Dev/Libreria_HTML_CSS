@@ -1,4 +1,4 @@
-# @echedev/kit
+# @echedev98/kit
 
 <div align="center">
 
@@ -13,7 +13,7 @@
 
 **La librería y CLI de componentes HTML, CSS y JS con más de 1,000 elementos listos para usar.**
 
-[![npm version](https://img.shields.io/npm/v/@echedev/kit.svg?style=flat-square)](https://www.npmjs.com/package/@echedev/kit)
+[![npm version](https://img.shields.io/npm/v/@echedev98/kit.svg?style=flat-square)](https://www.npmjs.com/package/@echedev98/kit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Web](https://img.shields.io/badge/Web-Oficial-00f0ff.svg?style=flat-square)](https://libreria-html-css.vercel.app)
 
@@ -21,9 +21,9 @@
 
 ---
 
-## ⚡ ¿Qué es @echedev/kit?
+## ⚡ ¿Qué es @echedev98/kit?
 
-**@echedev/kit** es una solución híbrida (CLI + Paquete NPM) para integrar componentes visuales de alta calidad en cualquier proyecto web con **un solo comando**, sin dependencias obligatorias ni complejidad de configuración:
+**@echedev98/kit** es una solución híbrida (CLI + Paquete NPM) para integrar componentes visuales de alta calidad en cualquier proyecto web con **un solo comando**, sin dependencias obligatorias ni complejidad de configuración:
 
 - 💎 **Más de 1,000 componentes**: Efectos de texto, botones animados, tarjetas 3D, loaders futuristas, formularios interactivos y navegación moderna.
 - 🚀 **Zero Dependencies**: El CLI y la librería funcionan con Node.js puro nativo, sin dependencias externas pesadas ni vulnerabilidades.
@@ -38,13 +38,13 @@ No necesitas instalar nada previamente. Simplemente usa `npx`:
 
 ```bash
 # Instalar un componente directamente en tu proyecto
-npx @echedev/kit add 3d-cube-rubiks-twist
+npx @echedev98/kit add 3d-cube-rubiks-twist
 
 # Instalar varios componentes a la vez
-npx @echedev/kit add neon-button glow-card
+npx @echedev98/kit add neon-button glow-card
 
 # Instalar en una carpeta personalizada
-npx @echedev/kit add neon-button -o ./src/components/ui
+npx @echedev98/kit add neon-button -o ./src/components/ui
 ```
 
 ### ¿Qué se crea al instalar un componente?
@@ -62,13 +62,13 @@ Cada componente descargado incluye:
 
 | Comando | Descripción | Ejemplo |
 |---|---|---|
-| `npx @echedev/kit add <id...>` | Instala uno o más componentes | `npx @echedev/kit add 3d-card` |
-| `npx @echedev/kit search <término>` | Busca componentes por nombre o tag | `npx @echedev/kit search button` |
-| `npx @echedev/kit list` | Lista componentes disponibles | `npx @echedev/kit list -c Buttons` |
-| `npx @echedev/kit info <id>` | Inspecciona detalles de un componente | `npx @echedev/kit info 3d-range-slider` |
-| `npx @echedev/kit categories` | Lista todas las categorías y cantidad | `npx @echedev/kit categories` |
-| `npx @echedev/kit init` | Crea el fichero de configuración local | `npx @echedev/kit init` |
-| `npx @echedev/kit` | Abre el **modo interactivo** en terminal | `npx @echedev/kit` |
+| `npx @echedev98/kit add <id...>` | Instala uno o más componentes | `npx @echedev98/kit add 3d-card` |
+| `npx @echedev98/kit search <término>` | Busca componentes por nombre o tag | `npx @echedev98/kit search button` |
+| `npx @echedev98/kit list` | Lista componentes disponibles | `npx @echedev98/kit list -c Buttons` |
+| `npx @echedev98/kit info <id>` | Inspecciona detalles de un componente | `npx @echedev98/kit info 3d-range-slider` |
+| `npx @echedev98/kit categories` | Lista todas las categorías y cantidad | `npx @echedev98/kit categories` |
+| `npx @echedev98/kit init` | Crea el fichero de configuración local | `npx @echedev98/kit init` |
+| `npx @echedev98/kit` | Abre el **modo interactivo** en terminal | `npx @echedev98/kit` |
 
 ### Opciones y Banderas
 - `-o, --output <dir>`: Ruta de destino (por defecto: `./components/echedev/`).
@@ -86,7 +86,7 @@ Cada componente descargado incluye:
 Si prefieres integrarlo en tus scripts de build, plugins de Vite o utilidades internas:
 
 ```bash
-npm install @echedev/kit
+npm install @echedev98/kit
 ```
 
 ```javascript
@@ -96,7 +96,7 @@ import {
   listComponents,
   getCategories,
   installComponent
-} from '@echedev/kit';
+} from '@echedev98/kit';
 
 // 1. Buscar componentes
 const buttons = await searchComponents('glow');

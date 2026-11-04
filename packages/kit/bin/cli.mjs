@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * CLI de @echedev/kit
+ * CLI de @echedev98/kit
  * Instalable y ejecutable con un solo comando:
- *   npx @echedev/kit add <component-id>
+ *   npx @echedev98/kit add <component-id>
  */
 
 import path from "node:path";
@@ -29,7 +29,7 @@ function showHelp() {
   printBanner();
   console.log(`
 ${c.bold("USO:")}
-  ${c.cyan("npx @echedev/kit")} ${c.yellow("<comando>")} [opciones]
+  ${c.cyan("npx @echedev98/kit")} ${c.yellow("<comando>")} [opciones]
 
 ${c.bold("COMANDOS:")}
   ${c.green("add")} ${c.yellow("<id...>")}${" ".repeat(14)} Instala uno o más componentes en tu proyecto
@@ -51,16 +51,16 @@ ${c.bold("OPCIONES:")}
 
 ${c.bold("EJEMPLOS:")}
   ${c.gray("# Instalar un componente con un solo comando")}
-  ${c.cyan("npx @echedev/kit add 3d-cube-rubiks-twist")}
+  ${c.cyan("npx @echedev98/kit add 3d-cube-rubiks-twist")}
 
   ${c.gray("# Instalar varios componentes en una carpeta personalizada")}
-  ${c.cyan("npx @echedev/kit add neon-button glow-card -o ./src/ui")}
+  ${c.cyan("npx @echedev98/kit add neon-button glow-card -o ./src/ui")}
 
   ${c.gray("# Buscar componentes de botones")}
-  ${c.cyan("npx @echedev/kit search button")}
+  ${c.cyan("npx @echedev98/kit search button")}
 
   ${c.gray("# Modo interactivo")}
-  ${c.cyan("npx @echedev/kit")}
+  ${c.cyan("npx @echedev98/kit")}
 `);
 }
 
@@ -98,7 +98,7 @@ function parseArgs(rawArgs) {
   while (i < rawArgs.length) {
     const arg = rawArgs[i];
 
-    if (arg === "-o" || arg === "--output") {
+    if ((arg === "-o" || arg === "--output") && i + 1 < rawArgs.length) {
       parsed.output = rawArgs[++i];
     } else if (arg === "-f" || arg === "--overwrite") {
       parsed.overwrite = true;
@@ -106,10 +106,11 @@ function parseArgs(rawArgs) {
       parsed.flat = true;
     } else if (arg === "--snippet-only") {
       parsed.snippetOnly = true;
-    } else if (arg === "-c" || arg === "--category") {
+    } else if ((arg === "-c" || arg === "--category") && i + 1 < rawArgs.length) {
       parsed.category = rawArgs[++i];
-    } else if (arg === "-l" || arg === "--limit") {
-      parsed.limit = parseInt(rawArgs[++i], 10);
+    } else if ((arg === "-l" || arg === "--limit") && i + 1 < rawArgs.length) {
+      const parsedNum = parseInt(rawArgs[++i], 10);
+      parsed.limit = Number.isNaN(parsedNum) ? null : parsedNum;
     } else if (arg === "--json") {
       parsed.json = true;
     } else if (arg === "-h" || arg === "--help") {
@@ -132,7 +133,7 @@ async function handleAdd(parsed) {
   const ids = parsed.positionals;
   if (ids.length === 0) {
     console.error(`\n${symbols.cross} ${c.red("Debes especificar al menos un ID de componente.")}`);
-    console.log(`Ejemplo: ${c.cyan("npx @echedev/kit add 3d-cube-rubiks-twist")}\n`);
+    console.log(`Ejemplo: ${c.cyan("npx @echedev98/kit add 3d-cube-rubiks-twist")}\n`);
     process.exit(1);
   }
 
@@ -171,7 +172,7 @@ async function handleSearch(parsed) {
   const query = parsed.positionals.join(" ").trim();
   if (!query) {
     console.error(`\n${symbols.cross} ${c.red("Especifica un término de búsqueda.")}`);
-    console.log(`Ejemplo: ${c.cyan("npx @echedev/kit search card")}\n`);
+    console.log(`Ejemplo: ${c.cyan("npx @echedev98/kit search card")}\n`);
     process.exit(1);
   }
 
@@ -187,7 +188,7 @@ async function handleSearch(parsed) {
 
   if (results.length === 0) {
     console.log(`  ${c.yellow("No se encontraron componentes coincidentes.")}`);
-    console.log(`  Prueba con otro término o usa ${c.cyan("npx @echedev/kit list")} para ver todos.\n`);
+    console.log(`  Prueba con otro término o usa ${c.cyan("npx @echedev98/kit list")} para ver todos.\n`);
     return;
   }
 
@@ -198,7 +199,7 @@ async function handleSearch(parsed) {
     if (item.description) {
       console.log(`    ${c.dim(item.description)}`);
     }
-    console.log(`    ${c.gray("Para instalar:")} ${c.green(`npx @echedev/kit add ${item.id}`)}\n`);
+    console.log(`    ${c.gray("Para instalar:")} ${c.green(`npx @echedev98/kit add ${item.id}`)}\n`);
   }
 }
 
@@ -225,7 +226,7 @@ async function handleList(parsed) {
   }
 
   console.log(`\n  ${c.dim(`Mostrando ${items.length} componentes. Usa -l <n> para ver más o -c <categoría> para filtrar.`)}`);
-  console.log(`  Para ver categorías: ${c.cyan("npx @echedev/kit categories")}\n`);
+  console.log(`  Para ver categorías: ${c.cyan("npx @echedev98/kit categories")}\n`);
 }
 
 /**
@@ -235,7 +236,7 @@ async function handleInfo(parsed) {
   const id = parsed.positionals[0];
   if (!id) {
     console.error(`\n${symbols.cross} ${c.red("Especifica el ID del componente.")}`);
-    console.log(`Ejemplo: ${c.cyan("npx @echedev/kit info 3d-cube-rubiks-twist")}\n`);
+    console.log(`Ejemplo: ${c.cyan("npx @echedev98/kit info 3d-cube-rubiks-twist")}\n`);
     process.exit(1);
   }
 
@@ -254,7 +255,7 @@ async function handleInfo(parsed) {
     console.log(`  ${c.bold("Etiquetas:")}   ${comp.tags.join(", ") || "N/A"}`);
     console.log(`  ${c.bold("Archivos:")}    ${Object.keys(comp.files).join(", ")}`);
     console.log(`\n${c.bold("Instalación rápida:")}`);
-    console.log(`  ${c.green(`npx @echedev/kit add ${comp.id}`)}\n`);
+    console.log(`  ${c.green(`npx @echedev98/kit add ${comp.id}`)}\n`);
   } catch (err) {
     console.error(`\n${symbols.cross} ${c.red(err.message)}\n`);
     process.exit(1);
@@ -272,13 +273,13 @@ async function handleCategories(parsed) {
     return;
   }
 
-  console.log(`\n${symbols.bullet} Categorías disponibles en @echedev/kit:\n`);
+  console.log(`\n${symbols.bullet} Categorías disponibles en @echedev98/kit:\n`);
 
   for (const [cat, count] of Object.entries(categories)) {
     console.log(`  ${c.cyan(cat.padEnd(20))} ${c.bold(String(count).padStart(5))} componentes`);
   }
 
-  console.log(`\n  Filtra por categoría: ${c.cyan("npx @echedev/kit list -c Buttons")}\n`);
+  console.log(`\n  Filtra por categoría: ${c.cyan("npx @echedev98/kit list -c Buttons")}\n`);
 }
 
 /**
@@ -303,7 +304,7 @@ async function handleInit() {
 }
 
 /**
- * Modo interactivo para cuando se ejecuta `npx @echedev/kit` sin argumentos.
+ * Modo interactivo para cuando se ejecuta `npx @echedev98/kit` sin argumentos.
  */
 async function runInteractive() {
   printBanner();
