@@ -35,7 +35,9 @@
     "format": "prettier --write \"Web/scripts/**/*.mjs\"",
     "minificar": "node Web/scripts/minificar.mjs --force",
     "sellar": "node Web/scripts/stamp-assets.mjs --force",
-    "zips": "node Web/scripts/build-zips.mjs --force"
+    "zips": "node Web/scripts/build-zips.mjs --force",
+    "kit:build": "node packages/kit/scripts/build-registry.mjs",
+    "kit:test": "node --test packages/kit/__tests__/*.test.mjs"
   },
   "engines": {
     "node": ">=20"

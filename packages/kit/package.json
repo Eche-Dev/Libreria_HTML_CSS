@@ -1,0 +1,51 @@
+{
+  "name": "@echedev98/kit",
+  "version": "1.0.0",
+  "description": "Librería de componentes HTML, CSS y JS instalable en cualquier proyecto con un solo comando.",
+  "type": "module",
+  "bin": {
+    "echedev": "./bin/cli.mjs",
+    "echedev-kit": "./bin/cli.mjs",
+    "kit": "./bin/cli.mjs"
+  },
+  "main": "./src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "registry",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build-registry.mjs",
+    "prepublishOnly": "node scripts/build-registry.mjs",
+    "test": "node --test __tests__/*.test.mjs"
+  },
+  "keywords": [
+    "echedev",
+    "echedev-kit",
+    "components",
+    "ui",
+    "html",
+    "css",
+    "javascript",
+    "vanilla",
+    "cli",
+    "design-system",
+    "component-library"
+  ],
+  "author": "Eche-Dev",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eche-Dev/Libreria_HTML_CSS.git",
+    "directory": "packages/kit"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
