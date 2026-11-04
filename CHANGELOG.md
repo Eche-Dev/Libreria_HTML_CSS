@@ -9,6 +9,16 @@ Cada fase terminada se registra aquí con su fecha. Las fases están definidas e
 en [`Docs/02-auditorias/Auditoria.md`](./Docs/02-auditorias/Auditoria.md) §10, y lo que se aplicó de cada una
 queda en [`Docs/02-auditorias/Fases-de-Auditoria-Aplicadas/`](./Docs/02-auditorias/Fases-de-Auditoria-Aplicadas/).
 
+## [1.1.0] - 2026-11-04
+
+### Añadido
+- Publicación del paquete oficial en NPM: [`@echedev98/kit`](https://www.npmjs.com/package/@echedev98/kit).
+- CLI instalable y ejecutable con un solo comando: `npx @echedev98/kit add <id>`. Permite descargar e integrar cualquiera de los **1 018 componentes** directamente en cualquier proyecto (HTML, React, Vue, Astro, Next.js, etc.) con sus archivos `index.html` (demo autónoma), `snippet.html` (código limpio listo para template), `styles.css` y `script.js`.
+- Comandos del CLI: `add`, `search`, `list`, `info`, `categories`, `init` y modo interactivo en terminal.
+- API programática para Node.js: `getComponent()`, `searchComponents()`, `listComponents()`, `getCategories()`, `installComponent()`.
+- Nuevo compilador de registro: `npm run kit:build` y suite de tests `npm run kit:test`.
+- Cero dependencias en tiempo de ejecución: construido 100% con APIs nativas de Node.js.
+
 ## [1.0.0] - 2026-10-03
 
 - Version inicial del catalogo, tras aplicar las fases 0 a 7 del plan de la
