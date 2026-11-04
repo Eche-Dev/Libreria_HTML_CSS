@@ -14,7 +14,7 @@ Copia, pega y adapta.
 
 [**Ver la biblioteca web**](https://libreria-html-css.vercel.app/) · [**Paquete NPM (@echedev98/kit)**](https://www.npmjs.com/package/@echedev98/kit) · [Cómo usar un componente](./Web/como-usar.html) · [Privacidad](./Web/privacidad.html) · [Aviso legal](./Web/legal.html)
 
-> 🚀 **¡Novedad! Librería y CLI oficial en NPM (@echedev98/kit):** Ahora puedes instalar cualquiera de los 1 018 componentes con un solo comando en tu terminal (`npx @echedev98/kit add <componente>`). [Ver paquete en NPM](https://www.npmjs.com/package/@echedev98/kit) · [Ver release v1.1.0](https://github.com/Eche-Dev/Libreria_HTML_CSS/releases/tag/v1.1.0).
+> 🚀 **¡Novedad! Librería y CLI oficial en NPM (@echedev98/kit):** Ahora puedes instalar cualquiera de los 1 018 componentes con un solo comando en tu terminal (`npx @echedev98/kit add <componente>`). [Ver paquete en NPM](https://www.npmjs.com/package/@echedev98/kit) · [Ver release v1.2.0](https://github.com/Eche-Dev/Libreria_HTML_CSS/releases/tag/v1.2.0).
 
 </div>
 

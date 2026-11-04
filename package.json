@@ -1,6 +1,6 @@
 {
   "name": "libreria-html-css",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "description": "Catalogo estatico de demos independientes de HTML, CSS y JavaScript.",
   "type": "module",

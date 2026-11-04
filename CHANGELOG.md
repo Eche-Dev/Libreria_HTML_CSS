@@ -9,7 +9,7 @@ Cada fase terminada se registra aquí con su fecha. Las fases están definidas e
 en [`Docs/02-auditorias/Auditoria.md`](./Docs/02-auditorias/Auditoria.md) §10, y lo que se aplicó de cada una
 queda en [`Docs/02-auditorias/Fases-de-Auditoria-Aplicadas/`](./Docs/02-auditorias/Fases-de-Auditoria-Aplicadas/).
 
-## [1.1.0] - 2026-11-04
+## [1.2.0] - 2026-11-04
 
 ### Añadido
 - Publicación del paquete oficial en NPM: [`@echedev98/kit`](https://www.npmjs.com/package/@echedev98/kit).
