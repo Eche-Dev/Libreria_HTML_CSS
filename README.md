@@ -10,10 +10,11 @@ Copia, pega y adapta.
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kindred-98_Libreria_HTML_CSS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kindred-98_Libreria_HTML_CSS)
 [![Licencia](https://img.shields.io/badge/licencia-MIT-d4f779?style=flat-square&labelColor=1b231c)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-5FA04E?style=flat-square&labelColor=1b231c)](./package.json)
+[![NPM Version](https://img.shields.io/npm/v/@echedev98/kit.svg?style=flat-square&color=cb3837)](https://www.npmjs.com/package/@echedev98/kit)
 
-[**Ver la biblioteca**](https://libreria-html-css.vercel.app/) · [Cómo usar un componente](./Web/como-usar.html) · [Privacidad](./Web/privacidad.html) · [Aviso legal](./Web/legal.html)
+[**Ver la biblioteca web**](https://libreria-html-css.vercel.app/) · [**Paquete NPM (@echedev98/kit)**](https://www.npmjs.com/package/@echedev98/kit) · [Cómo usar un componente](./Web/como-usar.html) · [Privacidad](./Web/privacidad.html) · [Aviso legal](./Web/legal.html)
 
-> 🎉 **Versión estable 1.0.0 publicada.** [Ver notas de la release](https://github.com/Eche-Dev/Libreria_HTML_CSS/releases/tag/v1.0.0).
+> 🚀 **¡Novedad! Librería y CLI oficial en NPM (@echedev98/kit):** Ahora puedes instalar cualquiera de los 1 018 componentes con un solo comando en tu terminal (`npx @echedev98/kit add <componente>`). [Ver paquete en NPM](https://www.npmjs.com/package/@echedev98/kit) · [Ver release v1.2.0](https://github.com/Eche-Dev/Libreria_HTML_CSS/releases/tag/v1.2.0).
 
 </div>
 
@@ -145,6 +146,31 @@ En corto:
 
 No hace falta instalar nada para usar un componente: es copiar y pegar.
 
+#### O con un solo comando en tu terminal (CLI en NPM)
+
+También puedes instalar cualquiera de los **1 018 componentes** directamente en tu proyecto (React, Vue, Astro, HTML plano, Next.js, etc.) usando el paquete oficial publicado en NPM:
+
+```bash
+# Instalar un componente directamente en tu proyecto
+npx @echedev98/kit add 3d-cube-rubiks-twist
+
+# Instalar varios a la vez en una carpeta personalizada
+npx @echedev98/kit add neon-button glow-card -o ./src/components/ui
+
+# Buscar componentes por palabra clave desde la consola
+npx @echedev98/kit search button
+
+# Explorar categorías o modo interactivo
+npx @echedev98/kit categories
+npx @echedev98/kit
+```
+
+También puedes consumirlo programáticamente instalando el paquete:
+```bash
+npm install @echedev98/kit
+```
+> Ver documentación completa del paquete en [NPM (@echedev98/kit)](https://www.npmjs.com/package/@echedev98/kit) y en [`packages/kit/README.md`](./packages/kit/README.md).
+
 ### Los comandos disponibles
 
 ```bash
@@ -157,6 +183,10 @@ npm run iconos            # regenera los iconos PNG de la PWA
 npm run sellar            # sella el ?v= de los assets (lo hace el despliegue)
 npm run zips              # reconstruye los ZIP de Davoker
 npm run minificar         # minifica los assets del sitio
+
+# Paquete NPM (@echedev98/kit)
+npm run kit:build         # compila el registro de los 1 018 componentes para NPM
+npm run kit:test          # ejecuta los tests de la librería del kit
 
 # Estilo, tipos y tests
 npm test                  # 55 tests unitarios
