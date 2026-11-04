@@ -27,103 +27,18 @@ async function ensureCatalogExists() {
   }
 }
 
-async function buildRegistry() {
-  console.log("==========================================");
-  console.log("  @echedev98/kit - Compilador de Registro   ");
-  console.log("==========================================");
+/**
+ * Genera el archivo README para el componente.
+ *
+ * @param {object} meta
+ * @param {string} snippet
+ * @returns {string}
+ */
+function createReadme(meta, snippet) {
+  const preview = snippet.slice(0, 150);
+  const jsUsage = meta.hasJs ? '\n<!-- 3. Enlazar script -->\n<script src="./script.js"></script>' : "";
 
-  await ensureCatalogExists();
-
-  const rawCatalog = await readFile(catalogPath, "utf8");
-  const catalog = JSON.parse(rawCatalog);
-  console.log(`Catálogo cargado: ${catalog.length} componentes encontrados.`);
-
-  // Limpiar y preparar directorios
-  await rm(componentsDir, { recursive: true, force: true });
-  await mkdir(componentsDir, { recursive: true });
-
-  const kitCatalog = [];
-  let totalFiles = 0;
-  let totalBytes = 0;
-
-  for (const item of catalog) {
-    const demoHtmlPath = path.resolve(repoRoot, "Web", item.preview);
-    const demoDir = path.dirname(demoHtmlPath);
-
-    let htmlContent = "";
-    try {
-      htmlContent = await readFile(demoHtmlPath, "utf8");
-    } catch {
-      console.warn(`[AVISO] No se pudo leer HTML para ${item.id} en ${demoHtmlPath}`);
-      continue;
-    }
-
-    const dirFiles = await readdir(demoDir);
-
-    // Identificar archivo CSS
-    let cssFile = dirFiles.find((f) => f.toLowerCase() === "styles.css") ||
-                   dirFiles.find((f) => f.toLowerCase().endsWith(".css"));
-    let cssContent = "";
-    if (cssFile) {
-      cssContent = await readFile(path.join(demoDir, cssFile), "utf8");
-    }
-
-    // Identificar archivo JS
-    let jsFile = dirFiles.find((f) => f.toLowerCase() === "script.js") ||
-                 dirFiles.find((f) => f.toLowerCase() === "main.js") ||
-                 dirFiles.find((f) => f.toLowerCase().endsWith(".js"));
-    let jsContent = "";
-    if (jsFile) {
-      jsContent = await readFile(path.join(demoDir, jsFile), "utf8");
-    }
-
-    const snippet = extractSnippet(htmlContent);
-
-    // Crear carpeta para el componente
-    const compTargetDir = path.join(componentsDir, item.id);
-    await mkdir(compTargetDir, { recursive: true });
-
-    // Guardar index.html (preview completa)
-    await writeFile(path.join(compTargetDir, "index.html"), htmlContent, "utf8");
-    totalFiles++;
-    totalBytes += Buffer.byteLength(htmlContent);
-
-    // Guardar snippet.html (código puro para incrustar)
-    await writeFile(path.join(compTargetDir, "snippet.html"), snippet, "utf8");
-    totalFiles++;
-    totalBytes += Buffer.byteLength(snippet);
-
-    // Guardar styles.css si existe
-    if (cssContent) {
-      await writeFile(path.join(compTargetDir, "styles.css"), cssContent, "utf8");
-      totalFiles++;
-      totalBytes += Buffer.byteLength(cssContent);
-    }
-
-    // Guardar script.js si existe
-    if (jsContent) {
-      await writeFile(path.join(compTargetDir, "script.js"), jsContent, "utf8");
-      totalFiles++;
-      totalBytes += Buffer.byteLength(jsContent);
-    }
-
-    // Guardar metadatos individuales
-    const meta = {
-      id: item.id,
-      name: item.name || item.id,
-      category: item.category || "Other",
-      author: item.author || "Eche-Dev",
-      description: item.descriptionEs || item.description || "",
-      tags: Array.isArray(item.tags) ? item.tags : [],
-      hasJs: Boolean(jsContent),
-      hasCss: Boolean(cssContent),
-    };
-
-    await writeFile(path.join(compTargetDir, "meta.json"), JSON.stringify(meta, null, 2), "utf8");
-    totalFiles++;
-
-    // Guardar README de uso rápido para el desarrollador que instale el componente
-    const componentReadme = `# ${meta.name}
+  return `# ${meta.name}
 
 > Componente de la librería [@echedev98/kit](https://www.npmjs.com/package/@echedev98/kit)  
 > Categoría: **${meta.category}** | Autor: **${meta.author}**
@@ -139,36 +54,111 @@ async function buildRegistry() {
 <link rel="stylesheet" href="./styles.css">
 
 <!-- 2. Pegar contenido de snippet.html -->
-${snippet.slice(0, 150)}...
-
-${meta.hasJs ? '<!-- 3. Enlazar script -->\n<script src="./script.js"></script>' : ""}
+${preview}...
+${jsUsage}
 \`\`\`
 `;
-    await writeFile(path.join(compTargetDir, "README.md"), componentReadme, "utf8");
-    totalFiles++;
+}
 
-    kitCatalog.push(meta);
+/**
+ * Procesa y escribe un componente individual en el registro.
+ *
+ * @param {object} item
+ * @returns {Promise<object|null>}
+ */
+async function processComponent(item) {
+  const demoHtmlPath = path.resolve(repoRoot, "Web", item.preview);
+  const demoDir = path.dirname(demoHtmlPath);
+
+  let htmlContent = "";
+  try {
+    htmlContent = await readFile(demoHtmlPath, "utf8");
+  } catch {
+    console.warn(`[AVISO] No se pudo leer HTML para ${item.id} en ${demoHtmlPath}`);
+    return null;
   }
 
-  // Guardar catálogo consolidado en el registro
+  const dirFiles = await readdir(demoDir);
+  const cssFile = dirFiles.find((f) => f.toLowerCase() === "styles.css") ||
+                 dirFiles.find((f) => f.toLowerCase().endsWith(".css"));
+  const cssContent = cssFile ? await readFile(path.join(demoDir, cssFile), "utf8") : "";
+
+  const jsFile = dirFiles.find((f) => f.toLowerCase() === "script.js") ||
+                dirFiles.find((f) => f.toLowerCase() === "main.js") ||
+                dirFiles.find((f) => f.toLowerCase().endsWith(".js"));
+  const jsContent = jsFile ? await readFile(path.join(demoDir, jsFile), "utf8") : "";
+
+  const snippet = extractSnippet(htmlContent);
+  const compTargetDir = path.join(componentsDir, item.id);
+  await mkdir(compTargetDir, { recursive: true });
+
+  await writeFile(path.join(compTargetDir, "index.html"), htmlContent, "utf8");
+  await writeFile(path.join(compTargetDir, "snippet.html"), snippet, "utf8");
+
+  if (cssContent) {
+    await writeFile(path.join(compTargetDir, "styles.css"), cssContent, "utf8");
+  }
+  if (jsContent) {
+    await writeFile(path.join(compTargetDir, "script.js"), jsContent, "utf8");
+  }
+
+  const meta = {
+    id: item.id,
+    name: item.name || item.id,
+    category: item.category || "Other",
+    author: item.author || "Eche-Dev",
+    description: item.descriptionEs || item.description || "",
+    tags: Array.isArray(item.tags) ? item.tags : [],
+    hasJs: Boolean(jsContent),
+    hasCss: Boolean(cssContent),
+  };
+
+  await writeFile(path.join(compTargetDir, "meta.json"), JSON.stringify(meta, null, 2), "utf8");
+  await writeFile(path.join(compTargetDir, "README.md"), createReadme(meta, snippet), "utf8");
+
+  return meta;
+}
+
+/**
+ * Builds the standalone component registry for @echedev98/kit.
+ */
+async function buildRegistry() {
+  console.log("==========================================");
+  console.log("  @echedev98/kit - Compilador de Registro ");
+  console.log("==========================================");
+
+  await ensureCatalogExists();
+
+  const rawCatalog = await readFile(catalogPath, "utf8");
+  const catalog = JSON.parse(rawCatalog);
+  console.log(`Catálogo cargado: ${catalog.length} componentes encontrados.`);
+
+  await rm(componentsDir, { recursive: true, force: true });
+  await mkdir(componentsDir, { recursive: true });
+
+  const kitCatalog = [];
+  for (const item of catalog) {
+    const meta = await processComponent(item);
+    if (meta) {
+      kitCatalog.push(meta);
+    }
+  }
+
   await writeFile(
     path.join(registryDir, "catalog.json"),
     JSON.stringify(kitCatalog, null, 2),
     "utf8"
   );
-  totalFiles++;
 
-  console.log(`\n✔ Registro compilado exitosamente:`);
-  console.log(`  - Componentes procesados: ${kitCatalog.length}`);
-  console.log(`  - Ficheros generados:     ${totalFiles}`);
-  console.log(`  - Tamaño total:           ${(totalBytes / 1024 / 1024).toFixed(2)} MB`);
-  console.log(`  - Destino:                ${registryDir}\n`);
+  console.log(`\n✔ Registro compilado exitosamente: ${kitCatalog.length} componentes en ${registryDir}\n`);
 }
 
-// Ejecutar si se llama directamente
-if (process.argv[1] === __filename) {
-  buildRegistry().catch((err) => {
+// Ejecutar si se llama directamente con top-level await
+if (path.resolve(process.argv[1]) === path.resolve(__filename)) {
+  try {
+    await buildRegistry();
+  } catch (err) {
     console.error("Error al compilar el registro:", err);
     process.exit(1);
-  });
+  }
 }

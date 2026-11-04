@@ -11,7 +11,6 @@ import process from "node:process";
 import readline from "node:readline";
 import { readFile, writeFile, access } from "node:fs/promises";
 import {
-  getCatalog,
   getComponent,
   searchComponents,
   listComponents,
@@ -79,7 +78,7 @@ async function loadProjectConfig() {
 }
 
 /**
- * Parsea argumentos simples de línea de comandos.
+ * Parsea argumentos simples de línea de comandos reduciendo la complejidad ciclomática.
  */
 function parseArgs(rawArgs) {
   const parsed = {
@@ -94,36 +93,68 @@ function parseArgs(rawArgs) {
     json: false,
   };
 
-  let i = 0;
-  while (i < rawArgs.length) {
+  for (let i = 0; i < rawArgs.length; i++) {
     const arg = rawArgs[i];
-
-    if ((arg === "-o" || arg === "--output") && i + 1 < rawArgs.length) {
-      parsed.output = rawArgs[++i];
-    } else if (arg === "-f" || arg === "--overwrite") {
-      parsed.overwrite = true;
-    } else if (arg === "--flat") {
-      parsed.flat = true;
-    } else if (arg === "--snippet-only") {
-      parsed.snippetOnly = true;
-    } else if ((arg === "-c" || arg === "--category") && i + 1 < rawArgs.length) {
-      parsed.category = rawArgs[++i];
-    } else if ((arg === "-l" || arg === "--limit") && i + 1 < rawArgs.length) {
-      const parsedNum = parseInt(rawArgs[++i], 10);
-      parsed.limit = Number.isNaN(parsedNum) ? null : parsedNum;
-    } else if (arg === "--json") {
-      parsed.json = true;
-    } else if (arg === "-h" || arg === "--help") {
-      parsed.command = "help";
-    } else if (!parsed.command) {
-      parsed.command = arg;
-    } else {
-      parsed.positionals.push(arg);
+    switch (arg) {
+      case "-o":
+      case "--output":
+        if (i + 1 < rawArgs.length) parsed.output = rawArgs[++i];
+        break;
+      case "-f":
+      case "--overwrite":
+        parsed.overwrite = true;
+        break;
+      case "--flat":
+        parsed.flat = true;
+        break;
+      case "--snippet-only":
+        parsed.snippetOnly = true;
+        break;
+      case "-c":
+      case "--category":
+        if (i + 1 < rawArgs.length) parsed.category = rawArgs[++i];
+        break;
+      case "-l":
+      case "--limit":
+        if (i + 1 < rawArgs.length) {
+          const num = Number.parseInt(rawArgs[++i], 10);
+          parsed.limit = Number.isNaN(num) ? null : num;
+        }
+        break;
+      case "--json":
+        parsed.json = true;
+        break;
+      case "-h":
+      case "--help":
+        parsed.command = "help";
+        break;
+      default:
+        if (!parsed.command) {
+          parsed.command = arg;
+        } else {
+          parsed.positionals.push(arg);
+        }
     }
-    i++;
   }
 
   return parsed;
+}
+
+/**
+ * Instala un componente e imprime su resumen en consola.
+ */
+async function installSingleComponent(id, options) {
+  try {
+    const result = await installComponent(id, options);
+    console.log(`${symbols.check} ${c.bold(c.green(id))} instalado con éxito en:`);
+    console.log(`  ${c.gray(result.targetDir)}`);
+    for (const file of result.writtenFiles) {
+      console.log(`  ${c.dim("└─")} ${path.basename(file)}`);
+    }
+    console.log("");
+  } catch (err) {
+    console.error(`${symbols.cross} Error al instalar ${c.bold(id)}: ${c.red(err.message)}\n`);
+  }
 }
 
 /**
@@ -143,23 +174,12 @@ async function handleAdd(parsed) {
   console.log(`\n${symbols.bullet} Instalando ${c.bold(ids.length)} componente(s) en ${c.cyan(outputDir)}...\n`);
 
   for (const id of ids) {
-    try {
-      const result = await installComponent(id, {
-        outputDir,
-        flat: parsed.flat,
-        overwrite: parsed.overwrite,
-        snippetOnly: parsed.snippetOnly,
-      });
-
-      console.log(`${symbols.check} ${c.bold(c.green(id))} instalado con éxito en:`);
-      console.log(`  ${c.gray(result.targetDir)}`);
-      for (const file of result.writtenFiles) {
-        console.log(`  ${c.dim("└─")} ${path.basename(file)}`);
-      }
-      console.log("");
-    } catch (err) {
-      console.error(`${symbols.cross} Error al instalar ${c.bold(id)}: ${c.red(err.message)}\n`);
-    }
+    await installSingleComponent(id, {
+      outputDir,
+      flat: parsed.flat,
+      overwrite: parsed.overwrite,
+      snippetOnly: parsed.snippetOnly,
+    });
   }
 
   console.log(`${c.green(c.bold("¡Listo!"))} Puedes importar o enlazar los componentes directamente en tu HTML.\n`);
@@ -184,7 +204,8 @@ async function handleSearch(parsed) {
     return;
   }
 
-  console.log(`\n${symbols.bullet} Resultados para ${c.cyan(`"${query}"`)} (${results.length} encontrados):\n`);
+  const termLabel = c.cyan('"' + query + '"');
+  console.log(`\n${symbols.bullet} Resultados para ${termLabel} (${results.length} encontrados):\n`);
 
   if (results.length === 0) {
     console.log(`  ${c.yellow("No se encontraron componentes coincidentes.")}`);
@@ -194,12 +215,13 @@ async function handleSearch(parsed) {
 
   for (const item of results) {
     const hasJsTag = item.hasJs ? c.yellow(" [JS]") : "";
+    const installCmd = c.green("npx @echedev98/kit add " + item.id);
     console.log(`  ${c.bold(c.cyan(item.id))}${hasJsTag}`);
     console.log(`    ${c.gray("Categoría:")} ${item.category} | ${c.gray("Autor:")} ${item.author}`);
     if (item.description) {
       console.log(`    ${c.dim(item.description)}`);
     }
-    console.log(`    ${c.gray("Para instalar:")} ${c.green(`npx @echedev98/kit add ${item.id}`)}\n`);
+    console.log(`    ${c.gray("Para instalar:")} ${installCmd}\n`);
   }
 }
 
@@ -218,11 +240,14 @@ async function handleList(parsed) {
     return;
   }
 
-  console.log(`\n${symbols.bullet} Lista de componentes ${parsed.category ? `(Categoría: ${parsed.category})` : ""}:\n`);
+  const categoryLabel = parsed.category ? ` (Categoría: ${parsed.category})` : "";
+  console.log(`\n${symbols.bullet} Lista de componentes${categoryLabel}:\n`);
 
   for (const item of items) {
     const jsIndicator = item.hasJs ? c.yellow(" [JS]") : "";
-    console.log(`  ${c.bold(c.cyan(item.id.padEnd(35)))}${c.gray(item.category.padEnd(15))}${jsIndicator}`);
+    const idPad = item.id.padEnd(35);
+    const catPad = item.category.padEnd(15);
+    console.log(`  ${c.bold(c.cyan(idPad))}${c.gray(catPad)}${jsIndicator}`);
   }
 
   console.log(`\n  ${c.dim(`Mostrando ${items.length} componentes. Usa -l <n> para ver más o -c <categoría> para filtrar.`)}`);
@@ -248,14 +273,17 @@ async function handleInfo(parsed) {
       return;
     }
 
-    console.log(`\n${symbols.star} ${c.bold(c.cyan(comp.name))} ${c.gray(`(${comp.id})`)}`);
+    const idLabel = c.gray("(" + comp.id + ")");
+    const installCmd = c.green("npx @echedev98/kit add " + comp.id);
+
+    console.log(`\n${symbols.star} ${c.bold(c.cyan(comp.name))} ${idLabel}`);
     console.log(`  ${c.bold("Categoría:")}   ${comp.category}`);
     console.log(`  ${c.bold("Autor:")}       ${comp.author}`);
     console.log(`  ${c.bold("Descripción:")} ${comp.description || "N/A"}`);
     console.log(`  ${c.bold("Etiquetas:")}   ${comp.tags.join(", ") || "N/A"}`);
     console.log(`  ${c.bold("Archivos:")}    ${Object.keys(comp.files).join(", ")}`);
     console.log(`\n${c.bold("Instalación rápida:")}`);
-    console.log(`  ${c.green(`npx @echedev98/kit add ${comp.id}`)}\n`);
+    console.log(`  ${installCmd}\n`);
   } catch (err) {
     console.error(`\n${symbols.cross} ${c.red(err.message)}\n`);
     process.exit(1);
@@ -304,7 +332,7 @@ async function handleInit() {
 }
 
 /**
- * Modo interactivo para cuando se ejecuta `npx @echedev98/kit` sin argumentos.
+ * Modo interactivo para cuando se ejecuta el CLI sin argumentos.
  */
 async function runInteractive() {
   printBanner();
@@ -371,7 +399,7 @@ async function main() {
       await handleCategories(parsed);
       break;
     case "init":
-      await handleInit(parsed);
+      await handleInit();
       break;
     case "help":
       showHelp();
@@ -390,7 +418,9 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+try {
+  await main();
+} catch (err) {
   console.error(`\n${symbols.cross} Error inesperado:`, err);
   process.exit(1);
-});
+}

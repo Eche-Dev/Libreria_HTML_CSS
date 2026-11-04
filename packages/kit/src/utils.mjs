@@ -1,5 +1,5 @@
 /**
- * Utilidades de terminal y formateo sin dependencias externas para @echedev/kit.
+ * Utilidades de terminal y formateo sin dependencias externas para @echedev98/kit.
  */
 
 const isColorSupported =
@@ -39,6 +39,113 @@ export const symbols = {
 };
 
 /**
+ * Extrae el contenido entre <body> y </body> si están presentes.
+ *
+ * @param {string} rawHtml
+ * @returns {string}
+ */
+function extractBody(rawHtml) {
+  const lower = rawHtml.toLowerCase();
+  const bodyStart = lower.indexOf("<body");
+  if (bodyStart === -1) return rawHtml;
+
+  const bodyTagEnd = lower.indexOf(">", bodyStart);
+  if (bodyTagEnd === -1) return rawHtml;
+
+  const bodyClose = lower.lastIndexOf("</body>");
+  if (bodyClose > bodyTagEnd) {
+    return rawHtml.slice(bodyTagEnd + 1, bodyClose);
+  }
+  return rawHtml;
+}
+
+/**
+ * Elimina etiquetas <script>...</script> del fragmento HTML.
+ *
+ * @param {string} html
+ * @returns {string}
+ */
+function removeScriptTags(html) {
+  let clean = "";
+  let idx = 0;
+  const lower = html.toLowerCase();
+
+  while (idx < html.length) {
+    const scriptStart = lower.indexOf("<script", idx);
+    if (scriptStart === -1) {
+      clean += html.slice(idx);
+      break;
+    }
+    clean += html.slice(idx, scriptStart);
+    const scriptTagEnd = lower.indexOf(">", scriptStart);
+    if (scriptTagEnd === -1) break;
+
+    const scriptClose = lower.indexOf("</script", scriptTagEnd);
+    if (scriptClose === -1) break;
+
+    const closeTagEnd = lower.indexOf(">", scriptClose);
+    if (closeTagEnd === -1) break;
+
+    idx = closeTagEnd + 1;
+  }
+  return clean;
+}
+
+/**
+ * Elimina etiquetas <link ...rel="stylesheet"...> del fragmento HTML.
+ *
+ * @param {string} html
+ * @returns {string}
+ */
+function removeStyleLinks(html) {
+  let clean = "";
+  let idx = 0;
+  const lower = html.toLowerCase();
+
+  while (idx < html.length) {
+    const linkStart = lower.indexOf("<link", idx);
+    if (linkStart === -1) {
+      clean += html.slice(idx);
+      break;
+    }
+    clean += html.slice(idx, linkStart);
+    const linkTagEnd = lower.indexOf(">", linkStart);
+    if (linkTagEnd === -1) break;
+
+    const tagChunk = lower.slice(linkStart, linkTagEnd + 1);
+    if (!tagChunk.includes("stylesheet")) {
+      clean += html.slice(linkStart, linkTagEnd + 1);
+    }
+    idx = linkTagEnd + 1;
+  }
+  return clean;
+}
+
+/**
+ * Elimina comentarios HTML <!-- ... --> del fragmento.
+ *
+ * @param {string} html
+ * @returns {string}
+ */
+function removeComments(html) {
+  let clean = "";
+  let idx = 0;
+
+  while (idx < html.length) {
+    const commentStart = html.indexOf("<!--", idx);
+    if (commentStart === -1) {
+      clean += html.slice(idx);
+      break;
+    }
+    clean += html.slice(idx, commentStart);
+    const commentEnd = html.indexOf("-->", commentStart + 4);
+    if (commentEnd === -1) break;
+    idx = commentEnd + 3;
+  }
+  return clean;
+}
+
+/**
  * Extrae de forma segura el fragmento HTML del cuerpo del documento.
  * No utiliza expresiones regulares complejas para evitar vulnerabilidades de ReDoS
  * o sanitización incompleta (CodeQL/SonarCloud).
@@ -49,95 +156,30 @@ export const symbols = {
 export function extractSnippet(rawHtml) {
   if (!rawHtml || typeof rawHtml !== "string") return "";
 
-  // 1. Extraer contenido entre <body> y </body> si existe
-  let content = rawHtml;
-  const lower = rawHtml.toLowerCase();
-  const bodyStart = lower.indexOf("<body");
-  if (bodyStart !== -1) {
-    const bodyTagEnd = lower.indexOf(">", bodyStart);
-    if (bodyTagEnd !== -1) {
-      const bodyClose = lower.lastIndexOf("</body>");
-      if (bodyClose > bodyTagEnd) {
-        content = rawHtml.slice(bodyTagEnd + 1, bodyClose);
-      }
-    }
-  }
-
-  // 2. Eliminar etiquetas <script>...</script> completamente
-  let clean = "";
-  let idx = 0;
-  while (idx < content.length) {
-    const lowerContent = content.toLowerCase();
-    const scriptStart = lowerContent.indexOf("<script", idx);
-    if (scriptStart === -1) {
-      clean += content.slice(idx);
-      break;
-    }
-    clean += content.slice(idx, scriptStart);
-    const scriptTagEnd = lowerContent.indexOf(">", scriptStart);
-    if (scriptTagEnd === -1) break;
-
-    const scriptClose = lowerContent.indexOf("</script", scriptTagEnd);
-    if (scriptClose === -1) break;
-
-    const closeTagEnd = lowerContent.indexOf(">", scriptClose);
-    if (closeTagEnd === -1) break;
-
-    idx = closeTagEnd + 1;
-  }
-  content = clean;
-
-  // 3. Eliminar etiquetas <link ...rel="stylesheet"...>
-  clean = "";
-  idx = 0;
-  while (idx < content.length) {
-    const lowerContent = content.toLowerCase();
-    const linkStart = lowerContent.indexOf("<link", idx);
-    if (linkStart === -1) {
-      clean += content.slice(idx);
-      break;
-    }
-    clean += content.slice(idx, linkStart);
-    const linkTagEnd = lowerContent.indexOf(">", linkStart);
-    if (linkTagEnd === -1) break;
-
-    const tagChunk = lowerContent.slice(linkStart, linkTagEnd + 1);
-    if (!tagChunk.includes("stylesheet")) {
-      clean += content.slice(linkStart, linkTagEnd + 1);
-    }
-    idx = linkTagEnd + 1;
-  }
-  content = clean;
-
-  // 4. Eliminar comentarios HTML <!-- ... -->
-  clean = "";
-  idx = 0;
-  while (idx < content.length) {
-    const commentStart = content.indexOf("<!--", idx);
-    if (commentStart === -1) {
-      clean += content.slice(idx);
-      break;
-    }
-    clean += content.slice(idx, commentStart);
-    const commentEnd = content.indexOf("-->", commentStart + 4);
-    if (commentEnd === -1) break;
-    idx = commentEnd + 3;
-  }
-
-  return clean.trim();
+  const body = extractBody(rawHtml);
+  const withoutScripts = removeScriptTags(body);
+  const withoutLinks = removeStyleLinks(withoutScripts);
+  return removeComments(withoutLinks).trim();
 }
 
 /**
  * Muestra el banner visual de EchedevKit en la consola.
  */
 export function printBanner() {
+  const line0 = "   _____ _____ _    _ ______ _____  ________      __  _  _______ _______ ";
+  const line1 = String.raw`  |  ___/ ____| |  | |  ____|  __ \|  ____\ \    / / | |/ /_   _|__   __|`;
+  const line2 = String.raw`  | |__| |    | |__| | |__  | |  | | |__   \ \  / /  | ' /  | |    | |   `;
+  const line3 = String.raw`  |  __| |    |  __  |  __| | |  | |  __|   \ \/ /   |  <   | |    | |   `;
+  const line4 = String.raw`  | |__| |____| |  | | |____| |__| | |____   \  /    | . \ _| |_   | |   `;
+  const line5 = String.raw`  |_____\_____|_|  |_|______|_____/|______|   \/     |_|\_\_____|  |_|   `;
+
   console.log(`
-${c.cyan(c.bold("   _____ _____ _    _ ______ _____  ________      __  _  _______ _______ "))}
-${c.cyan(c.bold("  |  ___/ ____| |  | |  ____|  __ \\|  ____\\ \\    / / | |/ /_   _|__   __|"))}
-${c.cyan(c.bold("  | |__| |    | |__| | |__  | |  | | |__   \\ \\  / /  | ' /  | |    | |   "))}
-${c.cyan(c.bold("  |  __| |    |  __  |  __| | |  | |  __|   \\ \\/ /   |  <   | |    | |   "))}
-${c.cyan(c.bold("  | |__| |____| |  | | |____| |__| | |____   \\  /    | . \\ _| |_   | |   "))}
-${c.cyan(c.bold("  |_____\\_____|_|  |_|______|_____/|______|   \\/     |_|\\_\\_____|  |_|   "))}
+${c.cyan(c.bold(line0))}
+${c.cyan(c.bold(line1))}
+${c.cyan(c.bold(line2))}
+${c.cyan(c.bold(line3))}
+${c.cyan(c.bold(line4))}
+${c.cyan(c.bold(line5))}
 ${c.gray("  ─────────────────────────────────────────────────────────────────────────")}
   ${c.bold("@echedev98/kit")} ${c.gray("—")} Colección de +1,000 componentes HTML, CSS y JS
   ${c.dim("Web oficial: https://libreria-html-css.vercel.app")}

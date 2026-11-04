@@ -54,7 +54,7 @@ export async function getCatalog() {
       author: item.author || "Eche-Dev",
       description: item.descriptionEs || item.description || "",
       tags: Array.isArray(item.tags) ? item.tags : [],
-      hasJs: true, // Se resolverá bajo demanda
+      hasJs: true,
       hasCss: true,
       _preview: item.preview,
     }));
@@ -95,9 +95,9 @@ export async function listComponents(options = {}) {
     const q = search.toLowerCase();
     items = items.filter(
       (item) =>
-        (item.id && item.id.toLowerCase().includes(q)) ||
-        (item.name && item.name.toLowerCase().includes(q)) ||
-        (item.description && item.description.toLowerCase().includes(q)) ||
+        item.id?.toLowerCase().includes(q) ||
+        item.name?.toLowerCase().includes(q) ||
+        item.description?.toLowerCase().includes(q) ||
         (Array.isArray(item.tags) && item.tags.some((tag) => typeof tag === "string" && tag.toLowerCase().includes(q)))
     );
   }
@@ -120,6 +120,45 @@ export async function getCategories() {
 }
 
 /**
+ * Calcula la puntuación de relevancia de un componente respecto a un término.
+ *
+ * @param {object} item
+ * @param {string} q
+ * @returns {number}
+ */
+function scoreComponent(item, q) {
+  let score = 0;
+  const idLower = item.id ? item.id.toLowerCase() : "";
+  const nameLower = item.name ? item.name.toLowerCase() : "";
+
+  if (idLower === q) score += 100;
+  else if (idLower.startsWith(q)) score += 50;
+  else if (idLower.includes(q)) score += 20;
+
+  if (nameLower === q) score += 80;
+  else if (nameLower.includes(q)) score += 15;
+
+  if (Array.isArray(item.tags)) {
+    for (const tag of item.tags) {
+      if (typeof tag === "string") {
+        const tagLower = tag.toLowerCase();
+        if (tagLower === q) score += 30;
+        else if (tagLower.includes(q)) score += 10;
+      }
+    }
+  }
+
+  if (typeof item.description === "string" && item.description.toLowerCase().includes(q)) {
+    score += 5;
+  }
+  if (typeof item.category === "string" && item.category.toLowerCase().includes(q)) {
+    score += 10;
+  }
+
+  return score;
+}
+
+/**
  * Busca componentes según palabras clave en id, nombre, etiquetas y descripción.
  *
  * @param {string} query
@@ -133,32 +172,10 @@ export async function searchComponents(query, options = {}) {
 
   const q = query.trim().toLowerCase();
   const items = await getCatalog();
-
   const scored = [];
+
   for (const item of items) {
-    let score = 0;
-    const idLower = item.id ? item.id.toLowerCase() : "";
-    const nameLower = item.name ? item.name.toLowerCase() : "";
-
-    if (idLower === q) score += 100;
-    else if (idLower.startsWith(q)) score += 50;
-    else if (idLower.includes(q)) score += 20;
-
-    if (nameLower === q) score += 80;
-    else if (nameLower.includes(q)) score += 15;
-
-    if (Array.isArray(item.tags)) {
-      if (item.tags.some((t) => typeof t === "string" && t.toLowerCase() === q)) score += 30;
-      else if (item.tags.some((t) => typeof t === "string" && t.toLowerCase().includes(q))) score += 10;
-    }
-
-    if (item.description && typeof item.description === "string" && item.description.toLowerCase().includes(q)) {
-      score += 5;
-    }
-    if (item.category && typeof item.category === "string" && item.category.toLowerCase().includes(q)) {
-      score += 10;
-    }
-
+    const score = scoreComponent(item, q);
     if (score > 0) {
       scored.push({ item, score });
     }
@@ -169,42 +186,43 @@ export async function searchComponents(query, options = {}) {
 }
 
 /**
- * Obtiene los datos completos y archivos de un componente por su ID.
+ * Carga un componente desde el registro empaquetado.
  *
- * @param {string} id ID del componente (ej. '3d-cube-rubiks-twist')
+ * @param {string} id
+ * @param {string} compDir
  * @returns {Promise<object>}
  */
-export async function getComponent(id) {
-  if (!id) throw new Error("Debes proporcionar un ID de componente.");
+async function loadComponentFromRegistry(id, compDir) {
+  const metaPath = path.join(compDir, "meta.json");
+  const meta = (await fileExists(metaPath))
+    ? JSON.parse(await readFile(metaPath, "utf8"))
+    : { id, name: id };
 
-  const compDir = path.join(registryComponentsDir, id);
-
-  // 1. Intentar leer desde el registro empaquetado
-  if (await fileExists(compDir)) {
-    const metaPath = path.join(compDir, "meta.json");
-    const meta = (await fileExists(metaPath))
-      ? JSON.parse(await readFile(metaPath, "utf8"))
-      : { id, name: id };
-
-    const files = {};
-    for (const f of ["index.html", "snippet.html", "styles.css", "script.js", "README.md"]) {
-      const p = path.join(compDir, f);
-      if (await fileExists(p)) {
-        files[f] = await readFile(p, "utf8");
-      }
+  const files = {};
+  for (const f of ["index.html", "snippet.html", "styles.css", "script.js", "README.md"]) {
+    const p = path.join(compDir, f);
+    if (await fileExists(p)) {
+      files[f] = await readFile(p, "utf8");
     }
-
-    return {
-      ...meta,
-      files,
-      html: files["index.html"] || "",
-      snippet: files["snippet.html"] || "",
-      css: files["styles.css"] || "",
-      js: files["script.js"] || "",
-    };
   }
 
-  // 2. Fallback: leer desde los fuentes del monorepo
+  return {
+    ...meta,
+    files,
+    html: files["index.html"] || "",
+    snippet: files["snippet.html"] || "",
+    css: files["styles.css"] || "",
+    js: files["script.js"] || "",
+  };
+}
+
+/**
+ * Carga un componente desde las fuentes originales del monorepo.
+ *
+ * @param {string} id
+ * @returns {Promise<object>}
+ */
+async function loadComponentFromSource(id) {
   const catalog = await getCatalog();
   const entry = catalog.find((c) => c.id === id);
   if (!entry) {
@@ -258,6 +276,24 @@ export async function getComponent(id) {
     css: cssContent,
     js: jsContent,
   };
+}
+
+/**
+ * Obtiene los datos completos y archivos de un componente por su ID.
+ *
+ * @param {string} id ID del componente (ej. '3d-cube-rubiks-twist')
+ * @returns {Promise<object>}
+ */
+export async function getComponent(id) {
+  if (!id) throw new Error("Debes proporcionar un ID de componente.");
+
+  const compDir = path.join(registryComponentsDir, id);
+
+  if (await fileExists(compDir)) {
+    return loadComponentFromRegistry(id, compDir);
+  }
+
+  return loadComponentFromSource(id);
 }
 
 /**
